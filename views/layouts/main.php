@@ -6,7 +6,7 @@ use yii\helpers\Html;
 if (Yii::$app->controller->action->id === 'login') { 
     echo $this->render('main-login', ['content' => $content]);
 } else {
-    admin\assets\AppAsset::register($this);
+    app\assets\AppAsset::register($this);
     dmstr\web\AdminLteAsset::register($this);
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>
