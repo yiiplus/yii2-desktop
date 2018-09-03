@@ -13,7 +13,7 @@ use yiiplus\desktop\components\Configs;
 
 $context = $this->context;
 $labels = $context->labels();
-$this->title = Yii::t('rbac-admin', $labels['Items']);
+$this->title = Yii::t('yiiplus/desktop', $labels['Items']);
 $this->params['breadcrumbs'][] = $this->title;
 
 $rules = array_keys(Configs::authManager()->getRules());
@@ -25,7 +25,7 @@ unset($rules[RouteRule::RULE_NAME]);
 <div class="box box-primary dataTables_wrapper role-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('rbac-admin', 'Create ' . $labels['Item']), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Create ' . $labels['Item']), ['create'], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -49,16 +49,16 @@ unset($rules[RouteRule::RULE_NAME]);
             ],
             [
                 'attribute' => 'name',
-                'label' => Yii::t('rbac-admin', 'Name'),
+                'label' => Yii::t('yiiplus/desktop', 'Name'),
             ],
             [
                 'attribute' => 'ruleName',
-                'label' => Yii::t('rbac-admin', 'Rule Name'),
+                'label' => Yii::t('yiiplus/desktop', 'Rule Name'),
                 'filter' => $rules
             ],
             [
                 'attribute' => 'description',
-                'label' => Yii::t('rbac-admin', 'Description'),
+                'label' => Yii::t('yiiplus/desktop', 'Description'),
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

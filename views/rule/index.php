@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('rbac-admin', 'Rules');
+$this->title = Yii::t('yiiplus/desktop', 'Rules');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary dataTables_wrapper role-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('rbac-admin', 'Create Rule'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Create Rule'), ['create'], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
                 [
                     'attribute' => 'name',
-                    'label' => Yii::t('rbac-admin', 'Name'),
+                    'label' => Yii::t('yiiplus/desktop', 'Name'),
                 ],
                 ['class' => 'yii\grid\ActionColumn',],
             ],

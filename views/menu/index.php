@@ -4,15 +4,15 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('rbac-admin', 'Menus');
+$this->title = Yii::t('yiiplus/desktop', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary dataTables_wrapper user-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('rbac-admin', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('rbac-admin', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -36,14 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'id',
-                'label' => Yii::t('rbac-admin', 'ID'),
+                'label' => Yii::t('yiiplus/desktop', 'ID'),
                 'headerOptions' => ['width' => '100'],
             ],
             'name',
             [
                 'attribute' => 'menuParent.name',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', ['class' => 'form-control', 'id' => null]),
-                'label' => Yii::t('rbac-admin', 'Parent'),
+                'label' => Yii::t('yiiplus/desktop', 'Parent'),
             ],
             'route',
             ['attribute'=>'order','headerOptions' => ['width' => '100']],

@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-$this->title = Yii::t('rbac-admin', 'Create Rule');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Rules'), 'url' => ['index']];
+$this->title = Yii::t('yiiplus/desktop', 'Create Rule');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

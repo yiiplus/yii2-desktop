@@ -24,7 +24,7 @@ $fieldOptions2 = [
         <a href="javascript:void(0)"><b>YiiPlus</b> Desktop</a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg"><?= Yii::t('rbac-admin', 'loginBoxMsg') ?></p>
+        <p class="login-box-msg"><?= Yii::t('yiiplus/desktop', 'loginBoxMsg') ?></p>
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
         <?= $form
             ->field($model, 'username', $fieldOptions1)
@@ -38,10 +38,10 @@ $fieldOptions2 = [
 
         <div class="row">
             <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->label(Yii::t('rbac-admin', 'rememberMe'))->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->label(Yii::t('yiiplus/desktop', 'rememberMe'))->checkbox() ?>
             </div>
             <div class="col-xs-4">
-                <?= Html::submitButton(Yii::t('rbac-admin', 'Sign In'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(Yii::t('yiiplus/desktop', 'Sign In'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

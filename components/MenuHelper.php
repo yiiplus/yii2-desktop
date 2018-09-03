@@ -199,7 +199,7 @@ class MenuHelper
                     $item = call_user_func($callback, $menu);
                 } else {
                     $item = [
-                        'label' => Yii::t('rbac-admin',$menu['name']),
+                        'label' => Yii::t('yiiplus/desktop',$menu['name']),
                         'url' => static::parseRoute($menu['route']),
                     ];
                     if ($menu['children'] != []) {

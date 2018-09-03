@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 $context = $this->context;
 $labels = $context->labels();
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', $labels['Items']), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', $labels['Items']), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $opts = Json::htmlEncode([
@@ -38,7 +38,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
         <div class="row">
             <div class="col-sm-5">
                 <input class="form-control search" data-target="available"
-                       placeholder="<?=Yii::t('rbac-admin', 'Search for available');?>">
+                       placeholder="<?=Yii::t('yiiplus/desktop', 'Search for available');?>">
                 <select multiple size="20" class="form-control list" data-target="available"></select>
             </div>
             <div class="col-sm-2" align="center">
@@ -46,18 +46,18 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                 <?=Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => $model->name], [
                     'class' => 'btn btn-success btn-assign',
                     'data-target' => 'available',
-                    'title' => Yii::t('rbac-admin', 'Assign'),
+                    'title' => Yii::t('yiiplus/desktop', 'Assign'),
                 ]);?>
                 <br><br>
                 <?=Html::a('&lt;&lt;' . $animateIcon, ['remove', 'id' => $model->name], [
                     'class' => 'btn btn-danger btn-assign',
                     'data-target' => 'assigned',
-                    'title' => Yii::t('rbac-admin', 'Remove'),
+                    'title' => Yii::t('yiiplus/desktop', 'Remove'),
                 ]);?>
             </div>
             <div class="col-sm-5">
                 <input class="form-control search" data-target="assigned"
-                       placeholder="<?=Yii::t('rbac-admin', 'Search for assigned');?>">
+                       placeholder="<?=Yii::t('yiiplus/desktop', 'Search for assigned');?>">
                 <select multiple size="20" class="form-control list" data-target="assigned"></select>
             </div>
         </div>

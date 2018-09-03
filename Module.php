@@ -88,8 +88,10 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        if (!isset(Yii::$app->i18n->translations['rbac-admin'])) {
-            Yii::$app->i18n->translations['rbac-admin'] = [
+
+        // 国际化
+        if (!isset(Yii::$app->i18n->translations['yiiplus/desktop'])) {
+            Yii::$app->i18n->translations['yiiplus/desktop'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
                 'basePath' => '@yiiplus/desktop/messages',
@@ -99,8 +101,8 @@ class Module extends \yii\base\Module
         //user did not define the Navbar?
         if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
             $this->navbar = [
-                ['label' => Yii::t('rbac-admin', 'Help'), 'url' => ['default/index']],
-                ['label' => Yii::t('rbac-admin', 'Application'), 'url' => Yii::$app->homeUrl],
+                ['label' => Yii::t('yiiplus/desktop', 'Help'), 'url' => ['default/index']],
+                ['label' => Yii::t('yiiplus/desktop', 'Application'), 'url' => Yii::$app->homeUrl],
             ];
         }
         if (class_exists('yii\jui\JuiAsset')) {
@@ -127,11 +129,11 @@ class Module extends \yii\base\Module
             ];
             foreach ($this->_coreItems as $id => $lable) {
                 if (!isset($conditions[$id]) || $conditions[$id]) {
-                    $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac-admin', $lable), 'url' => [$mid . $id]];
+                    $this->_normalizeMenus[$id] = ['label' => Yii::t('yiiplus/desktop', $lable), 'url' => [$mid . $id]];
                 }
             }
             foreach (array_keys($this->controllerMap) as $id) {
-                $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac-admin', Inflector::humanize($id)), 'url' => [$mid . $id]];
+                $this->_normalizeMenus[$id] = ['label' => Yii::t('yiiplus/desktop', Inflector::humanize($id)), 'url' => [$mid . $id]];
             }
 
             // user configure menus
@@ -173,7 +175,7 @@ class Module extends \yii\base\Module
             $view = $action->controller->getView();
 
             $view->params['breadcrumbs'][] = [
-                'label' => ($this->defaultUrlLabel ?: Yii::t('rbac-admin', 'Admin')),
+                'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', 'Admin')),
                 'url' => ['/' . ($this->defaultUrl ?: $this->uniqueId)],
             ];
             return true;

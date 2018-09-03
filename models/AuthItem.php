@@ -97,10 +97,10 @@ class AuthItem extends Model
                     $rule->name = $name;
                     Configs::authManager()->add($rule);
                 } else {
-                    $this->addError('ruleName', Yii::t('rbac-admin', 'Invalid rule "{value}"', ['value' => $name]));
+                    $this->addError('ruleName', Yii::t('yiiplus/desktop', 'Invalid rule "{value}"', ['value' => $name]));
                 }
             } catch (\Exception $exc) {
-                $this->addError('ruleName', Yii::t('rbac-admin', 'Rule "{value}" does not exists', ['value' => $name]));
+                $this->addError('ruleName', Yii::t('yiiplus/desktop', 'Rule "{value}" does not exists', ['value' => $name]));
             }
         }
     }
@@ -111,11 +111,11 @@ class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('rbac-admin', 'Name'),
-            'type' => Yii::t('rbac-admin', 'Type'),
-            'description' => Yii::t('rbac-admin', 'Description'),
-            'ruleName' => Yii::t('rbac-admin', 'Rule Name'),
-            'data' => Yii::t('rbac-admin', 'Data'),
+            'name'          => Yii::t('yiiplus/desktop', 'Name'),
+            'type'          => Yii::t('yiiplus/desktop', 'Type'),
+            'description'   => Yii::t('yiiplus/desktop', 'Description'),
+            'ruleName'      => Yii::t('yiiplus/desktop', 'Rule Name'),
+            'data'          => Yii::t('yiiplus/desktop', 'Data'),
         ];
     }
 

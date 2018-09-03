@@ -4,16 +4,16 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yiiplus\desktop\components\Helper;
 
-$this->title = Yii::t('rbac-admin', 'Users');
+$this->title = Yii::t('yiiplus/desktop', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box box-primary dataTables_wrapper user-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('rbac-admin', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('rbac-admin', 'Activate'), ['activate'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('rbac-admin', 'Inactive'), ['inactive'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('rbac-admin', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?> 
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Activate'), ['activate'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Inactive'), ['inactive'], ['class' => 'btn btn-primary']) ?> 
+            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -37,28 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'id',
-                'label' => Yii::t('rbac-admin', 'ID'),
+                'label' => Yii::t('yiiplus/desktop', 'ID'),
                 'headerOptions' => ['width' => '100'],
             ],
             [
-                'label' => Yii::t('rbac-admin', 'Username'),
+                'label' => Yii::t('yiiplus/desktop', 'Username'),
                 'attribute' => 'username',
             ],
             'email:email',
             [
-                'label' => Yii::t('rbac-admin', 'CreatedAt'),
+                'label' => Yii::t('yiiplus/desktop', 'CreatedAt'),
                 'attribute' => 'created_at',
                 'format' => ['date', 'php:Y-m-d H:i:s'],
             ],
             [
                 'attribute' => 'status',
-                'label' => Yii::t('rbac-admin', 'Status'),
+                'label' => Yii::t('yiiplus/desktop', 'Status'),
                 'value' => function($model) {
-                    return $model->status == 0 ? Yii::t('rbac-admin', 'Inactive') : Yii::t('rbac-admin', 'Activate');
+                    return $model->status == 0 ? Yii::t('yiiplus/desktop', 'Inactive') : Yii::t('yiiplus/desktop', 'Activate');
                 },
                 'filter' => [
-                    0 => Yii::t('rbac-admin', 'Inactive'),
-                    10 => Yii::t('rbac-admin', 'Activate'),
+                    0 => Yii::t('yiiplus/desktop', 'Inactive'),
+                    10 => Yii::t('yiiplus/desktop', 'Activate'),
                 ]
             ],
             [
@@ -69,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'assignment' => function($url, $model) {
                         $options = [
-                            'title' => Yii::t('rbac-admin', 'Assignment'),
-                            'aria-label' => Yii::t('rbac-admin', 'Assignment'),
+                            'title' => Yii::t('yiiplus/desktop', 'Assignment'),
+                            'aria-label' => Yii::t('yiiplus/desktop', 'Assignment'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -82,9 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '';
                         }
                         $options = [
-                            'title' => Yii::t('rbac-admin', 'Activate'),
-                            'aria-label' => Yii::t('rbac-admin', 'Activate'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
+                            'title' => Yii::t('yiiplus/desktop', 'Activate'),
+                            'aria-label' => Yii::t('yiiplus/desktop', 'Activate'),
+                            'data-confirm' => Yii::t('yiiplus/desktop', 'Are you sure you want to activate this user?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -95,9 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '';
                         }
                         $options = [
-                            'title' => Yii::t('rbac-admin', 'Inactive'),
-                            'aria-label' => Yii::t('rbac-admin', 'Inactive'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to inactive this user?'),
+                            'title' => Yii::t('yiiplus/desktop', 'Inactive'),
+                            'aria-label' => Yii::t('yiiplus/desktop', 'Inactive'),
+                            'data-confirm' => Yii::t('yiiplus/desktop', 'Are you sure you want to inactive this user?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -107,8 +107,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         // 超级管理员无法删除
                         if ($model->id != 1 && Yii::$app->getUser()->id != $model->id) {
                             $options = [
-                                'title' => Yii::t('rbac-admin', 'Delete'),
-                                'aria-label' => Yii::t('rbac-admin', 'Delete'),
+                                'title' => Yii::t('yiiplus/desktop', 'Delete'),
+                                'aria-label' => Yii::t('yiiplus/desktop', 'Delete'),
                                 'data-method' => 'post',
                                 'data-pjax' => '0',
                             ];
