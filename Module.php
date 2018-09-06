@@ -88,15 +88,7 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-        // 国际化
-        if (!isset(Yii::$app->i18n->translations['yiiplus/desktop'])) {
-            Yii::$app->i18n->translations['yiiplus/desktop'] = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'sourceLanguage' => 'en',
-                'basePath' => '@yiiplus/desktop/messages',
-            ];
-        }
+        $this->registerTranslations();
 
         //user did not define the Navbar?
         if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
@@ -108,6 +100,23 @@ class Module extends \yii\base\Module
         if (class_exists('yii\jui\JuiAsset')) {
             Yii::$container->set('yiiplus\desktop\AutocompleteAsset', 'yii\jui\JuiAsset');
         }
+    }
+
+    /**
+     * 注册翻译文件
+     *
+     * @return void
+     */
+    protected function registerTranslations()
+    {
+        Yii::$app->i18n->translations['yiiplus/desktop'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => $this->sourceLanguage,
+            'basePath' => '@yiiplus/desktop/messages',
+            'fileMap' => [
+                'yiiplus/desktop' => 'desktop.php',
+            ],
+        ];
     }
 
     /**
