@@ -120,6 +120,20 @@ class Module extends \yii\base\Module
     }
 
     /**
+     * 多语言翻译
+     *
+     * @param string  $message  消息
+     * @param array   $params   参数
+     * @param string  $language 语言
+     * 
+     * @return string 翻译结果
+     */
+    public static function t($message, $params = [], $language = null)
+    {
+        return Yii::t('yiiplus/mailer', $message, $params, $language);
+    }
+
+    /**
      * Get available menu.
      * @return array
      */
@@ -180,9 +194,7 @@ class Module extends \yii\base\Module
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
-            /* @var $action \yii\base\Action */
             $view = $action->controller->getView();
-
             $view->params['breadcrumbs'][] = [
                 'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', 'Admin')),
                 'url' => ['/' . ($this->defaultUrl ?: $this->uniqueId)],
