@@ -2,6 +2,7 @@
     "name": "yiiplus/yii2-desktop",
     "description": "RBAC Auth manager for Yii2",
     "keywords": ["yii", "admin" ,"desktop", "auth", "rbac"],
+    "homepage": "https://github.com/yiiplus/",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
@@ -20,11 +21,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "php": ">=7.1.0",
         "yiisoft/yii2": "^2.0.0",
         "dmstr/yii2-adminlte-asset": "^2.0.0"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "^2.0.0"
+        "yiisoft/yii2-codeception": "^2.0.0",
+        "phpunit/phpunit": "~4.0"
     },
     "suggest": {
         "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
