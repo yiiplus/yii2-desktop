@@ -35,6 +35,12 @@ use yii\helpers\Inflector;
  */
 class Module extends \yii\base\Module
 {
+    // 控制器名称空间
+    public $controllerNamespace = 'yiiplus\desktop\controllers';
+
+    // 源语言
+    public $sourceLanguage = 'en';
+
     /**
      * @inheritdoc
      */
