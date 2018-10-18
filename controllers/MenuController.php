@@ -46,8 +46,10 @@ class MenuController extends Controller
         $model = new Menu;
 
         if ($model->load(Yii::$app->request->post())) {
-            $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
-            $model->parent = $parentModel->id;
+            if ($model->parent_name) {
+                $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
+                $model->parent = $parentModel->id;
+            }
             $model->save();
             Helper::invalidate();
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,8 +65,10 @@ class MenuController extends Controller
             $model->parent_name = $model->menuParent->name;
         }
         if ($model->load(Yii::$app->request->post())) {
-            $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
-            $model->parent = $parentModel->id;
+            if ($model->parent_name) {
+                $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
+                $model->parent = $parentModel->id;
+            }
             $model->save();
             Helper::invalidate();
             return $this->redirect(['view', 'id' => $model->id]);
