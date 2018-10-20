@@ -35,6 +35,12 @@ use yii\helpers\Inflector;
  */
 class Module extends \yii\base\Module
 {
+    // 控制器名称空间
+    public $controllerNamespace = 'yiiplus\desktop\controllers';
+
+    // 源语言
+    public $sourceLanguage = 'en';
+
     /**
      * @inheritdoc
      */
@@ -88,15 +94,7 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-        // 国际化
-        if (!isset(Yii::$app->i18n->translations['yiiplus/desktop'])) {
-            Yii::$app->i18n->translations['yiiplus/desktop'] = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'sourceLanguage' => 'en',
-                'basePath' => '@yiiplus/desktop/messages',
-            ];
-        }
+        $this->registerTranslations();
 
         //user did not define the Navbar?
         if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
@@ -108,6 +106,37 @@ class Module extends \yii\base\Module
         if (class_exists('yii\jui\JuiAsset')) {
             Yii::$container->set('yiiplus\desktop\AutocompleteAsset', 'yii\jui\JuiAsset');
         }
+    }
+
+    /**
+     * 注册翻译文件
+     *
+     * @return void
+     */
+    protected function registerTranslations()
+    {
+        Yii::$app->i18n->translations['yiiplus/desktop'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => $this->sourceLanguage,
+            'basePath' => '@yiiplus/desktop/messages',
+            'fileMap' => [
+                'yiiplus/desktop' => 'desktop.php',
+            ],
+        ];
+    }
+
+    /**
+     * 多语言翻译
+     *
+     * @param string  $message  消息
+     * @param array   $params   参数
+     * @param string  $language 语言
+     * 
+     * @return string 翻译结果
+     */
+    public static function t($message, $params = [], $language = null)
+    {
+        return Yii::t('yiiplus/mailer', $message, $params, $language);
     }
 
     /**
@@ -171,9 +200,7 @@ class Module extends \yii\base\Module
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
-            /* @var $action \yii\base\Action */
             $view = $action->controller->getView();
-
             $view->params['breadcrumbs'][] = [
                 'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', 'Admin')),
                 'url' => ['/' . ($this->defaultUrl ?: $this->uniqueId)],

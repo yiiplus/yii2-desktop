@@ -18,7 +18,7 @@ use yii\rbac\ManagerInterface;
  *
  *     'yiiplus.desktop.configs' => [
  *         'db' => 'customDb',
- *         'menuTable' => '{{%admin_menu}}',
+ *         'menuTable' => '{{%yp_desktop_menu}}',
  *         'cache' => [
  *             'class' => 'yii\caching\DbCache',
  *             'db' => ['dsn' => 'sqlite:@runtime/admin-cache.db'],
@@ -68,12 +68,12 @@ class Configs extends \yii\base\Object
     /**
      * @var string Menu table name.
      */
-    public $menuTable = '{{%menu}}';
+    public $menuTable = '{{%yp_desktop_menu}}';
 
     /**
      * @var string Menu table name.
      */
-    public $userTable = '{{%user}}';
+    public $userTable = '{{%yp_desktop_user}}';
 
     /**
      * @var integer Default status user signup. 10 mean active.
