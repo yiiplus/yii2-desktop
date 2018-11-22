@@ -1,11 +1,13 @@
 <?php
 
+use yii\db\Migration;
+use yii\db\Schema;
 use yiiplus\desktop\components\Configs;
 
 /**
  * Migration table of {{%yp_desktop_log}}
  */
-class m140602_111327_create_log_table extends \yii\db\Migration
+class m140602_111327_create_log_table extends Migration
 {
 
     /**

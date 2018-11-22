@@ -8,7 +8,7 @@ use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
-use yiiplus\desktop\models\Log;
+use yiiplus\desktop\models\Log as DesktopLog;
 
 class LogBehavior extends Behavior
 {
@@ -27,7 +27,7 @@ class LogBehavior extends Behavior
 
     public function log($event)
     {
-        if($event->sender instanceof AdminLog || !$event->sender->primaryKey()) {
+        if($event->sender instanceof DesktopLog || !$event->sender->primaryKey()) {
             return;
         }
         if ($event->name == ActiveRecord::EVENT_AFTER_INSERT) {
@@ -59,7 +59,7 @@ class LogBehavior extends Behavior
             'user_id' => $userId,
             'ip' => $ip
         ];
-        $model = new AdminLog();
+        $model = new DesktopLog();
         $model->setAttributes($data);
         $model->save();
     }

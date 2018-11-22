@@ -1,11 +1,13 @@
 <?php
 
+use yii\db\Migration;
+use yii\db\Schema;
 use yiiplus\desktop\components\Configs;
 
 /**
  * Migration table of table_menu
  */
-class m140602_111327_create_menu_table extends \yii\db\Migration
+class m140602_111327_create_menu_table extends Migration
 {
 
     /**

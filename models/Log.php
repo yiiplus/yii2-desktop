@@ -2,6 +2,7 @@
 
 namespace yiiplus\desktop\models;
 
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yiiplus\desktop\components\Configs;
 

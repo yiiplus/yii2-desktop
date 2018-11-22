@@ -80,6 +80,7 @@ return [
     'Email' => '邮箱', 
     'CreatedAt' => '创建时间',
     'ID' => '主键ID',
+    'Log' => '操作日志',
     'LogRoute' => '路由',
     'LogUid' => '操作人',
     'LogIp' => '操作人ip',
