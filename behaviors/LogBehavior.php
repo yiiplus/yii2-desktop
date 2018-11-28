@@ -31,11 +31,11 @@ class LogBehavior extends Behavior
             return;
         }
         if ($event->name == ActiveRecord::EVENT_AFTER_INSERT) {
-            $description = "%s新增了表%s %s:%s的%s"; // Yii::t('yiiplus/desktop', '%s新增了表%s %s:%s的%s');
+            $description = Yii::t('yiiplus/desktop', '%s新增了表%s %s:%s的%s');
         } elseif($event->name == ActiveRecord::EVENT_AFTER_UPDATE) {
-            $description = "%s修改了表%s %s:%s的%s"; // Yii::t('yiiplus/desktop', '%s修改了表%s %s:%s的%s');
+            $description = Yii::t('yiiplus/desktop', '%s修改了表%s %s:%s的%s');
         } else {
-            $description = "%s删除了表%s %s:%s%s"; // Yii::t('yiiplus/desktop', '%s删除了表%s %s:%s的%s');
+            $description = Yii::t('yiiplus/desktop', '%s删除了表%s %s:%s的%s');
         }
         if (!empty($event->changedAttributes)) {
             $desc = '';
