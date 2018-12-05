@@ -19,4 +19,15 @@ class DesktopAsset extends AssetBundle
     public $css = [
         'desktop.css',
     ];
+    
+    /**
+     * {@inheritdoc}
+     */
+    public $js = [
+        'jquery-ui.js',
+    ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }

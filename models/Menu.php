@@ -3,8 +3,12 @@
 namespace yiiplus\desktop\models;
 
 use Yii;
-use yiiplus\desktop\components\Configs;
 use yii\db\Query;
+
+use yiiplus\desktop\components\Configs;
+use yiiplus\desktop\behaviors\PositionBehavior;
+use yiiplus\desktop\behaviors\CacheInvalidateBehavior;
+use yiiplus\desktop\components\MenuHelper;
 
 /**
  * This is the model class for table "menu".
@@ -44,6 +48,30 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
+     * [behaviors description]
+     *
+     * @return [type] [description]
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'order',
+                'groupAttributes' => [
+                    'parent' // multiple lists varying by 'parent'
+                ],
+            ],
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'tags' => [
+                    MenuHelper::CACHE_TAG
+                ]
+            ]
+        ];
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -57,6 +85,7 @@ class Menu extends \yii\db\ActiveRecord
             [['parent'], 'filterParent', 'when' => function() {
                 return !$this->isNewRecord;
             }],
+            ['icon', 'string'],
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),
@@ -96,6 +125,7 @@ class Menu extends \yii\db\ActiveRecord
             'route' => Yii::t('yiiplus/desktop', 'Route'),
             'order' => Yii::t('yiiplus/desktop', 'Order'),
             'data' => Yii::t('yiiplus/desktop', 'Data'),
+            'icon' => Yii::t('yiiplus/desktop', 'Icon'),
         ];
     }
 
@@ -143,5 +173,17 @@ class Menu extends \yii\db\ActiveRecord
                 ->from(['m' => $tableName])
                 ->leftJoin(['p' => $tableName], '[[m.parent]]=[[p.id]]')
                 ->all(static::getDb());
+    }
+
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '&nbsp;&nbsp;&nbsp;&nbsp;')
+    {
+        $deep++;
+        foreach($tree as $list) {
+            $result[$list['id']] = str_repeat($separator, $deep-1) . $list['name'];
+            if (isset($list['children'])) {
+                self::getDropDownList($list['children'], $result, $deep);
+            }
+        }
+        return $result;
     }
 }

@@ -38,6 +38,8 @@ use yiiplus\desktop\models\Menu;
  */
 class MenuHelper
 {
+    const CACHE_TAG = 'mdm.admin.menu';
+    
     /**
      * Use to get assigned menu of user.
      * @param mixed $userId

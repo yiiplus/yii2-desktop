@@ -84,4 +84,5 @@ return [
     'LogRoute' => '路由',
     'LogUid' => '操作人',
     'LogIp' => '操作人ip',
+    'Icon' => '图标',
 ];
