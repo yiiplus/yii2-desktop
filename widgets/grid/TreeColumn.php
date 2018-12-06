@@ -1,6 +1,6 @@
 <?php
 /**
- * TreeColumn
+ * 无限极分类
  *
  * PHP version 7
  *

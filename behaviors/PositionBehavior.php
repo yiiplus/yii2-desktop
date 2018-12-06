@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionBehavior
+ * 作用菜单移动场景 PositionBehavior
  *
  * PHP version 7
  *
@@ -18,9 +18,11 @@ use yii\base\ModelEvent;
 use yii\db\BaseActiveRecord;
 
 /**
- * PositionBehavior allows managing custom order for the records in the database.
- * Behavior uses the specific integer field of the database entity to set up position index.
- * Due to this the database entity, which the model refers to, must contain field [[positionAttribute]].
+ * PositionBehavior
+ *
+ * 位置行为允许管理数据库中记录的自定义顺序。
+ * 行为使用数据库实体的特定整数字段来设置位置索引。
+ * 由于这个原因，模型引用的数据库实体必须包含字段[[positionAttribute]]。
  *
  * PHP version 7
  *
@@ -33,14 +35,16 @@ use yii\db\BaseActiveRecord;
 class PositionBehavior extends Behavior
 {
     /**
-     * @var string name owner attribute, which will store position value.
-     * This attribute should be an integer.
+     * 数据库顺序字段order默认position //菜单model指定
+     *
+     * @var string
      */
     public $positionAttribute = 'position';
+
     /**
-     * @var array list of owner attribute names, which values split records into the groups,
-     * which should have their own positioning.
-     * Example: `['group_id', 'category_id']`
+     * 所属分类parent
+     *
+     * @var array
      */
     public $groupAttributes = [];
 
@@ -52,7 +56,8 @@ class PositionBehavior extends Behavior
 
 
     /**
-     * Moves owner record by one position towards the start of the list.
+     * 将一个菜单像上移动一个
+     *
      * @return boolean movement successful.
      */
     public function movePrev()
@@ -79,7 +84,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Moves owner record by one position towards the end of the list.
+     * 将一个菜单像下移动一个
+     *
      * @return boolean movement successful.
      */
     public function moveNext()
@@ -108,7 +114,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Moves owner record to the start of the list.
+     * 移动到列表顶端
+     *
      * @return boolean movement successful.
      */
     public function moveFirst()
@@ -137,7 +144,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Moves owner record to the end of the list.
+     * 移动到列表底端
+     *
      * @return boolean movement successful.
      */
     public function moveLast()
@@ -168,14 +176,17 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Moves owner record to the specific position.
-     * If specified position exceeds the total number of records,
-     * owner will be moved to the end of the list.
+     * 将所有者记录移动到特定位置。
+     * 如果指定位置超过记录总数，
+     * 所有者将被移动到列表的末尾
+     *
      * @param integer $position number of the new position.
+     *
      * @return boolean movement successful.
      */
     public function moveToPosition($position)
     {
+        //整数大于1
         if (!is_numeric($position) || $position < 1) {
             return false;
         }
@@ -236,8 +247,10 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Creates array of group attributes with their values.
+     * 组装条件数组 ['parent' => 0]
+     *
      * @see groupAttributes
+     *
      * @return array attribute conditions.
      */
     protected function createGroupConditionAttributes()
@@ -252,9 +265,11 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Finds the number of records which belongs to the group of the owner.
-     * @see groupAttributes
-     * @return integer records count.
+     * 查询当前分类的记录数
+     *
+     * @see groupAttributes parent
+     *
+     * @return integer records 记录数.
      */
     protected function countGroupRecords()
     {
@@ -265,10 +280,10 @@ class PositionBehavior extends Behavior
         return $query->count();
     }
 
-    // Events :
-
     /**
-     * @inheritdoc
+     * 事件列表
+     *
+     * @return array
      */
     public function events()
     {
@@ -282,7 +297,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Handles owner 'beforeInsert' owner event, preparing its positioning.
+     * 插入前置操作
+     *
      * @param ModelEvent $event event instance.
      */
     public function beforeInsert($event)
@@ -295,7 +311,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Handles owner 'beforeInsert' owner event, preparing its possible re-positioning.
+     * 更新前置操作
+     *
      * @param ModelEvent $event event instance.
      */
     public function beforeUpdate($event)
@@ -324,9 +341,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * This event raises after owner inserted or updated.
-     * It applies previously set [[positionOnSave]].
-     * This event supports other functionality.
+     * 插入更新后操作
+     *
      * @param ModelEvent $event event instance.
      */
     public function afterSave($event)
@@ -338,7 +354,8 @@ class PositionBehavior extends Behavior
     }
 
     /**
-     * Handles owner 'beforeDelete' owner event, moving it to the end of the list before deleting.
+     * 删除后操作
+     *
      * @param ModelEvent $event event instance.
      */
     public function beforeDelete($event)

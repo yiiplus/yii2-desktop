@@ -1,6 +1,6 @@
 <?php
 /**
- * 重写 yii2\IconPickerWidget
+ * 获取菜单小图标列表IconPickerWidget
  *
  * PHP version 7
  *

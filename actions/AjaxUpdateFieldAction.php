@@ -1,6 +1,6 @@
 <?php
 /**
- * AjaxUpdateFieldAction
+ * 菜单异步处理action
  *
  * PHP version 7
  *

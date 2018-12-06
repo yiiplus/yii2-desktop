@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionBehavior
+ * 菜单缓存
  *
  * PHP version 7
  *
@@ -19,7 +19,7 @@ use yii\caching\TagDependency;
 use yii\db\ActiveRecord;
 
 /**
- * PositionBehavior
+ * CacheInvalidateBehavior
  *
  * PHP version 7
  *
@@ -35,10 +35,12 @@ class CacheInvalidateBehavior extends Behavior
      * @var string Name of cache componentj
      */
     public $cacheComponent = 'cache';
+
     /**
      * @var array List of tags to invalidate
      */
     public $tags = [];
+
     /**
      * @var array List of keys to invalidate
      */
@@ -51,7 +53,8 @@ class CacheInvalidateBehavior extends Behavior
 
 
     /**
-     * Get events list.
+     * 事件列表
+     *
      * @return array
      */
     public function events()
@@ -64,7 +67,8 @@ class CacheInvalidateBehavior extends Behavior
     }
 
     /**
-     * Invalidate cache connected to model.
+     * 缓存失效
+     *
      * @return bool
      */
     public function invalidateCache()
@@ -92,7 +96,7 @@ class CacheInvalidateBehavior extends Behavior
     }
 
     /**
-     *
+     * invalidateTags
      */
     protected function invalidateTags()
     {
@@ -108,6 +112,8 @@ class CacheInvalidateBehavior extends Behavior
     }
 
     /**
+     * 获取缓存
+     *
      * @return \yii\caching\Cache
      */
     protected function getCache()

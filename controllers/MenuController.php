@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * 菜单控制器MenuController
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 namespace yiiplus\desktop\controllers;
 
 use Yii;
@@ -13,6 +23,17 @@ use yiiplus\desktop\models\Menu;
 use yiiplus\desktop\models\searchs\Menu as MenuSearch;
 use yiiplus\desktop\components\Helper;
 
+/**
+ * MenuController
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 class MenuController extends Controller
 {
     /**
@@ -33,7 +54,7 @@ class MenuController extends Controller
     }
 
     /**
-     * actions
+     * 菜单移动处理actions
      *
      * @return array
      */

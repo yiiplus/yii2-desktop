@@ -1,6 +1,6 @@
 <?php
 /**
- * TreeGrid
+ * 无限级分类实现
  *
  * PHP version 7
  *

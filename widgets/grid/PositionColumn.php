@@ -1,6 +1,6 @@
 <?php
 /**
- * PositionColumn
+ * 组装菜单移动小图标PositionColumn
  *
  * PHP version 7
  *
@@ -165,11 +165,13 @@ class PositionColumn extends DataColumn
     }
 
     /**
-     * Renders button.
+     * 组装button.
+     *
      * @param string $name button name.
      * @param mixed $model
      * @param string $key
      * @param integer $index
+     *
      * @return string rendered HTML
      * @throws InvalidConfigException on invalid button format.
      */
@@ -237,10 +239,12 @@ class PositionColumn extends DataColumn
     /**
      * Creates a URL for the given position and model.
      * This method is called for each button and each row.
+     *
      * @param string $position the position name
      * @param \yii\db\BaseActiveRecord $model the data model
      * @param mixed $key the key associated with the data model
      * @param integer $index the current row index
+     *
      * @return string the created URL
      */
     public function createUrl($position, $model, $key, $index)

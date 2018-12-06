@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * 菜单插件
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 namespace yiiplus\desktop\components;
 
 use Yii;

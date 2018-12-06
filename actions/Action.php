@@ -1,6 +1,6 @@
 <?php
 /**
- * Action
+ * Action父类
  *
  * PHP version 7
  *
@@ -35,46 +35,28 @@ use yii\web\NotFoundHttpException;
 class Action extends \yii\base\Action
 {
     /**
-     * @var callable a PHP callable that will be called to return the model corresponding
-     * to the specified primary key value. If not set, [[findModel()]] will be used instead.
-     * The signature of the callable should be:
-     *
-     * The callable should return the model found, or throw an exception if not found.
+     * 查询$Model
      */
     public $findModel;
+
     /**
-     * @var string ID of the controller action, which user should be redirected to on success.
-     * This property overrides the value set by [[setReturnAction()]] method.
-     * @see getReturnAction()
-     * @see returnUrl
+     * action返回对象
      */
     public $returnAction;
+
     /**
-     * @var string|array|callable URL, which user should be redirected to on success.
-     * This could be a plain string URL, URL array configuration or callable, which returns actual URL.
-     * The signature for the callable is following:
-     *
-     * ```
-     * string|array function (Model $model) {}
-     * ```
-     *
-     * Note: actual list of the callable arguments may vary depending on particular action class.
-     *
-     * Note: this option takes precedence over [[returnAction]] related logic.
-     *
-     * @see returnAction
+     * 返回路径
      */
     public $returnUrl;
 
 
     /**
-     * Returns the data model based on the primary key given.
-     * If the data model is not found, a 404 HTTP exception will be raised.
-     * @param string $id the ID of the model to be loaded. If the model has a composite primary key,
-     * the ID must be a string of the primary key values separated by commas.
-     * The order of the primary key values should follow that returned by the `primaryKey()` method
-     * of the model.
+     * 查询Model 对象不存在抛出异常
+     * 
+     * @param 复合主键
+     *
      * @return ActiveRecordInterface|Model the model found
+     *
      * @throws NotFoundHttpException if the model cannot be found
      * @throws InvalidConfigException on invalid configuration
      */
@@ -90,9 +72,11 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * Checks whether action with specified ID exists in owner controller.
+     * 检查所有控制器是否指定该id的操作
+     *
      * @param string $id action ID.
-     * @return boolean whether action exists or not.
+     *
+     * @return bool
      */
     public function actionExists($id)
     {
@@ -107,7 +91,8 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * Sets the return action ID.
+     * 设置返回的actionId
+     *
      * @param string|null $actionId action ID, if not set current action will be used.
      */
     public function setReturnAction($actionId = null)
@@ -123,9 +108,10 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * Returns the ID of action, which should be used for return redirect.
-     * If action belongs to another controller or does not exist in current controller - 'index' is returned.
+     * 获取复合主键的action
+     *
      * @param string $defaultActionId default action ID.
+     *
      * @return string action ID.
      */
     public function getReturnAction($defaultActionId = 'index')
@@ -154,8 +140,11 @@ class Action extends \yii\base\Action
     }
 
     /**
+     * 创建返回路径 通过getReturnAction()
+     *
      * @param string $defaultActionId default action ID.
      * @param ActiveRecordInterface|Model|null $model model being processed by action.
+     *
      * @return array|string URL
      */
     public function createReturnUrl($defaultActionId = 'index', $model = null)
@@ -190,20 +179,15 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * Sets a flash message.
-     * @param string|array|null $message flash message(s) to be set.
-     * If plain string is passed, it will be used as a message with the key 'success'.
-     * You may specify multiple messages as an array, if element name is not integer, it will be used as a key,
-     * otherwise 'success' will be used as key.
-     * If empty value passed, no flash will be set.
-     * Particular message value can be a PHP callback, which should return actual message. Such callback, should
-     * have following signature:
+     * 设置一个Flash消息
      *
-     * ```php
-     * function (array $params) {
-     *     // return string
-     * }
-     * ```
+     * @param string|array|null $message flash message(s) to be set.
+     *
+     * 如果传递了纯字符串，它将被用作带有密钥“成功”的消息。
+     * 可以将多个消息指定为数组，如果元素名不是整数，则将其用作键，
+     * 否则，“成功”将被用作关键。
+     * 如果空值通过，则不会设置闪存。
+     * 特定的消息值可以是PHP回调，它应该返回实际消息。
      *
      * @param array $params extra params for the message parsing in format: key => value.
      */

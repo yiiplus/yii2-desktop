@@ -1,6 +1,6 @@
 <?php
 /**
- * Position
+ * 菜单移动Action
  *
  * PHP version 7
  *
@@ -32,13 +32,15 @@ use yii\web\Response;
 class Position extends Action
 {
     /**
-     * @var string name of the query param, which is used for new model position specification.
+     * 获取参数键值
      */
     public $positionParam = 'at';
 
     /**
      * Updates existing record specified by id.
+     *
      * @param mixed $id id of the model to be deleted.
+     *
      * @return mixed response.
      * @throws BadRequestHttpException on invalid request.
      * @throws MethodNotAllowedHttpException on invalid request.
@@ -48,6 +50,7 @@ class Position extends Action
         if (!Yii::$app->request->isPost) {
             throw new MethodNotAllowedHttpException('Method Not Allowed. This url can only handle post');
         }
+        //获取菜单移动方向
         $position = Yii::$app->request->getQueryParam($this->positionParam, null);
         if (empty($position)) {
             throw new BadRequestHttpException(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->positionParam]));
@@ -61,9 +64,12 @@ class Position extends Action
     }
 
     /**
-     * @param \yii\db\ActiveRecordInterface|\backend\behaviors\PositionBehavior $model
-     * @param $position
-     * @throws BadRequestHttpException
+     * 定位Model
+     *
+     * @param object $model model
+     * @param string $position 移动方向 first/last/prev/next
+     *
+     * @return yiiplus\desktop\behaviors\PositionBehavior
      */
     protected function positionModel($model, $position)
     {
@@ -94,9 +100,11 @@ class Position extends Action
     }
 
     /**
-     * Composes success response.
-     * @param \yii\db\ActiveRecordInterface $model
-     * @return mixed response.
+     * 成功返回
+     *
+     * @param  object $model Model
+     *
+     * @return redirect
      */
     protected function respondSuccess($model)
     {
@@ -111,7 +119,13 @@ class Position extends Action
     }
 
     /**
-     * @inheritdoc
+     * 构成返回路径
+     *
+     * @param  string $defaultActionId 列表名称
+     *
+     * @param  [type] $model Model
+     *
+     * @return url
      */
     public function createReturnUrl($defaultActionId = 'index', $model = null)
     {
