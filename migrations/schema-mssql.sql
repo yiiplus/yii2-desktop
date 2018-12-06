@@ -13,6 +13,7 @@ create table [menu]
     [route] varchar(256),
     [order] int(11),
     [data]   text,
+    [icon] varchar(20)
     foreign key (parent) references [menu]([id])  ON DELETE SET NULL ON UPDATE CASCADE
 );
 

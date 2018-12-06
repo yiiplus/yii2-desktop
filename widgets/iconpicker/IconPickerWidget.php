@@ -84,9 +84,7 @@ class IconPickerWidget extends InputWidget
      * @var string
      */
     private $_default = '';
-    /**
-     *
-     */
+
     public function init()
     {
         if (!isset($this->options['id']) && !$this->hasModel()) {
@@ -131,6 +129,7 @@ class IconPickerWidget extends InputWidget
             'unselectedClass' => 'btn-default',
         ];
     }
+    
     /**
      * Registers the needed assets
      */
@@ -168,6 +167,7 @@ JS
 JS;
         $view->registerJs(implode("\n", $js));
     }
+
     /**
      * @return string bootstrap-picker button with hiddenInput field where we put selected value
      */
