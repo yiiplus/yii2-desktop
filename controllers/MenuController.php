@@ -61,11 +61,6 @@ class MenuController extends Controller
     public function actions()
     {
         return [
-            'ajax-update-field' => [
-                'class' => 'yiiplus\\desktop\\actions\\AjaxUpdateFieldAction',
-                'allowFields' => ['order'],
-                'findModel' => [$this, 'findModel']
-            ],
             'position' => [
                 'class' => 'yiiplus\\desktop\\actions\\Position',
                 'returnUrl' => Url::current()
@@ -88,8 +83,8 @@ class MenuController extends Controller
         ]);
 
         return $this->render('index', [
-                'dataProvider' => $dataProvider,
-                'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

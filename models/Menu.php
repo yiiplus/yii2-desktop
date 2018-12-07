@@ -18,8 +18,6 @@ use yii\db\Query;
 
 use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\behaviors\PositionBehavior;
-use yiiplus\desktop\behaviors\CacheInvalidateBehavior;
-use yiiplus\desktop\components\MenuHelper;
 
 /**
  * 菜单model
@@ -90,12 +88,6 @@ class Menu extends \yii\db\ActiveRecord
                     'parent' // multiple lists varying by 'parent'
                 ],
             ],
-            [
-                'class' => CacheInvalidateBehavior::className(),
-                'tags' => [
-                    MenuHelper::CACHE_TAG
-                ]
-            ]
         ];
     }
 
