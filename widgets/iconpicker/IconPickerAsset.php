@@ -1,6 +1,6 @@
 <?php
 /**
- * IconPickerAsset icon样式路径
+ * yiiplus\desktop
  *
  * PHP version 7
  *

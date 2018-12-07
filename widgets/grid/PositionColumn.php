@@ -1,6 +1,6 @@
 <?php
 /**
- * 组装菜单移动小图标PositionColumn
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
- * PositionColumn
+ * 组装菜单移动小图标
  *
  * PHP version 7
  *
@@ -37,27 +37,33 @@ class PositionColumn extends DataColumn
      * @inheritdoc
      */
     public $headerOptions = ['class' => 'position-column'];
+
     /**
      * @var string the template that is used to render the content in each cell.
      * These default tokens are recognized: {first}, {prev}, {next}, {last} and {value}.
      */
     public $template = '{first}&nbsp;{prev}&nbsp;{value}&nbsp;{next}&nbsp;{last}';
+
     /**
      * @var array configuration for the switch position buttons.
      */
     public $buttons = [];
+
     /**
      * @var array html options to be applied to the [[initDefaultButtons()|default buttons]].
      */
     public $buttonOptions = ["class"=>"btn btn-default btn-xs"];
+
     /**
      * @var string route to the action, which should process position switching, for example: 'item/position'.
      */
     public $route = 'position';
+
     /**
      * @var string name of the query param, which is used for new position specification.
      */
     public $positionParam = 'at';
+
     /**
      * @var callable a callback that creates a button URL using the specified model information.
      * The signature of the callback should be the same as that of [[createUrl()]].
@@ -147,7 +153,13 @@ class PositionColumn extends DataColumn
     }
 
     /**
-     * @inheritdoc
+     * renderDataCellContent
+     *
+     * @param object $model
+     * @param string $key
+     * @param string $index
+     *
+     * @return render
      */
     protected function renderDataCellContent($model, $key, $index)
     {
@@ -167,12 +179,13 @@ class PositionColumn extends DataColumn
     /**
      * 组装button.
      *
-     * @param string $name button name.
-     * @param mixed $model
-     * @param string $key
+     * @param string  $name button name.
+     * @param mixed   $model
+     * @param string  $key
      * @param integer $index
      *
      * @return string rendered HTML
+     *
      * @throws InvalidConfigException on invalid button format.
      */
     protected function renderButton($name, $model, $key, $index)
@@ -240,10 +253,10 @@ class PositionColumn extends DataColumn
      * Creates a URL for the given position and model.
      * This method is called for each button and each row.
      *
-     * @param string $position the position name
-     * @param \yii\db\BaseActiveRecord $model the data model
-     * @param mixed $key the key associated with the data model
-     * @param integer $index the current row index
+     * @param string                   $position the position name
+     * @param \yii\db\BaseActiveRecord $model    the data model
+     * @param mixed                    $key      the key associated with the data model
+     * @param integer                  $index    the current row index
      *
      * @return string the created URL
      */

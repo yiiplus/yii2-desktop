@@ -1,6 +1,6 @@
 <?php
 /**
- * Tree
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -14,7 +14,7 @@
 namespace yiiplus\desktop\common\helpers;
 
 /**
- * Tree
+ * 创建树形结构数据
  *
  * PHP version 7
  *

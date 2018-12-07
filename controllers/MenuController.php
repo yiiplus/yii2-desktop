@@ -1,6 +1,6 @@
 <?php
 /**
- * 菜单控制器MenuController
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -37,23 +37,6 @@ use yiiplus\desktop\components\Helper;
 class MenuController extends Controller
 {
     /**
-     * behaviors
-     *
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
      * 菜单移动处理actions
      *
      * @return array
@@ -76,12 +59,8 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $searchModel = new MenuSearch;
-        $query = Menu::find()->orderBy('order asc');
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => false
-        ]);
-
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+        
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,

@@ -1,6 +1,6 @@
 <?php
 /**
- * 菜单移动Action
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -19,7 +19,7 @@ use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 
 /**
- * Position
+ * 菜单移动
  *
  * PHP version 7
  *
@@ -42,7 +42,8 @@ class Position extends Action
      * @param mixed $id id of the model to be deleted.
      *
      * @return mixed response.
-     * @throws BadRequestHttpException on invalid request.
+     *
+     * @throws BadRequestHttpException       on invalid request.
      * @throws MethodNotAllowedHttpException on invalid request.
      */
     public function run($id)
@@ -66,7 +67,7 @@ class Position extends Action
     /**
      * 定位Model
      *
-     * @param object $model model
+     * @param object $model    model
      * @param string $position 移动方向 first/last/prev/next
      *
      * @return yiiplus\desktop\behaviors\PositionBehavior
@@ -102,7 +103,7 @@ class Position extends Action
     /**
      * 成功返回
      *
-     * @param  object $model Model
+     * @param object $model Model
      *
      * @return redirect
      */
@@ -121,9 +122,8 @@ class Position extends Action
     /**
      * 构成返回路径
      *
-     * @param  string $defaultActionId 列表名称
-     *
-     * @param  [type] $model Model
+     * @param string $defaultActionId 列表名称
+     * @param object $model Model
      *
      * @return url
      */

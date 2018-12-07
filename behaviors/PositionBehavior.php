@@ -1,6 +1,6 @@
 <?php
 /**
- * 作用菜单移动场景 PositionBehavior
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -18,8 +18,7 @@ use yii\base\ModelEvent;
 use yii\db\BaseActiveRecord;
 
 /**
- * PositionBehavior
- *
+ * 作用菜单移动场景
  * 位置行为允许管理数据库中记录的自定义顺序。
  * 行为使用数据库实体的特定整数字段来设置位置索引。
  * 由于这个原因，模型引用的数据库实体必须包含字段[[positionAttribute]]。

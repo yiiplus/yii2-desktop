@@ -18,7 +18,6 @@ use yii\db\Query;
 
 use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\behaviors\PositionBehavior;
-
 /**
  * 菜单model
  *

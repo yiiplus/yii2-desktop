@@ -1,6 +1,6 @@
 <?php
 /**
- * Action父类
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -22,7 +22,7 @@ use yii\helpers\StringHelper;
 use yii\web\NotFoundHttpException;
 
 /**
- * Action
+ * 父类
  *
  * PHP version 7
  *
@@ -57,7 +57,7 @@ class Action extends \yii\base\Action
      *
      * @return ActiveRecordInterface|Model the model found
      *
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException  if the model cannot be found
      * @throws InvalidConfigException on invalid configuration
      */
     public function findModel($id)
@@ -142,8 +142,8 @@ class Action extends \yii\base\Action
     /**
      * 创建返回路径 通过getReturnAction()
      *
-     * @param string $defaultActionId default action ID.
-     * @param ActiveRecordInterface|Model|null $model model being processed by action.
+     * @param string                           $defaultActionId default action ID.
+     * @param ActiveRecordInterface|Model|null $model           model being processed by action.
      *
      * @return array|string URL
      */
@@ -180,16 +180,14 @@ class Action extends \yii\base\Action
 
     /**
      * 设置一个Flash消息
-     *
-     * @param string|array|null $message flash message(s) to be set.
-     *
      * 如果传递了纯字符串，它将被用作带有密钥“成功”的消息。
      * 可以将多个消息指定为数组，如果元素名不是整数，则将其用作键，
      * 否则，“成功”将被用作关键。
      * 如果空值通过，则不会设置闪存。
      * 特定的消息值可以是PHP回调，它应该返回实际消息。
      *
-     * @param array $params extra params for the message parsing in format: key => value.
+     * @param string|array|null $message flash message(s) to be set.
+     * @param array             $params  extra params for the message parsing in format: key => value.
      */
     public function setFlash($message, $params = [])
     {

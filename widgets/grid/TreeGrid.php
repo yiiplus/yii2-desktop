@@ -1,6 +1,6 @@
 <?php
 /**
- * 无限级分类实现
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -12,8 +12,8 @@
  */
 namespace yiiplus\desktop\widgets\grid;
 
-use Closure;
 use Yii;
+use Closure;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\grid\DataColumn;
@@ -23,7 +23,7 @@ use yii\helpers\Json;
 use yii\i18n\Formatter;
 
 /**
- * TreeGrid
+ * 无限极分类
  *
  * PHP version 7
  *
@@ -159,6 +159,7 @@ class TreeGrid extends Widget
      * @see \yii\grid::$columns for details.
      */
     public $columns = [];
+
     /**
      * Initializes the grid view.
      * This method will initialize required property values and instantiate [[columns]] objects.
@@ -224,7 +225,9 @@ class TreeGrid extends Widget
 
     /**
      * Renders the HTML content indicating that the list view has no data.
+     *
      * @return string the rendering result
+     *
      * @see emptyText
      */
     public function renderEmpty()
@@ -236,9 +239,11 @@ class TreeGrid extends Widget
 
     /**
      * Renders a table row with the given data model and key.
-     * @param mixed $model the data model to be rendered
-     * @param mixed $key the key associated with the data model
+     *
+     * @param mixed   $model the data model to be rendered
+     * @param mixed   $key   the key associated with the data model
      * @param integer $index the zero-based index of the data model among the model array returned by [[dataProvider]].
+     *
      * @return string the rendering result
      */
     public function renderTableRow($model, $key, $index)
@@ -286,6 +291,7 @@ class TreeGrid extends Widget
 
     /**
      * Renders the table footer.
+     *
      * @return string the rendering result.
      */
     public function renderTableFooter()
@@ -366,8 +372,11 @@ class TreeGrid extends Widget
 
     /**
      * Creates a [[DataColumn]] object based on a string in the format of "attribute:format:label".
-     * @param string $text the column specification string
+     *
+     * @param  string $text the column specification string
+     *
      * @return DataColumn the column instance
+     *
      * @throws InvalidConfigException if the column specification is invalid
      */
     protected function createDataColumn($text)
@@ -402,8 +411,10 @@ class TreeGrid extends Widget
 
     /**
      * Normalize tree data
-     * @param array $data
+     *
+     * @param array  $data
      * @param string $parentId
+     *
      * @return array
      */
     protected function normalizeData(array $data, $parentId = null) {
@@ -419,4 +430,4 @@ class TreeGrid extends Widget
         }
         return $result;
     }
-} 
+}

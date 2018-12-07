@@ -1,6 +1,6 @@
 <?php
 /**
- * TreeGridAsset 树形组件样式路径
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -16,7 +16,7 @@ namespace yiiplus\desktop\widgets\grid;
 use yii\web\AssetBundle;
 
 /**
- * TreeGridAsset
+ * 树形组件样式路径
  *
  * PHP version 7
  *
@@ -41,5 +41,4 @@ class TreeGridAsset extends AssetBundle {
     public $depends = [
         'yii\web\JqueryAsset'
     ];
-
-} 
+}

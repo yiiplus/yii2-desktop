@@ -1,6 +1,6 @@
 <?php
 /**
- * 无限极分类
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -159,9 +159,11 @@ class TreeColumn extends Object
 
     /**
      * Renders a data cell.
-     * @param mixed $model the data model being rendered
-     * @param mixed $key the key associated with the data model
+     *
+     * @param mixed   $model the data model being rendered
+     * @param mixed   $key the key associated with the data model
      * @param integer $index the zero-based index of the data item among the item array returned by [[GridView::dataProvider]].
+     *
      * @return string the rendering result
      */
     public function renderDataCell($model, $key, $index)
@@ -178,6 +180,7 @@ class TreeColumn extends Object
      * Renders the header cell content.
      * The default implementation simply renders [[header]].
      * This method may be overridden to customize the rendering of the header cell.
+     *
      * @return string the rendering result
      */
     protected function renderHeaderCellContent()
@@ -213,6 +216,7 @@ class TreeColumn extends Object
      * Renders the footer cell content.
      * The default implementation simply renders [[footer]].
      * This method may be overridden to customize the rendering of the footer cell.
+     *
      * @return string the rendering result
      */
     protected function renderFooterCellContent()
@@ -222,9 +226,11 @@ class TreeColumn extends Object
 
     /**
      * Renders the data cell content.
-     * @param mixed $model the data model
-     * @param mixed $key the key associated with the data model
+     *
+     * @param mixed   $model the data model
+     * @param mixed   $key   the key associated with the data model
      * @param integer $index the zero-based index of the data model among the models array returned by [[GridView::dataProvider]].
+     *
      * @return string the rendering result
      */
     protected function renderDataCellContent($model, $key, $index)
@@ -242,9 +248,11 @@ class TreeColumn extends Object
 
     /**
      * Returns the data cell value.
-     * @param mixed $model the data model
-     * @param mixed $key the key associated with the data model
+     *
+     * @param mixed   $model the data model
+     * @param mixed   $key   the key associated with the data model
      * @param integer $index the zero-based index of the data model among the models array returned by [[GridView::dataProvider]].
+     *
      * @return string the data cell value
      */
     public function getDataCellValue($model, $key, $index)
@@ -260,4 +268,4 @@ class TreeColumn extends Object
         }
         return null;
     }
-} 
+}

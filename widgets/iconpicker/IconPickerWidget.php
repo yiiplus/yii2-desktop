@@ -1,6 +1,6 @@
 <?php
 /**
- * 获取菜单小图标列表IconPickerWidget
+ * yiiplus\desktop
  *
  * PHP version 7
  *
