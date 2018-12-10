@@ -36,6 +36,11 @@ use yii\web\NotFoundHttpException;
 class Action extends \yii\base\Action
 {
     /**
+     * session值
+     */
+    const SESSION_KEY = '__adminReturnAction';
+
+    /**
      * 查询$Model
      */
     public $findModel;
@@ -103,8 +108,7 @@ class Action extends \yii\base\Action
         if (strpos($actionId, '/') === false) {
             $actionId = $this->controller->getUniqueId() . '/' . $actionId;
         }
-        $sessionKey = '__adminReturnAction';
-        Yii::$app->getSession()->set($sessionKey, $actionId);
+        Yii::$app->getSession()->set(self::SESSION_KEY, $actionId);
     }
 
     /**
@@ -120,8 +124,7 @@ class Action extends \yii\base\Action
             return $this->returnAction;
         }
 
-        $sessionKey = '__adminReturnAction';
-        $actionId = Yii::$app->getSession()->get($sessionKey, $defaultActionId);
+        $actionId = Yii::$app->getSession()->get(self::SESSION_KEY, $defaultActionId);
         $actionId = trim($actionId, '/');
         if ($actionId === 'index') {
             return $actionId;
