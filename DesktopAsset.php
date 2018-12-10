@@ -13,11 +13,12 @@ class DesktopAsset extends AssetBundle
      * @inheritdoc
      */
     public $sourcePath = '@yiiplus/desktop/assets';
+
     /**
      * @inheritdoc
      */
     public $css = [
-        'desktop.css',
+        'jquery-ui.css',
     ];
     
     /**
@@ -25,9 +26,5 @@ class DesktopAsset extends AssetBundle
      */
     public $js = [
         'jquery-ui.js',
-    ];
-
-    public $depends = [
-        'yii\web\JqueryAsset',
     ];
 }

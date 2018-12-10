@@ -58,7 +58,7 @@ class MenuController extends Controller
     {
         $searchModel = new MenuSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
-        
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
