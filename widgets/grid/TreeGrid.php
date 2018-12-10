@@ -294,6 +294,7 @@ class TreeGrid extends Widget // TODO:liguangquan
         $models = array_values($this->dataProvider->getModels());
         $models = $this->normalizeData($models, $this->parentRootValue); //TODO
         $this->dataProvider->setModels($models);
+        $this->dataProvider->setKeys(null);
         $this->dataProvider->prepare();
         $keys = $this->dataProvider->getKeys(); //获取所有id值
         foreach ($models as $index => $model) { //$model 数据值

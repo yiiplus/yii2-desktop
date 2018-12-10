@@ -32,7 +32,7 @@ use yii\web\Response;
 class Position extends Action
 {
     /**
-     * 获取参数键值 TODO:liguangquan
+     * 获取参数键值
      */
     public $positionParam = 'at';
 

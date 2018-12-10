@@ -77,7 +77,7 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * 检查所有控制器是否指定该id的操作
+     * 检查是否存在该id的控制器操作
      *
      * @param string $id action ID.
      *
@@ -96,7 +96,7 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * 设置返回的actionId
+     * 设置复合主键的action
      *
      * @param string|null $actionId action ID, if not set current action will be used.
      */
