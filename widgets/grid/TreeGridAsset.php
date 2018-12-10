@@ -30,6 +30,10 @@ class TreeGridAsset extends AssetBundle {
 
     public $sourcePath = '@yiiplus/desktop/widgets/grid/assets/tree';
 
+    /**
+     * js文件路径
+     * @var string
+     */
     public $js = [
         'js/jquery.treegrid.min.js',
     ];

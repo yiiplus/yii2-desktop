@@ -55,7 +55,7 @@ class TreeColumn extends Object
     public $footer;
 
     /**
-     * 列表内容对象
+     * 列表主体对象
      * @var object
      */
     public $content;
@@ -66,13 +66,7 @@ class TreeColumn extends Object
     public $visible = true;
 
     /**
-     * @var 排列列组标签的HTML属性.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
-     */
-    public $options = [];
-
-    /**
-     * @var 排列列组标签的HTML属性
+     * @var 列表头部对象
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $headerOptions = [];
@@ -90,20 +84,19 @@ class TreeColumn extends Object
     public $footerOptions = [];
 
     /**
-     * @var 将与此列关联的属性名称串起来。当[[content]] nor [[value]]
-     * 指定后，将从每个数据模型中检索并显示指定属性的值。[[content]] nor [[value]]
-     * 此外，如果未指定[[Lab] ]，则将显示与属性相关联的标签。
+     * column键值
+     * @var mixed
      */
     public $attribute;
 
     /**
-     * 默认标签值
+     * 标签值 名称
      * @var string
      */
     public $label;
 
     /**
-     * @var boolean whether the header label should be HTML-encoded.
+     * @var 编码格式开关 默认返回utf8
      * @see label
      */
     public $encodeLabel = true;
@@ -174,7 +167,7 @@ class TreeColumn extends Object
             if ($provider instanceof ActiveDataProvider && $provider->query instanceof ActiveQueryInterface) {
                 /* @var $model Model */
                 $model = new $provider->query->modelClass;
-                $label = $model->getAttributeLabel($this->attribute);
+                $label = $model->getAttributeLabel($this->attribute); //获取别名
             } else {
                 $models = $provider->getModels();
                 if (($model = reset($models)) instanceof Model) {
@@ -187,7 +180,6 @@ class TreeColumn extends Object
         } else {
             $label = $this->label;
         }
-
         return $this->encodeLabel ? Html::encode($label) : $label;
     }
 

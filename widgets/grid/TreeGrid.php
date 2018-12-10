@@ -33,149 +33,127 @@ use yii\i18n\Formatter;
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
-class TreeGrid extends Widget
+class TreeGrid extends Widget // TODO:liguangquan
 {
     /**
-     * @var \yii\data\DataProviderInterface|\yii\data\BaseDataProvider the data provider for the view. This property is required.
+     * Db数据
+     * @var object
      */
     public $dataProvider;
     
     /**
-     * @var string the default data column class if the class name is not explicitly specified when configuring a data column.
-     * Defaults to 'leandrogehlen\treegrid\TreeColumn'.
+     * 如果在配置数据列时没有显式指定类名，则触发默认数据列类。
+     ＊ 默认值为“Leand RooGeHLe\\TeeGrave\TeeCalOnLoad”。
      */
     public $dataColumnClass;
 
     /**
-     * @var array the HTML attributes for the container tag of the grid view.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @var 默认表格class名
+     * @see array
      */
     public $options = ['class' => 'table table-striped table-bordered'];
 
     /**
-     * @var array The plugin options
+     * 控制jquery->treegrid默认为收起状态
+     * @var array
      */
     public $pluginOptions = [];
 
     /**
-     * @var array the HTML attributes for the table header row.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @var 为表格头部自定义属性
+     * @see array
      */
     public $headerRowOptions = [];
+
     /**
-     * @var array the HTML attributes for the table footer row.
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * 表格底部自定义属性
+     * @var array
      */
     public $footerRowOptions = [];
 
     /**
-     * @var string the HTML display when the content of a cell is empty
-     */
-    public $emptyCell = '&nbsp;';
-
-    /**
-     * @var string the HTML content to be displayed when [[dataProvider]] does not have any data.
+     * 当没有任何数据的时候，默认显示的html内容
+     * @var object
      */
     public $emptyText;
 
     /**
-     * @var array the HTML attributes for the emptyText of the list view.
-     * The "tag" element specifies the tag name of the emptyText element and defaults to "div".
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * 数据为空的表格class值
+     * @var array
      */
     public $emptyTextOptions = ['class' => 'empty'];
 
     /**
+     * 控制表格头部<th>显示
      * @var boolean whether to show the header section of the grid table.
      */
     public $showHeader = true;
+
     /**
+     * 控制表格底部<tfoot>显示
      * @var boolean whether to show the footer section of the grid table.
      */
     public $showFooter = false;
+
     /**
-     * @var boolean whether to show the grid view if [[dataProvider]] returns no data.
+     * 数据不存在时的提示语是否显示配置
+     * @var boolean
      */
     public $showOnEmpty = true;
 
     /**
-     * @var array|Formatter the formatter used to format model attribute values into displayable texts.
-     * This can be either an instance of [[Formatter]] or an configuration array for creating the [[Formatter]]
-     * instance. If this property is not set, the "formatter" application component will be used.
+     * 格式化数据
+     * @var mixed
      */
     public $formatter;
 
     /**
-     * @var array|Closure the HTML attributes for the table body rows. This can be either an array
-     * specifying the common HTML attributes for all body rows, or an anonymous function that
-     * returns an array of the HTML attributes. The anonymous function will be called once for every
-     * data model returned by [[dataProvider]]. It should have the following signature:
-     *
-     * ```php
-     * function ($model, $key, $index, $grid)
-     * ```
-     *
-     * - `$model`: the current data model being rendered
-     * - `$key`: the key value associated with the current data model
-     * - `$index`: the zero-based index of the data model in the model array returned by [[dataProvider]]
-     * - `$grid`: the GridView object
-     *
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * 回调函数
+     * @var array
      */
     public $rowOptions = [];
 
     /**
-     * @var Closure an anonymous function that is called once BEFORE rendering each data model.
-     * It should have the similar signature as [[rowOptions]]. The return result of the function
-     * will be rendered directly.
-     */
-    public $beforeRow;
-
-    /**
-     * @var Closure an anonymous function that is called once AFTER rendering each data model.
-     * It should have the similar signature as [[rowOptions]]. The return result of the function
-     * will be rendered directly.
-     */
-    public $afterRow;
-
-    /**
-     * @var string name of key column used to build tree
+     * 用于构建树的键列的字符串名称
+     * @var string
      */
     public $keyColumnName;
 
     /**
-     * @var string name of parent column used to build tree
+     * 用于构建树的父列的字符串名称
+     * @var string
      */
     public $parentColumnName;
 
     /**
-     * @var mixed parent column value of root elements from data
+     * 用于构建树的根值
+     * @var mixed
      */
     public $parentRootValue = null;
 
     /**
-     * @var array grid column configuration. Each array element represents the configuration
-     * for one particular grid column.
-     * @see \yii\grid::$columns for details.
+     * column
+     * @var array
      */
     public $columns = [];
 
     /**
-     * Initializes the grid view.
-     * This method will initialize required property values and instantiate [[columns]] objects.
+     * 默认验证方法
+     * @return string
      */
     public function init()
     {
         if ($this->dataProvider === null) {
             throw new InvalidConfigException('The "dataProvider" property must be set.');
         }
+        //数据不存在使用yii2语言包
         if ($this->emptyText === null) {
             $this->emptyText = Yii::t('yii', 'No results found.');
         }
         if (!isset($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
-
+        //格式化数据
         if ($this->formatter == null) {
             $this->formatter = Yii::$app->getFormatter();
         } elseif (is_array($this->formatter)) {
@@ -194,29 +172,28 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Runs the widget.
+     * run()
      */
     public function run()
     {
-        $id = $this->options['id'];
+        $id = $this->options['id']; //表格id值默认值w0
         $options = Json::htmlEncode($this->pluginOptions);
 
         $view = $this->getView();
-        TreeGridAsset::register($view);
+        TreeGridAsset::register($view); //加载配置的静态<js;css>文件
 
         $view->registerJs("jQuery('#$id').treegrid($options);");
 
         if ($this->showOnEmpty || $this->dataProvider->getCount() > 0) {
-            $header = $this->showHeader ? $this->renderTableHeader() : false;
-            $body = $this->renderItems();
-            $footer = $this->showFooter ? $this->renderTableFooter() : false;
+            $header = $this->showHeader ? $this->renderTableHeader() : false;//表格头部
+            $body = $this->renderItems(); //表格主体
+            $footer = $this->showFooter ? $this->renderTableFooter() : false;//表格底部
 
             $content = array_filter([
                 $header,
                 $body,
                 $footer
             ]);
-
             return Html::tag('table', implode("\n", $content), $this->options);
         } else {
             return $this->renderEmpty();
@@ -224,9 +201,9 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Renders the HTML content indicating that the list view has no data.
+     * 数据不存在时表格显示内容
      *
-     * @return string the rendering result
+     * @return string
      *
      * @see emptyText
      */
@@ -238,7 +215,7 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Renders a table row with the given data model and key.
+     * 用给定的数据模型和键呈现表行。
      *
      * @param mixed   $model the data model to be rendered
      * @param mixed   $key   the key associated with the data model
@@ -253,20 +230,20 @@ class TreeGrid extends Widget
         foreach ($this->columns as $column) {
             $cells[] = $column->renderDataCell($model, $key, $index);
         }
-        if ($this->rowOptions instanceof Closure) {
+        if ($this->rowOptions instanceof Closure) {//如果定义了回调函数
             $options = call_user_func($this->rowOptions, $model, $key, $index, $this);
         } else {
             $options = $this->rowOptions;
         }
         $options['data-key'] = is_array($key) ? json_encode($key) : (string) $key;
-
-        $id = ArrayHelper::getValue($model, $this->keyColumnName);
+        $id = ArrayHelper::getValue($model, $this->keyColumnName); //id值
         Html::addCssClass($options, "treegrid-$id");
 
-        $parentId = ArrayHelper::getValue($model, $this->parentColumnName);
+        $parentId = ArrayHelper::getValue($model, $this->parentColumnName); //parent值
+
         if ($parentId) {
             if(ArrayHelper::getValue($this->pluginOptions, 'initialState') == 'collapsed'){
-                Html::addCssStyle($options, 'display: none;');
+                Html::addCssStyle($options, 'display: none;'); //如果设置的收起，子类不显示
             }
             Html::addCssClass($options, "treegrid-parent-$parentId");
         }
@@ -275,14 +252,15 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Renders the table header.
-     * @return string the rendering result.
+     * 生成表格头部<thead><tr><th>$content</th></tr></thead>
+     *
+     * @return string<thead></thead>
      */
     public function renderTableHeader()
     {
         $cells = [];
         foreach ($this->columns as $column) {
-            /* @var $column TreeColumn */
+            /* @var $column TreeColumn */ //TODO TreeColumn
             $cells[] = $column->renderHeaderCell();
         }
         $content = Html::tag('tr', implode('', $cells), $this->headerRowOptions);
@@ -290,9 +268,9 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Renders the table footer.
+     * 生成表格头部<tfoot><tr><th>$content</th></tr></tfoot>
      *
-     * @return string the rendering result.
+     * @return string
      */
     public function renderTableFooter()
     {
@@ -306,37 +284,22 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Renders the data models for the grid view.
+     * 表格主体
+     *
+     * @return <tr><td>$content</td></tr>
      */
     public function renderItems()
     {
         $rows = [];
-        $this->dataProvider->setKeys([]);
         $models = array_values($this->dataProvider->getModels());
-        $models = $this->normalizeData($models, $this->parentRootValue);
+        $models = $this->normalizeData($models, $this->parentRootValue); //TODO
         $this->dataProvider->setModels($models);
-        $this->dataProvider->setKeys(null);
         $this->dataProvider->prepare();
-        $keys = $this->dataProvider->getKeys();
-        foreach ($models as $index => $model) {
-            $key = $keys[$index];
-            if ($this->beforeRow !== null) {
-                $row = call_user_func($this->beforeRow, $model, $key, $index, $this);
-                if (!empty($row)) {
-                    $rows[] = $row;
-                }
-            }
-
-            $rows[] = $this->renderTableRow($model, $key, $index);
-
-            if ($this->afterRow !== null) {
-                $row = call_user_func($this->afterRow, $model, $key, $index, $this);
-                if (!empty($row)) {
-                    $rows[] = $row;
-                }
-            }
+        $keys = $this->dataProvider->getKeys(); //获取所有id值
+        foreach ($models as $index => $model) { //$model 数据值
+            $key = $keys[$index]; //对应id值
+            $rows[] = $this->renderTableRow($model, $key, $index); //生成数据路由
         }
-
         if (empty($rows)) {
             $colspan = count($this->columns);
             return "<tr><td colspan=\"$colspan\">" . $this->renderEmpty() . "</td></tr>";
@@ -346,11 +309,11 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Creates column objects and initializes them.
+     * column转化
      */
     protected function initColumns()
     {
-        if (empty($this->columns)) {
+        if (empty($this->columns)) { //column未找到
             $this->guessColumns();
         }
         foreach ($this->columns as $i => $column) {
@@ -371,11 +334,11 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Creates a [[DataColumn]] object based on a string in the format of "attribute:format:label".
+     * 基于column创建label对象.
      *
-     * @param  string $text the column specification string
+     * @param string $text the column specification string
      *
-     * @return DataColumn the column instance
+     * @return object
      *
      * @throws InvalidConfigException if the column specification is invalid
      */
@@ -395,8 +358,7 @@ class TreeGrid extends Widget
     }
 
     /**
-     * This function tries to guess the columns to show from the given data
-     * if [[columns]] are not explicitly specified.
+     * Column未找到调用
      */
     protected function guessColumns()
     {
@@ -410,20 +372,21 @@ class TreeGrid extends Widget
     }
 
     /**
-     * Normalize tree data
+     * 递归生成树形数据
      *
-     * @param array  $data
-     * @param string $parentId
+     * @param array  $data     model数据
+     * @param string $parentId 根值
      *
      * @return array
      */
     protected function normalizeData(array $data, $parentId = null) {
         $result = [];
         foreach ($data as $element) {
+            //获取与parent数据相同的数据
             if (ArrayHelper::getValue($element, $this->parentColumnName) === $parentId) {
                 $result[] = $element;
                 $children = $this->normalizeData($data, ArrayHelper::getValue($element, $this->keyColumnName));
-                if ($children) {
+                if ($children) { //子类存在
                     $result = array_merge($result, $children);
                 }
             }

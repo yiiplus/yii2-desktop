@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
- * 组装菜单移动小图标
+ * 组装菜单移动标签
  *
  * PHP version 7
  *
@@ -68,7 +68,6 @@ class PositionColumn extends DataColumn
      */
     public function init()
     {
-        parent::init();
         $this->initDefaultButtons();
     }
 

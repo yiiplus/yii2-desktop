@@ -10,7 +10,7 @@ use yiiplus\desktop\models\Menu as MenuModel;
 /**
  * Menu represents the model behind the search form about [[\yiiplus\desktop\models\Menu]].
  */
-class Menu extends MenuModel
+class Menu extends MenuModel // TODO:liguangquan
 {
 
     /**
@@ -38,7 +38,7 @@ class Menu extends MenuModel
      * @param  array $params
      * @return \yii\data\ActiveDataProvider
      */
-    public function search($params)
+    public function search($params) // TODO:liguangquan
     {
         $query = MenuModel::find()
             ->from(MenuModel::tableName() . ' t')
