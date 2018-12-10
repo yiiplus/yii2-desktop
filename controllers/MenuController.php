@@ -15,8 +15,6 @@ namespace yiiplus\desktop\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
 use yiiplus\desktop\models\Menu;

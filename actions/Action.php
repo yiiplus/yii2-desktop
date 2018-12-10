@@ -22,7 +22,8 @@ use yii\helpers\StringHelper;
 use yii\web\NotFoundHttpException;
 
 /**
- * 父类
+ * 继承\yii\base\Action
+ * 增加findModel/返回action/构建返回action
  *
  * PHP version 7
  *

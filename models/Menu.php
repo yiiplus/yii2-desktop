@@ -1,6 +1,6 @@
 <?php
 /**
- * 菜单model
+ * yiiplus\desktop
  *
  * PHP version 7
  *
@@ -84,7 +84,7 @@ class Menu extends \yii\db\ActiveRecord
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'order',
                 'groupAttributes' => [
-                    'parent' // multiple lists varying by 'parent'
+                    'parent' // 菜单父类字段名
                 ],
             ],
         ];

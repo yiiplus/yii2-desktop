@@ -34,45 +34,37 @@ use yii\helpers\Url;
 class PositionColumn extends DataColumn
 {
     /**
-     * @inheritdoc
-     */
-    public $headerOptions = ['class' => 'position-column'];
-
-    /**
-     * @var string the template that is used to render the content in each cell.
-     * These default tokens are recognized: {first}, {prev}, {next}, {last} and {value}.
+     * 将用于在每个单元格中呈现内容的模板串起来。
      */
     public $template = '{first}&nbsp;{prev}&nbsp;{value}&nbsp;{next}&nbsp;{last}';
 
     /**
-     * @var array configuration for the switch position buttons.
+     * 小图标数组默认值
      */
     public $buttons = [];
 
     /**
-     * @var array html options to be applied to the [[initDefaultButtons()|default buttons]].
+     * 小图标默认class
      */
     public $buttonOptions = ["class"=>"btn btn-default btn-xs"];
 
     /**
-     * @var string route to the action, which should process position switching, for example: 'item/position'.
+     * 动作的字符串路径 例如："项目/位置"
      */
     public $route = 'position';
 
     /**
-     * @var string name of the query param, which is used for new position specification.
+     * 获取params字符串名称
      */
     public $positionParam = 'at';
 
     /**
-     * @var callable a callback that creates a button URL using the specified model information.
-     * The signature of the callback should be the same as that of [[createUrl()]].
-     * If this property is not set, button URLs will be created using [[createUrl()]].
+     * 回调的默认值
      */
     public $urlCreator;
 
     /**
-     * @inheritdoc
+     * 默认执行 init
      */
     public function init()
     {
@@ -81,7 +73,9 @@ class PositionColumn extends DataColumn
     }
 
     /**
-     * Initializes the default buttons.
+     * 初始化默认按钮
+     *
+     * @return bool
      */
     protected function initDefaultButtons()
     {
@@ -153,7 +147,7 @@ class PositionColumn extends DataColumn
     }
 
     /**
-     * renderDataCellContent
+     * 生成模版内容
      *
      * @param object $model
      * @param string $key
@@ -250,8 +244,8 @@ class PositionColumn extends DataColumn
     }
 
     /**
-     * Creates a URL for the given position and model.
-     * This method is called for each button and each row.
+     * 为给定的位置和模型创建URL。
+     * 为每个按钮和每一行调用此方法。
      *
      * @param string                   $position the position name
      * @param \yii\db\BaseActiveRecord $model    the data model

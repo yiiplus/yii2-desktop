@@ -24,7 +24,7 @@ use yii\helpers\Html;
 use yii\helpers\Inflector;
 
 /**
- * TreeColumn
+ * 生成树形菜单列表
  *
  * PHP version 7
  *
@@ -37,25 +37,26 @@ use yii\helpers\Inflector;
 class TreeColumn extends Object
 {
     /**
-     * @var TreeGrid the grid view object that owns this column.
+     * 列表对象
+     * @var object
      */
     public $grid;
 
     /**
-     * @var string the header cell content. Note that it will not be HTML-encoded.
+     * 列表头部对象
+     * @var object
      */
     public $header;
 
     /**
-     * @var string the footer cell content. Note that it will not be HTML-encoded.
+     * 列表底部对象
+     * @var object
      */
     public $footer;
 
     /**
-     * @var callable This is a callable that will be used to generate the content of each cell.
-     * The signature of the function should be the following: `function ($model, $key, $index, $column)`.
-     * Where `$model`, `$key`, and `$index` refer to the model, key and index of the row currently being rendered
-     * and `$column` is a reference to the [[TreeColumn]] object.
+     * 列表内容对象
+     * @var object
      */
     public $content;
 
@@ -65,49 +66,39 @@ class TreeColumn extends Object
     public $visible = true;
 
     /**
-     * @var array the HTML attributes for the column group tag.
+     * @var 排列列组标签的HTML属性.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $options = [];
 
     /**
-     * @var array the HTML attributes for the header cell tag.
+     * @var 排列列组标签的HTML属性
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $headerOptions = [];
 
     /**
-     * @var array|\Closure the HTML attributes for the data cell tag. This can either be an array of
-     * attributes or an anonymous function ([[Closure]]) that returns such an array.
-     * The signature of the function should be the following: `function ($model, $key, $index, $column)`.
-     * Where `$model`, `$key`, and `$index` refer to the model, key and index of the row currently being rendered
-     * and `$column` is a reference to the [[Column]] object.
-     * A function may be used to assign different attributes to different rows based on the data in that row.
-     *
+     * @var 排列列组标签的HTML属性
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $contentOptions = [];
 
     /**
-     * @var array the HTML attributes for the footer cell tag.
+     * @var 排列列组标签的HTML属性
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
     public $footerOptions = [];
 
     /**
-     * @var string the attribute name associated with this column. When neither [[content]] nor [[value]]
-     * is specified, the value of the specified attribute will be retrieved from each data model and displayed.
-     *
-     * Also, if [[label]] is not specified, the label associated with the attribute will be displayed.
+     * @var 将与此列关联的属性名称串起来。当[[content]] nor [[value]]
+     * 指定后，将从每个数据模型中检索并显示指定属性的值。[[content]] nor [[value]]
+     * 此外，如果未指定[[Lab] ]，则将显示与属性相关联的标签。
      */
     public $attribute;
 
     /**
-     * @var string label to be displayed in the [[header|header cell]] and also to be used as the sorting
-     * link label when sorting is enabled for this column.
-     * If it is not set and the models provided by the GridViews data provider are instances
-     * of [[\yii\db\ActiveRecord]], the label will be determined using [[\yii\db\ActiveRecord::getAttributeLabel()]].
-     * Otherwise [[\yii\helpers\Inflector::camel2words()]] will be used to get a label.
+     * 默认标签值
+     * @var string
      */
     public $label;
 
@@ -118,31 +109,19 @@ class TreeColumn extends Object
     public $encodeLabel = true;
 
     /**
-     * @var string|\Closure an anonymous function or a string that is used to determine the value to display in the current column.
-     *
-     * If this is an anonymous function, it will be called for each row and the return value will be used as the value to
-     * display for every data model. The signature of this function should be: `function ($model, $key, $index, $column)`.
-     * Where `$model`, `$key`, and `$index` refer to the model, key and index of the row currently being rendered
-     * and `$column` is a reference to the [[DataColumn]] object.
-     *
-     * You may also set this property to a string representing the attribute name to be displayed in this column.
-     * This can be used when the attribute to be displayed is different from the [[attribute]] that is used for
-     * sorting and filtering.
-     *
-     * If this is not set, `$model[$attribute]` will be used to obtain the value, where `$attribute` is the value of [[attribute]].
+     * 数据单元格默认值
+     * @var string
      */
     public $value;
 
     /**
-     * @var string|array in which format should the value of each data model be displayed as (e.g. `"raw"`, `"text"`, `"html"`,
-     * `['date', 'php:Y-m-d']`). Supported formats are determined by the [[GridView::formatter|formatter]] used by
-     * the [[GridView]]. Default format is "text" which will format the value as an HTML-encoded plain text when
-     * [[\yii\i18n\Formatter]] is used as the [[GridView::$formatter|formatter]] of the GridView.
+     * 数据默认类型.
+     * @var string
      */
     public $format = 'text';
 
     /**
-     * Renders the header cell.
+     * 呈现头部单元格
      */
     public function renderHeaderCell()
     {
@@ -150,7 +129,7 @@ class TreeColumn extends Object
     }
 
     /**
-     * Renders the footer cell.
+     * 呈现底部单元格
      */
     public function renderFooterCell()
     {
@@ -158,13 +137,13 @@ class TreeColumn extends Object
     }
 
     /**
-     * Renders a data cell.
+     * 呈现数据单元
      *
-     * @param mixed   $model the data model being rendered
-     * @param mixed   $key the key associated with the data model
-     * @param integer $index the zero-based index of the data item among the item array returned by [[GridView::dataProvider]].
+     * @param mixed   $model object
+     * @param mixed   $key   数据相关联的key值
+     * @param integer $index 数据索引
      *
-     * @return string the rendering result
+     * @return string
      */
     public function renderDataCell($model, $key, $index)
     {
@@ -177,11 +156,11 @@ class TreeColumn extends Object
     }
 
     /**
-     * Renders the header cell content.
-     * The default implementation simply renders [[header]].
-     * This method may be overridden to customize the rendering of the header cell.
+     * 呈现标题单元格内容。
+     * 默认实现简单地呈现[[header] ]。
+     * 可以重写此方法来自定义标题单元格的呈现。
      *
-     * @return string the rendering result
+     * @return string
      */
     protected function renderHeaderCellContent()
     {
@@ -213,11 +192,11 @@ class TreeColumn extends Object
     }
 
     /**
-     * Renders the footer cell content.
-     * The default implementation simply renders [[footer]].
-     * This method may be overridden to customize the rendering of the footer cell.
+     * 呈现页脚单元格内容。
+     * 默认实现简单地呈现[[footer] ]。
+     * 可以重写此方法来自定义页脚单元格的呈现。
      *
-     * @return string the rendering result
+     * @return string
      */
     protected function renderFooterCellContent()
     {
@@ -225,13 +204,13 @@ class TreeColumn extends Object
     }
 
     /**
-     * Renders the data cell content.
+     * 呈现单元格数据
      *
-     * @param mixed   $model the data model
-     * @param mixed   $key   the key associated with the data model
-     * @param integer $index the zero-based index of the data model among the models array returned by [[GridView::dataProvider]].
+     * @param mixed   $model object
+     * @param mixed   $key   与数据模型关联的密钥
+     * @param integer $index 索引值
      *
-     * @return string the rendering result
+     * @return string
      */
     protected function renderDataCellContent($model, $key, $index)
     {
@@ -247,13 +226,13 @@ class TreeColumn extends Object
     }
 
     /**
-     * Returns the data cell value.
+     * 返回数据单元格值
      *
-     * @param mixed   $model the data model
-     * @param mixed   $key   the key associated with the data model
-     * @param integer $index the zero-based index of the data model among the models array returned by [[GridView::dataProvider]].
+     * @param mixed   $model object
+     * @param mixed   $key   与数据模型关联的密钥
+     * @param integer $index 索引[[GridView::dataProvider]].
      *
-     * @return string the data cell value
+     * @return string
      */
     public function getDataCellValue($model, $key, $index)
     {

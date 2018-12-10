@@ -20,7 +20,7 @@ use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 /**
- * IconPickerWidget
+ * icon小图标生成器
  *
  * PHP version 7
  *
@@ -33,22 +33,24 @@ use yii\widgets\InputWidget;
 class IconPickerWidget extends InputWidget
 {
     /**
-     * @var string $iconset - one of allowed variants
+     * @var 允许的变体值
      * glyphicon|ionicon|fontawesome|weathericon|mapicon|octicon|typicon|elusiveicon|materialdesign
      */
     public $iconset = 'fontawesome';
+
     /**
-     * @var array $pickerOptions additional html options for picker button
+     * @var 默认class
      */
     public $pickerOptions = ['class' => 'btn btn-default btn-sm'];
+
     /**
-     * @var array $containerOptions additional html options for container
+     * @var 列表附加选项
      */
     public $containerOptions = [];
+
     /**
-     * @var array $clientOptions - iconpicker options
-     * (will be merged with defaultOptions @see getDefaultOptions() , so you can set only overrides)
-     * @see       http://victor-valencia.github.io/bootstrap-iconpicker/
+     * @var 客户端选项
+     * @see http://victor-valencia.github.io/bootstrap-iconpicker/
      **/
     public $clientOptions
         = [
@@ -76,11 +78,14 @@ class IconPickerWidget extends InputWidget
      * }'),
      */
     public $onSelectIconCallback;
+
     /**
      * @var
      */
     private $_id;
+
     /**
+     * 默认值
      * @var string
      */
     private $_default = '';
@@ -106,7 +111,7 @@ class IconPickerWidget extends InputWidget
     }
 
     /**
-     * Default js-plugin options
+     * 默认js插件选项
      *
      * @return array
      **/
@@ -131,7 +136,7 @@ class IconPickerWidget extends InputWidget
     }
     
     /**
-     * Registers the needed assets
+     * 加载器
      */
     public function registerAssets()
     {
@@ -169,6 +174,8 @@ JS;
     }
 
     /**
+     * 自动执行
+     *
      * @return string bootstrap-picker button with hiddenInput field where we put selected value
      */
     public function run()

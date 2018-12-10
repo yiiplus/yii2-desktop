@@ -37,9 +37,9 @@ class Position extends Action
     public $positionParam = 'at';
 
     /**
-     * Updates existing record specified by id.
+     * 更新ID指定的现有记录
      *
-     * @param mixed $id id of the model to be deleted.
+     * @param mixed $id ModelId
      *
      * @return mixed response.
      *
