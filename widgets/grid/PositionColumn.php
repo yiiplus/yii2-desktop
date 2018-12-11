@@ -68,6 +68,7 @@ class PositionColumn extends DataColumn
      */
     public function init()
     {
+        parent::init();
         $this->initDefaultButtons();
     }
 
