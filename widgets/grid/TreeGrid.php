@@ -43,7 +43,6 @@ class TreeGrid extends Widget // TODO:liguangquan
     
     /**
      * 如果在配置数据列时没有显式指定类名，则触发默认数据列类。
-     ＊ 默认值为“Leand RooGeHLe\\TeeGrave\TeeCalOnLoad”。
      */
     public $dataColumnClass;
 

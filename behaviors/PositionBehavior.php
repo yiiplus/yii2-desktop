@@ -19,9 +19,6 @@ use yii\db\BaseActiveRecord;
 
 /**
  * 作用菜单移动场景
- * 位置行为允许管理数据库中记录的自定义顺序。
- * 行为使用数据库实体的特定整数字段来设置位置索引。
- * 由于这个原因，模型引用的数据库实体必须包含字段[[positionAttribute]]。
  *
  * PHP version 7
  *
@@ -34,7 +31,7 @@ use yii\db\BaseActiveRecord;
 class PositionBehavior extends Behavior
 {
     /**
-     * 数据库顺序字段order默认position //菜单model指定
+     * 数据库顺序字段order默认position
      *
      * @var string
      */
@@ -48,8 +45,8 @@ class PositionBehavior extends Behavior
     public $groupAttributes = [];
 
     /**
-     * @var integer position value, which should be applied to the model on its save.
-     * Internal usage only.
+     * 默认保存的positionAttribute值
+     * @var mixed
      */
     private $positionOnSave;
 
@@ -57,7 +54,7 @@ class PositionBehavior extends Behavior
     /**
      * 将一个菜单像上移动一个
      *
-     * @return boolean movement successful.
+     * @return boolean
      */
     public function movePrev()
     {
@@ -85,7 +82,7 @@ class PositionBehavior extends Behavior
     /**
      * 将一个菜单像下移动一个
      *
-     * @return boolean movement successful.
+     * @return boolean
      */
     public function moveNext()
     {
@@ -115,7 +112,7 @@ class PositionBehavior extends Behavior
     /**
      * 移动到列表顶端
      *
-     * @return boolean movement successful.
+     * @return boolean
      */
     public function moveFirst()
     {
@@ -145,7 +142,7 @@ class PositionBehavior extends Behavior
     /**
      * 移动到列表底端
      *
-     * @return boolean movement successful.
+     * @return boolean
      */
     public function moveLast()
     {
@@ -179,9 +176,9 @@ class PositionBehavior extends Behavior
      * 如果指定位置超过记录总数，
      * 所有者将被移动到列表的末尾
      *
-     * @param integer $position number of the new position.
+     * @param integer $position order值
      *
-     * @return boolean movement successful.
+     * @return boolean
      */
     public function moveToPosition($position)
     {
@@ -250,7 +247,7 @@ class PositionBehavior extends Behavior
      *
      * @see groupAttributes
      *
-     * @return array attribute conditions.
+     * @return array
      */
     protected function createGroupConditionAttributes()
     {
@@ -298,7 +295,7 @@ class PositionBehavior extends Behavior
     /**
      * 插入前置操作
      *
-     * @param ModelEvent $event event instance.
+     * @param ModelEvent
      */
     public function beforeInsert($event)
     {
@@ -312,7 +309,7 @@ class PositionBehavior extends Behavior
     /**
      * 更新前置操作
      *
-     * @param ModelEvent $event event instance.
+     * @param ModelEvent
      */
     public function beforeUpdate($event)
     {
@@ -342,7 +339,7 @@ class PositionBehavior extends Behavior
     /**
      * 插入更新后操作
      *
-     * @param ModelEvent $event event instance.
+     * @param ModelEvent
      */
     public function afterSave($event)
     {
@@ -355,7 +352,7 @@ class PositionBehavior extends Behavior
     /**
      * 删除后操作
      *
-     * @param ModelEvent $event event instance.
+     * @param ModelEvent
      */
     public function beforeDelete($event)
     {
