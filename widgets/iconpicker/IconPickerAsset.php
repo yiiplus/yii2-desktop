@@ -17,7 +17,7 @@ namespace yiiplus\desktop\widgets\iconpicker;
 use yii\web\AssetBundle;
 
 /**
- * IconPickerAsset
+ * 小图标样式文件路径
  *
  * PHP version 7
  *

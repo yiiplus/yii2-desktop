@@ -10,11 +10,13 @@ use yiiplus\desktop\models\Menu as MenuModel;
 /**
  * Menu represents the model behind the search form about [[\yiiplus\desktop\models\Menu]].
  */
-class Menu extends MenuModel // TODO:liguangquan
+class Menu extends MenuModel
 {
 
     /**
-     * @inheritdoc
+     * 规则
+     *
+     * @return array
      */
     public function rules()
     {
@@ -25,20 +27,23 @@ class Menu extends MenuModel // TODO:liguangquan
     }
 
     /**
-     * @inheritdoc
+     * 场景
+     *
+     * @return Model
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
     /**
-     * Searching menu
+     * 搜索
+     *
      * @param  array $params
+     *
      * @return \yii\data\ActiveDataProvider
      */
-    public function search($params) // TODO:liguangquan
+    public function search($params)
     {
         $query = MenuModel::find()
             ->from(MenuModel::tableName() . ' t')

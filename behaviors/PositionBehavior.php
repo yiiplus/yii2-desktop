@@ -31,13 +31,6 @@ use yii\db\BaseActiveRecord;
 class PositionBehavior extends Behavior
 {
     /**
-     * 数据库顺序字段order默认position
-     *
-     * @var string
-     */
-    public $positionAttribute = 'position';
-
-    /**
      * 所属分类parent
      *
      * @var array
@@ -45,7 +38,15 @@ class PositionBehavior extends Behavior
     public $groupAttributes = [];
 
     /**
-     * 默认保存的positionAttribute值
+     * 排序字段名称
+     *
+     * @var string
+     */
+    public $positionAttribute = 'position';
+
+    /**
+     * 目标排序值
+     *
      * @var mixed
      */
     private $positionOnSave;
@@ -182,22 +183,22 @@ class PositionBehavior extends Behavior
      */
     public function moveToPosition($position)
     {
-        //整数大于1
+        // 整数大于1
         if (!is_numeric($position) || $position < 1) {
             return false;
         }
+
+        // 判断排序是否变更
         $positionAttribute = $this->positionAttribute;
-
         $oldRecord = $this->owner->findOne($this->owner->getPrimaryKey());
-
         $oldRecordPosition = $oldRecord->$positionAttribute;
-
         if ($oldRecordPosition == $position) {
             return true;
         }
 
         if ($position < $oldRecordPosition) {
-            // Move Up:
+            // 排序向上移动
+            // 将大于等于目标值小于当前位置的值+1操作
             $this->owner->updateAllCounters(
                 [
                     $positionAttribute => +1
@@ -210,18 +211,21 @@ class PositionBehavior extends Behavior
                 ]
             );
 
+            // 更新当前操作
             $this->owner->updateAttributes([
                 $positionAttribute => $position
             ]);
 
             return true;
         } else {
-            // Move Down:
+            // 排序向下移动
+            // 移动到末尾
             $recordsCount = $this->countGroupRecords();
             if ($position >= $recordsCount) {
                 return $this->moveLast();
             }
 
+            // 将大于当前值小于等于目标位置的值-1操作
             $this->owner->updateAllCounters(
                 [
                     $positionAttribute => -1
@@ -234,6 +238,7 @@ class PositionBehavior extends Behavior
                 ]
             );
 
+            // 更新当前排序操作
             $this->owner->updateAttributes([
                 $positionAttribute => $position
             ]);
@@ -303,6 +308,7 @@ class PositionBehavior extends Behavior
         if ($this->owner->$positionAttribute > 0) {
             $this->positionOnSave = $this->owner->$positionAttribute;
         }
+        // 插入数据默认排在末尾
         $this->owner->$positionAttribute = $this->countGroupRecords() + 1;
     }
 
@@ -313,8 +319,10 @@ class PositionBehavior extends Behavior
      */
     public function beforeUpdate($event)
     {
+        // 排序字段名
         $positionAttribute = $this->positionAttribute;
 
+        // 判断父类是否发生改变
         $isNewGroup = false;
         foreach ($this->groupAttributes as $groupAttribute) {
             if ($this->owner->isAttributeChanged($groupAttribute, false)) {
@@ -324,14 +332,16 @@ class PositionBehavior extends Behavior
         }
 
         if ($isNewGroup) {
+            // 移动到别的组先放到末尾，保证数据连续
             $oldRecord = $this->owner->findOne($this->owner->getPrimaryKey());
             $oldRecord->moveLast();
             $this->positionOnSave = $this->owner->$positionAttribute;
             $this->owner->$positionAttribute = $this->countGroupRecords() + 1;
         } else {
+            // 判断排序是否发生变化
             if ($this->owner->isAttributeChanged($positionAttribute, false)) {
-                $this->positionOnSave = $this->owner->$positionAttribute;
-                $this->owner->$positionAttribute = $this->owner->getOldAttribute($positionAttribute);
+                $this->positionOnSave = $this->owner->$positionAttribute; // 目标排序值
+                $this->owner->$positionAttribute = $this->owner->getOldAttribute($positionAttribute); // 当前排序值
             }
         }
     }

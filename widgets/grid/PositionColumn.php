@@ -81,6 +81,7 @@ class PositionColumn extends DataColumn
     {
         $this->buttons = ArrayHelper::merge(
             [
+                // 移动到顶端
                 'first' => [
                     'icon' => 'triangle-top',
                     'visible' => function ($model) {
@@ -96,6 +97,7 @@ class PositionColumn extends DataColumn
                         'data-method' => 'post'
                     ],
                 ],
+                // 移动到末尾
                 'last' => [
                     'icon' => 'triangle-bottom',
                     'visible' => function ($model) {
@@ -111,6 +113,7 @@ class PositionColumn extends DataColumn
                         'data-method' => 'post'
                     ],
                 ],
+                // 移动到上一个
                 'prev' => [
                     'icon' => 'arrow-up',
                     'visible' => function ($model) {
@@ -126,6 +129,7 @@ class PositionColumn extends DataColumn
                         'data-method' => 'post'
                     ],
                 ],
+                // 移动到下一个
                 'next' => [
                     'icon' => 'arrow-down',
                     'visible' => function ($model) {

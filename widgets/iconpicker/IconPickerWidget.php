@@ -55,6 +55,7 @@ class IconPickerWidget extends InputWidget
     public $clientOptions
         = [
             'rows'            => 5,
+            'cols'            => 10,
             'columns'         => 10,
             'placement'       => 'right',
             'align'           => 'center',
@@ -120,6 +121,7 @@ class IconPickerWidget extends InputWidget
         return [
             'iconset'         => $this->iconset,
             'rows'            => 5,
+            'cols'            => 10,
             'columns'         => 10,
             'placement'       => 'right',
             'align'           => 'center',

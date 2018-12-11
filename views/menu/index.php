@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'keyColumnName' => 'id',
             'parentColumnName' => 'parent',
-            'parentRootValue' => null, //first parentId value
-            'pluginOptions' => [
+            'parentRootValue' => null,
+            'pluginOptions' => [ //jquery默认收起
                 'initialState' => 'collapse',
             ],
             'columns' => [

@@ -95,12 +95,6 @@ class TreeGrid extends Widget // TODO:liguangquan
     public $showFooter = false;
 
     /**
-     * 数据不存在时的提示语是否显示配置
-     * @var boolean
-     */
-    public $showOnEmpty = true;
-
-    /**
      * 格式化数据
      * @var mixed
      */
@@ -142,22 +136,29 @@ class TreeGrid extends Widget // TODO:liguangquan
      */
     public function init()
     {
+        // DB 数据源
         if ($this->dataProvider === null) {
             throw new InvalidConfigException('The "dataProvider" property must be set.');
         }
-        //数据不存在使用yii2语言包
+
+        // 数据不存在使用 yii2 语言包
         if ($this->emptyText === null) {
-            $this->emptyText = Yii::t('yii', 'No results found.');
+            $this->emptyText = Yii::t('yii', 'No results found.'); // TODO
         }
+
+        // 获取默认表格 id
         if (!isset($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
-        //格式化数据
+
+        // 格式化数据
         if ($this->formatter == null) {
             $this->formatter = Yii::$app->getFormatter();
         } elseif (is_array($this->formatter)) {
             $this->formatter = Yii::createObject($this->formatter);
         }
+
+        // 参数检测
         if (!$this->formatter instanceof Formatter) {
             throw new InvalidConfigException('The "formatter" property must be either a Format object or a configuration array.');
         }
@@ -167,6 +168,8 @@ class TreeGrid extends Widget // TODO:liguangquan
         if (!$this->parentColumnName) {
             throw new InvalidConfigException('The "parentColumnName" property must be specified"');
         }
+
+        // 初始化
         $this->initColumns();
     }
 
@@ -175,28 +178,24 @@ class TreeGrid extends Widget // TODO:liguangquan
      */
     public function run()
     {
-        $id = $this->options['id']; //表格id值默认值w0
+        $id = $this->options['id']; // 表格 id 值默认值 w0
         $options = Json::htmlEncode($this->pluginOptions);
 
         $view = $this->getView();
-        TreeGridAsset::register($view); //加载配置的静态<js;css>文件
+        TreeGridAsset::register($view); // 加载配置的静态 <js;css> 文件
 
-        $view->registerJs("jQuery('#$id').treegrid($options);");
+        $view->registerJs("jQuery('#${id}').treegrid(${options});");
 
-        if ($this->showOnEmpty || $this->dataProvider->getCount() > 0) {
-            $header = $this->showHeader ? $this->renderTableHeader() : false;//表格头部
-            $body = $this->renderItems(); //表格主体
-            $footer = $this->showFooter ? $this->renderTableFooter() : false;//表格底部
+        $header = $this->showHeader ? $this->renderTableHeader() : false; // 表格头部
+        $body = $this->renderItems(); // 表格主体
+        $footer = $this->showFooter ? $this->renderTableFooter() : false; // 表格底部
 
-            $content = array_filter([
-                $header,
-                $body,
-                $footer
-            ]);
-            return Html::tag('table', implode("\n", $content), $this->options);
-        } else {
-            return $this->renderEmpty();
-        }
+        $content = array_filter([
+            $header,
+            $body,
+            $footer
+        ]);
+        return Html::tag('table', implode("\n", $content), $this->options);
     }
 
     /**
@@ -289,23 +288,28 @@ class TreeGrid extends Widget // TODO:liguangquan
      */
     public function renderItems()
     {
-        $rows = [];
+        // 生成树形数据源 TODO
         $models = array_values($this->dataProvider->getModels());
-        $models = $this->normalizeData($models, $this->parentRootValue); //TODO
+        $models = $this->normalizeData($models, $this->parentRootValue); // 生成树形数据
         $this->dataProvider->setModels($models);
         $this->dataProvider->setKeys(null);
         $this->dataProvider->prepare();
-        $keys = $this->dataProvider->getKeys(); //获取所有id值
-        foreach ($models as $index => $model) { //$model 数据值
+
+        // TODO
+        $keys = $this->dataProvider->getKeys(); // 获取所有 id 值
+        $rows = [];
+        foreach ($models as $index => $model) { // $model 数据值
             $key = $keys[$index]; //对应id值
-            $rows[] = $this->renderTableRow($model, $key, $index); //生成数据路由
+            $rows[] = $this->renderTableRow($model, $key, $index); // 生成数据路由
         }
+
+        // 没有找到数据
         if (empty($rows)) {
             $colspan = count($this->columns);
             return "<tr><td colspan=\"$colspan\">" . $this->renderEmpty() . "</td></tr>";
-        } else {
-            return implode("\n", $rows);
         }
+
+        return implode("\n", $rows);
     }
 
     /**
@@ -313,7 +317,7 @@ class TreeGrid extends Widget // TODO:liguangquan
      */
     protected function initColumns()
     {
-        if (empty($this->columns)) { //column未找到
+        if (empty($this->columns)) { //column 未找到
             $this->guessColumns();
         }
         foreach ($this->columns as $i => $column) {
