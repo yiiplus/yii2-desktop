@@ -37,11 +37,17 @@ class TreeGridAsset extends AssetBundle {
     public $js = [
         'js/jquery.treegrid.min.js',
     ];
-
+    /**
+     * css文件路径
+     * @var [type]
+     */
     public $css = [
         'css/jquery.treegrid.css',
     ];
-
+    /**
+     * yii2 jquery路径
+     * @var [type]
+     */
     public $depends = [
         'yii\web\JqueryAsset'
     ];
