@@ -60,10 +60,10 @@ class Action extends \yii\base\Action
      * 
      * @param 复合主键
      *
-     * @return ActiveRecordInterface|Model the model found
+     * @return ActiveRecordInterface|数据不存在
      *
-     * @throws NotFoundHttpException  if the model cannot be found
-     * @throws InvalidConfigException on invalid configuration
+     * @throws NotFoundHttpException
+     * @throws InvalidConfigException
      */
     public function findModel($id)
     {
@@ -79,7 +79,7 @@ class Action extends \yii\base\Action
     /**
      * 检查是否存在该id的控制器操作
      *
-     * @param string $id action ID.
+     * @param string $id actionID
      *
      * @return bool
      */
@@ -98,7 +98,7 @@ class Action extends \yii\base\Action
     /**
      * 设置复合主键的action
      *
-     * @param string|null $actionId action ID, if not set current action will be used.
+     * @param string|null $actionId actionID
      */
     public function setReturnAction($actionId = null)
     {
@@ -114,7 +114,7 @@ class Action extends \yii\base\Action
     /**
      * 获取复合主键的action
      *
-     * @param string $defaultActionId default action ID.
+     * @param string $defaultActionId 默认actionID
      *
      * @return string action ID.
      */
@@ -145,8 +145,8 @@ class Action extends \yii\base\Action
     /**
      * 创建返回路径 通过getReturnAction()
      *
-     * @param string                           $defaultActionId default action ID.
-     * @param ActiveRecordInterface|Model|null $model           model being processed by action.
+     * @param string                           $defaultActionId 默认actionID
+     * @param ActiveRecordInterface|Model|null $model           object
      *
      * @return array|string URL
      */
@@ -189,8 +189,8 @@ class Action extends \yii\base\Action
      * 如果空值通过，则不会设置闪存。
      * 特定的消息值可以是PHP回调，它应该返回实际消息。
      *
-     * @param string|array|null $message flash message(s) to be set.
-     * @param array             $params  extra params for the message parsing in format: key => value.
+     * @param string|array|null $message 提示信息必须填写
+     * @param array             $params  可选
      */
     public function setFlash($message, $params = [])
     {
