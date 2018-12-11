@@ -84,13 +84,13 @@ class TreeGrid extends Widget // TODO:liguangquan
 
     /**
      * 控制表格头部<th>显示
-     * @var boolean whether to show the header section of the grid table.
+     * @var boolean
      */
     public $showHeader = true;
 
     /**
      * 控制表格底部<tfoot>显示
-     * @var boolean whether to show the footer section of the grid table.
+     * @var boolean
      */
     public $showFooter = false;
 
@@ -215,9 +215,9 @@ class TreeGrid extends Widget // TODO:liguangquan
     /**
      * 用给定的数据模型和键呈现表行。
      *
-     * @param mixed   $model the data model to be rendered
-     * @param mixed   $key   the key associated with the data model
-     * @param integer $index the zero-based index of the data model among the model array returned by [[dataProvider]].
+     * @param mixed   $model model
+     * @param mixed   $key   key值
+     * @param integer $index string
      *
      * @return string the rendering result
      */
@@ -340,11 +340,9 @@ class TreeGrid extends Widget // TODO:liguangquan
     /**
      * 基于column创建label对象.
      *
-     * @param string $text the column specification string
+     * @param string $text string
      *
      * @return object
-     *
-     * @throws InvalidConfigException if the column specification is invalid
      */
     protected function createDataColumn($text)
     {
