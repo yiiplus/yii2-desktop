@@ -61,25 +61,20 @@ class TreeColumn extends Object
     public $content;
 
     /**
-     * @var boolean whether this column is visible. Defaults to true.
-     */
-    public $visible = true;
-
-    /**
      * @var 列表头部对象
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \yii\helpers\Html::renderTagAttributes()
      */
     public $headerOptions = [];
 
     /**
      * @var 排列列组标签的HTML属性
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \yii\helpers\Html::renderTagAttributes()
      */
     public $contentOptions = [];
 
     /**
      * @var 排列列组标签的HTML属性
-     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     * @see \yii\helpers\Html::renderTagAttributes()
      */
     public $footerOptions = [];
 

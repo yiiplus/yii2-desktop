@@ -36,7 +36,7 @@ use yii\web\NotFoundHttpException;
 class Action extends \yii\base\Action
 {
     /**
-     * session值
+     * session键值
      */
     const SESSION_KEY = '__adminReturnAction';
 
@@ -116,7 +116,7 @@ class Action extends \yii\base\Action
      *
      * @param string $defaultActionId 默认actionID
      *
-     * @return string action ID.
+     * @return string actionID.
      */
     public function getReturnAction($defaultActionId = 'index')
     {

@@ -33,7 +33,7 @@ use yii\i18n\Formatter;
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
-class TreeGrid extends Widget // TODO:liguangquan
+class TreeGrid extends Widget
 {
     /**
      * Db数据
@@ -143,7 +143,7 @@ class TreeGrid extends Widget // TODO:liguangquan
 
         // 数据不存在使用 yii2 语言包
         if ($this->emptyText === null) {
-            $this->emptyText = Yii::t('yii', 'No results found.'); // TODO
+            $this->emptyText = Yii::t('yii', 'No results found.');
         }
 
         // 获取默认表格 id
@@ -174,7 +174,7 @@ class TreeGrid extends Widget // TODO:liguangquan
     }
 
     /**
-     * run()
+     * 入口
      */
     public function run()
     {
@@ -216,10 +216,10 @@ class TreeGrid extends Widget // TODO:liguangquan
      * 用给定的数据模型和键呈现表行。
      *
      * @param mixed   $model model
-     * @param mixed   $key   key值
+     * @param mixed   $key   主键id值
      * @param integer $index string
      *
-     * @return string the rendering result
+     * @return string
      */
     public function renderTableRow($model, $key, $index)
     {
@@ -258,7 +258,7 @@ class TreeGrid extends Widget // TODO:liguangquan
     {
         $cells = [];
         foreach ($this->columns as $column) {
-            /* @var $column TreeColumn */ //TODO TreeColumn
+            /* @var $column TreeColumn */
             $cells[] = $column->renderHeaderCell();
         }
         $content = Html::tag('tr', implode('', $cells), $this->headerRowOptions);
@@ -288,14 +288,15 @@ class TreeGrid extends Widget // TODO:liguangquan
      */
     public function renderItems()
     {
-        // 生成树形数据源 TODO
+        // 生成树形数据源
+        $this->dataProvider->setKeys([]);
         $models = array_values($this->dataProvider->getModels());
         $models = $this->normalizeData($models, $this->parentRootValue); // 生成树形数据
         $this->dataProvider->setModels($models);    // 将树形数据应用 setModels()
         $this->dataProvider->setKeys(null); // 将树形数据所有 id 应用setKeys(null)
         $this->dataProvider->prepare();
-        // TODO
         $keys = $this->dataProvider->getKeys(); // 获取所有 id 值
+
         $rows = [];
         foreach ($models as $index => $model) { // $model 数据值
             $key = $keys[$index]; // 对应id值
@@ -327,10 +328,6 @@ class TreeGrid extends Widget // TODO:liguangquan
                     'class' => $this->dataColumnClass ? : TreeColumn::className(),
                     'grid' => $this,
                 ], $column));
-            }
-            if (!$column->visible) {
-                unset($this->columns[$i]);
-                continue;
             }
             $this->columns[$i] = $column;
         }

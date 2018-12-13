@@ -161,7 +161,7 @@ JS;
     }
 
     /**
-     * 自动执行
+     * 入口
      *
      * @return string bootstrap-picker button with hiddenInput field where we put selected value
      */

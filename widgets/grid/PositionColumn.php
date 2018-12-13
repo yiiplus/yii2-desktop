@@ -89,13 +89,6 @@ class PositionColumn extends DataColumn
                 // 移动到顶端
                 'first' => [
                     'icon' => 'triangle-top',
-                    'visible' => function ($model) {
-                        /* @var $model \yii\db\BaseActiveRecord */
-                        if ($this->attribute !== null && isset($model[$this->attribute])) {
-                            return $model[$this->attribute] > 0;
-                        }
-                        return true;
-                    },
                     'options' => [
                         'title' => 'Move top',
                         'aria-label' => 'Move top',
@@ -105,13 +98,6 @@ class PositionColumn extends DataColumn
                 // 移动到末尾
                 'last' => [
                     'icon' => 'triangle-bottom',
-                    'visible' => function ($model) {
-                        /* @var $model \yii\db\BaseActiveRecord */
-                        if ($this->attribute !== null && isset($model[$this->attribute])) {
-                            return $model[$this->attribute] < $this->grid->dataProvider->getTotalCount();
-                        }
-                        return true;
-                    },
                     'options' => [
                         'title' => 'Move bottom',
                         'aria-label' => 'Move bottom',
@@ -121,13 +107,6 @@ class PositionColumn extends DataColumn
                 // 移动到上一个
                 'prev' => [
                     'icon' => 'arrow-up',
-                    'visible' => function ($model) {
-                        /* @var $model \yii\db\BaseActiveRecord */
-                        if ($this->attribute !== null && isset($model[$this->attribute])) {
-                            return $model[$this->attribute] > 0;
-                        }
-                        return true;
-                    },
                     'options' => [
                         'title' => 'Move up',
                         'aria-label' => 'Move up',
@@ -137,13 +116,6 @@ class PositionColumn extends DataColumn
                 // 移动到下一个
                 'next' => [
                     'icon' => 'arrow-down',
-                    'visible' => function ($model) {
-                        /* @var $model \yii\db\BaseActiveRecord */
-                        if ($this->attribute !== null && isset($model[$this->attribute])) {
-                            return $model[$this->attribute] < $this->grid->dataProvider->getTotalCount();
-                        }
-                        return true;
-                    },
                     'options' => [
                         'title' => 'Move down',
                         'aria-label' => 'Move down',
@@ -158,9 +130,9 @@ class PositionColumn extends DataColumn
     /**
      * 生成模版内容
      *
-     * @param object $model
-     * @param string $key
-     * @param string $index
+     * @param object $model model数据
+     * @param string $key   主键id
+     * @param string $index 数组键值
      *
      * @return render
      */
@@ -182,14 +154,14 @@ class PositionColumn extends DataColumn
     /**
      * 组装button.
      *
-     * @param string  $name button name.
-     * @param mixed   $model
-     * @param string  $key
-     * @param integer $index
+     * @param string  $name   按钮名称
+     * @param mixed   $model  model数据
+     * @param string  $key    主键id
+     * @param integer $index  数组键值
      *
-     * @return string rendered HTML
+     * @return HTML
      *
-     * @throws InvalidConfigException on invalid button format.
+     * @throws InvalidConfigException
      */
     protected function renderButton($name, $model, $key, $index)
     {
@@ -204,17 +176,6 @@ class PositionColumn extends DataColumn
         }
         if (!is_array($button)) {
             throw new InvalidConfigException("Button should be either a Closure or array configuration.");
-        }
-
-        // Visibility :
-        if (isset($button['visible'])) {
-            if ($button['visible'] instanceof \Closure) {
-                if (!call_user_func($button['visible'], $model, $key, $index)) {
-                    return '';
-                }
-            } elseif (!$button['visible']) {
-                return '';
-            }
         }
 
         // URL :
@@ -247,24 +208,7 @@ class PositionColumn extends DataColumn
             $label = Html::icon($icon) . (empty($label) ? '' : ' ' . $label);
         }
 
-        // 同节点排列在第一个向上跟置顶图标或者排列在最后一个向下跟置底不可点击 
-        if ($name == 'first' 
-            && $model[$this->attribute] == 1 
-            || $name == 'prev' && $model[$this->attribute] == 1 
-        ) {
-            $this->buttonOptions = ["class"=>"btn btn-default btn-xs disabled"];
-        } elseif ($name == 'next' 
-            && $model[$this->attribute] == $this->countGroupRecords($model) 
-            || $name == 'last' 
-            && $model[$this->attribute] == $this->countGroupRecords($model)
-        ) {
-            $this->buttonOptions = ["class"=>"btn btn-default btn-xs disabled"];
-        } else {
-            $this->buttonOptions = ["class"=>"btn btn-default btn-xs"];
-        }
-
         $options = array_merge(ArrayHelper::getValue($button, 'options', []), $this->buttonOptions);
-
         return Html::a($label, $url, $options);
     }
 
@@ -272,10 +216,10 @@ class PositionColumn extends DataColumn
      * 为给定的位置和模型创建URL。
      * 为每个按钮和每一行调用此方法。
      *
-     * @param string                   $position the position name
-     * @param \yii\db\BaseActiveRecord $model    the data model
-     * @param mixed                    $key      the key associated with the data model
-     * @param integer                  $index    the current row index
+     * @param string                   $position 排序名称
+     * @param \yii\db\BaseActiveRecord $model    model数据
+     * @param mixed                    $key      主键id
+     * @param integer                  $index    数组键值
      *
      * @return string the created URL
      */
@@ -293,38 +237,5 @@ class PositionColumn extends DataColumn
 
             return Url::toRoute($params);
         }
-    }
-
-    /**
-     * 获取同级总记录数
-     *
-     * @param object $model
-     *
-     * @return int
-     */
-    protected function countGroupRecords($model)
-    {
-        $query = $model->find();
-        if (!empty($this->groupAttribute)) {
-            $query->andWhere($this->createGroupConditionAttributes($model));
-        }
-        return $query->count();
-    }
-
-    /**
-     * 创建查询条件
-     * @param object $model
-     *
-     * @see groupAttributes
-     *
-     * @return array [parent => 0]
-     */
-    protected function createGroupConditionAttributes($model)
-    {
-        $condition = [];
-        if (!empty($this->groupAttribute)) {
-            $condition[$this->groupAttribute] = $model[$this->groupAttribute];
-        }
-        return $condition;
     }
 }
