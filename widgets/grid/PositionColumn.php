@@ -35,36 +35,50 @@ class PositionColumn extends DataColumn
 {
     /**
      * 将用于在每个单元格中呈现内容的模板串起来。
+     *
+     * @var string
      */
     public $template = '{first}&nbsp;{prev}&nbsp;{value}&nbsp;{next}&nbsp;{last}';
 
     /**
      * 小图标数组默认值
+     *
+     * @var array
      */
     public $buttons = [];
 
     /**
      * 小图标默认class
+     *
+     * @var array
      */
     public $buttonOptions = ["class"=>"btn btn-default btn-xs"];
 
     /**
      * 动作的字符串路径 例如："项目/位置"
+     *
+     * @var string
      */
     public $route = 'position';
 
     /**
      * 获取params字符串名称
+     *
+     * @var string
      */
     public $positionParam = 'at';
 
     /**
      * 回调的默认值
+     *
+     * @var string
      */
     public $urlCreator;
 
     /**
      * 组装当前分类查询条件
+     *
+     * @var array
      */
     public $groupAttributes = [];
 

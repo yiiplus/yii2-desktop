@@ -106,7 +106,7 @@ class Menu extends \yii\db\ActiveRecord
             [['parent'], 'filterParent', 'when' => function() {
                 return !$this->isNewRecord;
             }],
-            ['icon', 'string'],
+            [['icon'], 'string'],
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),

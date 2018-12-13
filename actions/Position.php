@@ -33,6 +33,8 @@ class Position extends Action
 {
     /**
      * 获取参数键值
+     *
+     * @var string
      */
     public $positionParam = 'at';
 

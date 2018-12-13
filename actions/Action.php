@@ -37,21 +37,29 @@ class Action extends \yii\base\Action
 {
     /**
      * session键值
+     *
+     * @var string
      */
     const SESSION_KEY = '__adminReturnAction';
 
     /**
      * 查询$Model
+     *
+     * @var object
      */
     public $findModel;
 
     /**
      * action返回对象
+     *
+     * @var object
      */
     public $returnAction;
 
     /**
      * 返回路径
+     *
+     * @var string
      */
     public $returnUrl;
 
