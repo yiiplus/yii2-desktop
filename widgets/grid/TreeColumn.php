@@ -38,78 +38,92 @@ class TreeColumn extends Object
 {
     /**
      * 列表对象
+     *
      * @var object
      */
     public $grid;
 
     /**
      * 列表头部对象
+     *
      * @var object
      */
     public $header;
 
     /**
      * 列表底部对象
+     *
      * @var object
      */
     public $footer;
 
     /**
      * 列表主体对象
+     *
      * @var object
      */
     public $content;
 
     /**
-     * @var 列表头部对象
-     * @see \yii\helpers\Html::renderTagAttributes()
+     * 列表头部对象
+     *
+     * @var object
      */
     public $headerOptions = [];
 
     /**
-     * @var 排列列组标签的HTML属性
-     * @see \yii\helpers\Html::renderTagAttributes()
+     * 排列列组标签的HTML属性
+     *
+     * @var object
      */
     public $contentOptions = [];
 
     /**
-     * @var 排列列组标签的HTML属性
-     * @see \yii\helpers\Html::renderTagAttributes()
+     * 排列列组标签的HTML属性
+     *
+     * @var object
      */
     public $footerOptions = [];
 
     /**
      * column键值
+     *
      * @var mixed
      */
     public $attribute;
 
     /**
      * 标签值 名称
+     *
      * @var string
      */
     public $label;
 
     /**
      * @var 编码格式开关 默认返回utf8
-     * @see label
+     *
+     * @var object
      */
     public $encodeLabel = true;
 
     /**
      * 数据单元格默认值
+     *
      * @var string
      */
     public $value;
 
     /**
-     * 数据默认类型.
+     * 数据格式
+     *
      * @var string
      */
     public $format = 'text';
 
     /**
      * 呈现头部单元格
+     *
+     * @return HTML标签
      */
     public function renderHeaderCell()
     {
@@ -118,6 +132,8 @@ class TreeColumn extends Object
 
     /**
      * 呈现底部单元格
+     *
+     * @return HTML标签
      */
     public function renderFooterCell()
     {
@@ -131,7 +147,7 @@ class TreeColumn extends Object
      * @param mixed   $key   数据相关联的key值
      * @param integer $index 数据索引
      *
-     * @return string
+     * @return HTML标签
      */
     public function renderDataCell($model, $key, $index)
     {

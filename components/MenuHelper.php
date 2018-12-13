@@ -1,6 +1,6 @@
 <?php
 /**
- * 菜单插件
+ * yiiplus\desktop
  *
  * PHP version 7
  *

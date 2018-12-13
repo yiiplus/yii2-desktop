@@ -31,12 +31,14 @@ class IconPickerAsset extends AssetBundle
 {
     /**
      * 样式文件路径
+     *
      * @var string
      */
     public $sourcePath = '@yiiplus/desktop/widgets/iconpicker/static';
 
     /**
      * css 文件
+     *
      * @var array
      */
     public $css=[
@@ -45,6 +47,7 @@ class IconPickerAsset extends AssetBundle
 
     /**
      * js 文件
+     *
      * @var array
      */
     public $js= [
@@ -54,6 +57,7 @@ class IconPickerAsset extends AssetBundle
 
     /**
      * 集成 yii2->jquery
+     *
      * @var array
      */
     public $depends = [

@@ -169,7 +169,6 @@ class PositionColumn extends DataColumn
             return '';
         }
         $button = $this->buttons[$name];
-
         if ($button instanceof \Closure) {
             $url = $this->createUrl($name, $model, $key, $index);
             return call_user_func($button, $url, $model, $key);
@@ -178,14 +177,14 @@ class PositionColumn extends DataColumn
             throw new InvalidConfigException("Button should be either a Closure or array configuration.");
         }
 
-        // URL :
+        // 路由 :
         if (isset($button['url'])) {
             $url = call_user_func($button['url'], $name, $model, $key, $index);
         } else {
             $url = $this->createUrl($name, $model, $key, $index);
         }
 
-        // label :
+        // 标签 :
         if (isset($button['label'])) {
             $label = $button['label'];
 
@@ -202,7 +201,7 @@ class PositionColumn extends DataColumn
             $label = '';
         }
 
-        // icon :
+        // 图标 :
         if (isset($button['icon'])) {
             $icon = $button['icon'];
             $label = Html::icon($icon) . (empty($label) ? '' : ' ' . $label);

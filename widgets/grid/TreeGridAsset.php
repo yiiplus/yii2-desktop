@@ -27,11 +27,16 @@ use yii\web\AssetBundle;
  * @link      http://www.yiiplus.com
  */
 class TreeGridAsset extends AssetBundle {
-
+    /**
+     * 样式文件目录
+     *
+     * @var string
+     */
     public $sourcePath = '@yiiplus/desktop/widgets/grid/assets/tree';
 
     /**
      * js文件路径
+     *
      * @var string
      */
     public $js = [
@@ -39,14 +44,16 @@ class TreeGridAsset extends AssetBundle {
     ];
     /**
      * css文件路径
-     * @var [type]
+     *
+     * @var string
      */
     public $css = [
         'css/jquery.treegrid.css',
     ];
     /**
-     * yii2 jquery路径
-     * @var [type]
+     * yii2 jquery 路径
+     *
+     * @var string
      */
     public $depends = [
         'yii\web\JqueryAsset'

@@ -51,7 +51,7 @@ class Position extends Action
         if (!Yii::$app->request->isPost) {
             throw new MethodNotAllowedHttpException('Method Not Allowed. This url can only handle post');
         }
-        //获取菜单移动方向
+        // 获取菜单移动方向
         $position = Yii::$app->request->getQueryParam($this->positionParam, null);
         if (empty($position)) {
             throw new BadRequestHttpException(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->positionParam]));
@@ -68,7 +68,7 @@ class Position extends Action
      * 定位Model
      *
      * @param object $model    model
-     * @param string $position 移动方向 first/last/prev/next
+     * @param string $position 移动方向
      *
      * @return yiiplus\desktop\behaviors\PositionBehavior
      */
@@ -103,7 +103,7 @@ class Position extends Action
     /**
      * 成功返回
      *
-     * @param object $model Model
+     * @param object $model Model对象
      *
      * @return redirect
      */
@@ -122,10 +122,10 @@ class Position extends Action
     /**
      * 构成返回路径
      *
-     * @param string $defaultActionId 列表名称
-     * @param object $model Model
+     * @param string $defaultActionId 默认actionId
+     * @param object $model           Model
      *
-     * @return url
+     * @return string
      */
     public function createReturnUrl($defaultActionId = 'index', $model = null)
     {

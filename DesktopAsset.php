@@ -30,12 +30,14 @@ class DesktopAsset extends AssetBundle
 {
     /**
      * 样式文件路径
+     *
      * @var string
      */
     public $sourcePath = '@yiiplus/desktop/assets';
 
     /**
      * css文件
+     *
      * @var string
      */
     public $css = [
@@ -45,6 +47,7 @@ class DesktopAsset extends AssetBundle
     
     /**
      * js文件
+     *
      * @var string
      */
     public $js = [

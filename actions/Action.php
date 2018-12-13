@@ -62,8 +62,7 @@ class Action extends \yii\base\Action
      *
      * @return ActiveRecordInterface|数据不存在
      *
-     * @throws NotFoundHttpException
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException异常
      */
     public function findModel($id)
     {

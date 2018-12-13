@@ -33,49 +33,57 @@ use yii\widgets\InputWidget;
 class IconPickerWidget extends InputWidget
 {
     /**
-     * @var 允许的变体值
+     * 允许的变体值
+     *
      * glyphicon|ionicon|fontawesome|weathericon|mapicon|octicon|typicon|elusiveicon|materialdesign
      */
     public $iconset = 'fontawesome';
 
     /**
-     * @var 默认class
+     * 默认class
+     *
+     * @var array
      */
     public $pickerOptions = ['class' => 'btn btn-default btn-sm'];
 
     /**
-     * @var 列表附加选项
+     * 列表附加选项
+     *
+     * @var array
      */
     public $containerOptions = [];
 
     /**
-     * @var 客户端选项
+     * 客户端选项
+     *
      * @see http://victor-valencia.github.io/bootstrap-iconpicker/
      **/
     public $clientOptions = [];
     
     /**
-     * @var JsExpression $onSelectIconCallback
-     * @example
-     * onSelectIconCallback=>new JsExpression('function(e){
-     *    var icon = e.icon;
-     *    icon = "some "+icon;
-     *    $('#target').val(icon);
-     * }'),
+     * js 回调
+     *
+     * @var mixed
      */
     public $onSelectIconCallback;
 
     /**
-     * @var
+     * 表格id值
+     *
+     * @var string
      */
     private $_id;
 
     /**
      * 默认值
+     *
      * @var string
      */
     private $_default = '';
 
+    /**
+     * 入口 init()
+     */
     public function init()
     {
         if (!isset($this->options['id']) && !$this->hasModel()) {
@@ -163,7 +171,7 @@ JS;
     /**
      * 入口
      *
-     * @return string bootstrap-picker button with hiddenInput field where we put selected value
+     * @return HTMl标签
      */
     public function run()
     {

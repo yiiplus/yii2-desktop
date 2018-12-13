@@ -37,102 +37,120 @@ class TreeGrid extends Widget
 {
     /**
      * Db数据
+     *
      * @var object
      */
     public $dataProvider;
     
     /**
-     * 如果在配置数据列时没有显式指定类名，则触发默认数据列类。
+     * 如果在配置数据列时没有显式指定类名，则触发默认数据列类
+     *
+     * @var string
      */
     public $dataColumnClass;
 
     /**
-     * @var 默认表格class名
-     * @see array
+     * 默认表格class名
+     *
+     * @var array
      */
     public $options = ['class' => 'table table-striped table-bordered'];
 
     /**
      * 控制jquery->treegrid默认为收起状态
+     *
      * @var array
      */
     public $pluginOptions = [];
 
     /**
-     * @var 为表格头部自定义属性
-     * @see array
+     * 为表格头部自定义属性
+     *
+     * @var array
      */
     public $headerRowOptions = [];
 
     /**
      * 表格底部自定义属性
+     *
      * @var array
      */
     public $footerRowOptions = [];
 
     /**
      * 当没有任何数据的时候，默认显示的html内容
+     *
      * @var object
      */
     public $emptyText;
 
     /**
      * 数据为空的表格class值
+     *
      * @var array
      */
     public $emptyTextOptions = ['class' => 'empty'];
 
     /**
      * 控制表格头部<th>显示
+     *
      * @var boolean
      */
     public $showHeader = true;
 
     /**
      * 控制表格底部<tfoot>显示
+     *
      * @var boolean
      */
     public $showFooter = false;
 
     /**
      * 格式化数据
+     *
      * @var mixed
      */
     public $formatter;
 
     /**
      * 回调函数
+     *
      * @var array
      */
     public $rowOptions = [];
 
     /**
      * 用于构建树的键列的字符串名称
+     *
      * @var string
      */
     public $keyColumnName;
 
     /**
      * 用于构建树的父列的字符串名称
+     *
      * @var string
      */
     public $parentColumnName;
 
     /**
      * 用于构建树的根值
+     *
      * @var mixed
      */
     public $parentRootValue = null;
 
     /**
      * column
+     *
      * @var array
      */
     public $columns = [];
 
     /**
-     * 默认验证方法
-     * @return string
+     * 入口init()
+     *
+     * @return InvalidConfigException
      */
     public function init()
     {
@@ -174,7 +192,9 @@ class TreeGrid extends Widget
     }
 
     /**
-     * 入口
+     * 入口run()
+     *
+     * @return HTML标签
      */
     public function run()
     {
@@ -250,9 +270,9 @@ class TreeGrid extends Widget
     }
 
     /**
-     * 生成表格头部<thead><tr><th>$content</th></tr></thead>
+     * 生成表格头部
      *
-     * @return string<thead></thead>
+     * @return string
      */
     public function renderTableHeader()
     {
@@ -266,7 +286,7 @@ class TreeGrid extends Widget
     }
 
     /**
-     * 生成表格头部<tfoot><tr><th>$content</th></tr></tfoot>
+     * 生成表格头部
      *
      * @return string
      */
@@ -284,7 +304,7 @@ class TreeGrid extends Widget
     /**
      * 表格主体
      *
-     * @return <tr><td>$content</td></tr>
+     * @return string
      */
     public function renderItems()
     {
@@ -313,7 +333,7 @@ class TreeGrid extends Widget
     }
 
     /**
-     * column转化
+     * 生成表单数据入口
      */
     protected function initColumns()
     {

@@ -27,15 +27,15 @@ namespace yiiplus\desktop\common\helpers;
 class Tree
 {
     /**
-     * 把数据集转换成Tree
+     * 树形数据转化
      *
-     * @param  $list
-     * @param  string $pk
-     * @param  string $pid
-     * @param  string $child
-     * @param  int $root
+     * @param array   $list  Db数据
+     * @param string  $pk    主键id
+     * @param string  $pid   父节点名称
+     * @param string  $child 子类键值名称
+     * @param integer $root  根节点
      *
-     * @return array
+     * @return [type]         [description]
      */
     public static function build($list, $pk='id', $pid = 'pid', $child = 'children', $root = 0) {
         // 创建Tree
