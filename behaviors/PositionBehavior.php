@@ -117,11 +117,13 @@ class PositionBehavior extends Behavior
      */
     public function moveFirst()
     {
+        // 移动到第一个
         $positionAttribute = $this->positionAttribute;
         if ($this->owner->$positionAttribute == 1) {
             return false;
         }
 
+        // 将小于当前值所有排序值 +1 操作
         $this->owner->updateAllCounters(
             [
                 $positionAttribute => +1
@@ -133,6 +135,7 @@ class PositionBehavior extends Behavior
             ]
         );
 
+        // 更新当前值为 1
         $this->owner->updateAttributes([
             $positionAttribute => 1
         ]);
@@ -147,13 +150,15 @@ class PositionBehavior extends Behavior
      */
     public function moveLast()
     {
+        // 将元素移动到页面末尾
         $positionAttribute = $this->positionAttribute;
 
+        // 如果是最后一个元素
         $recordsCount = $this->countGroupRecords();
         if ($this->owner->getAttribute($positionAttribute) == $recordsCount) {
             return false;
         }
-
+        // 将所有大于当前值 -1操作
         $this->owner->updateAllCounters(
             [
                 $positionAttribute => -1
@@ -164,7 +169,7 @@ class PositionBehavior extends Behavior
                 ['>', $positionAttribute, $this->owner->$positionAttribute]
             ]
         );
-
+        // 更新当前值为当前分类总记录数
         $this->owner->updateAttributes([
             $positionAttribute => $recordsCount
         ]);

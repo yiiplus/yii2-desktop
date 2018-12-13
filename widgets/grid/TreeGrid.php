@@ -291,15 +291,14 @@ class TreeGrid extends Widget // TODO:liguangquan
         // 生成树形数据源 TODO
         $models = array_values($this->dataProvider->getModels());
         $models = $this->normalizeData($models, $this->parentRootValue); // 生成树形数据
-        $this->dataProvider->setModels($models);
-        $this->dataProvider->setKeys(null);
-        $this->dataProvider->prepare();
+        $this->dataProvider->setModels($models);    // 将树形数据应用 setModels()
+        $this->dataProvider->setKeys(null); // 将树形数据所有 id 应用 setKeys(null)
 
         // TODO
         $keys = $this->dataProvider->getKeys(); // 获取所有 id 值
         $rows = [];
         foreach ($models as $index => $model) { // $model 数据值
-            $key = $keys[$index]; //对应id值
+            $key = $keys[$index]; // 对应id值
             $rows[] = $this->renderTableRow($model, $key, $index); // 生成数据路由
         }
 

@@ -64,6 +64,11 @@ class PositionColumn extends DataColumn
     public $urlCreator;
 
     /**
+     * 组装当前分类查询条件
+     */
+    public $groupAttributes = [];
+
+    /**
      * 默认执行 init
      */
     public function init()
@@ -242,6 +247,22 @@ class PositionColumn extends DataColumn
             $label = Html::icon($icon) . (empty($label) ? '' : ' ' . $label);
         }
 
+        // 同节点排列在第一个向上跟置顶图标或者排列在最后一个向下跟置底不可点击 
+        if ($name == 'first' 
+            && $model[$this->attribute] == 1 
+            || $name == 'prev' && $model[$this->attribute] == 1 
+        ) {
+            $this->buttonOptions = ["class"=>"btn btn-default btn-xs disabled"];
+        } elseif ($name == 'next' 
+            && $model[$this->attribute] == $this->countGroupRecords($model) 
+            || $name == 'last' 
+            && $model[$this->attribute] == $this->countGroupRecords($model)
+        ) {
+            $this->buttonOptions = ["class"=>"btn btn-default btn-xs disabled"];
+        } else {
+            $this->buttonOptions = ["class"=>"btn btn-default btn-xs"];
+        }
+
         $options = array_merge(ArrayHelper::getValue($button, 'options', []), $this->buttonOptions);
 
         return Html::a($label, $url, $options);
@@ -272,5 +293,38 @@ class PositionColumn extends DataColumn
 
             return Url::toRoute($params);
         }
+    }
+
+    /**
+     * 获取同级总记录数
+     *
+     * @param object $model
+     *
+     * @return int
+     */
+    protected function countGroupRecords($model)
+    {
+        $query = $model->find();
+        if (!empty($this->groupAttribute)) {
+            $query->andWhere($this->createGroupConditionAttributes($model));
+        }
+        return $query->count();
+    }
+
+    /**
+     * 创建查询条件
+     * @param object $model
+     *
+     * @see groupAttributes
+     *
+     * @return array [parent => 0]
+     */
+    protected function createGroupConditionAttributes($model)
+    {
+        $condition = [];
+        if (!empty($this->groupAttribute)) {
+            $condition[$this->groupAttribute] = $model[$this->groupAttribute];
+        }
+        return $condition;
     }
 }

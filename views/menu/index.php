@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'keyColumnName' => 'id',
             'parentColumnName' => 'parent',
             'parentRootValue' => null,
+            
             'pluginOptions' => [ //jquery默认收起
                 'initialState' => 'collapse',
             ],

@@ -52,23 +52,8 @@ class IconPickerWidget extends InputWidget
      * @var 客户端选项
      * @see http://victor-valencia.github.io/bootstrap-iconpicker/
      **/
-    public $clientOptions
-        = [
-            'rows'            => 5,
-            'cols'            => 10,
-            'columns'         => 10,
-            'placement'       => 'right',
-            'align'           => 'center',
-            'arrowClass'      => 'btn-primary',
-            'header'          => true,
-            'footer'          => true,
-            'labelHeader'     => '{0} / {1}',
-            'labelFooter'     => '{0} - {1}:[{2}]',
-            'search'          => true,
-            'searchText'      => 'Search icon',
-            'selectedClass'   => 'btn-warning',
-            'unselectedClass' => 'btn-default',
-        ];
+    public $clientOptions = [];
+    
     /**
      * @var JsExpression $onSelectIconCallback
      * @example
