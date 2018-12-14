@@ -14,7 +14,9 @@ class Menu extends MenuModel
 {
 
     /**
-     * @inheritdoc
+     * 规则
+     *
+     * @return array
      */
     public function rules()
     {
@@ -25,17 +27,20 @@ class Menu extends MenuModel
     }
 
     /**
-     * @inheritdoc
+     * 场景
+     *
+     * @return Model
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
     /**
-     * Searching menu
+     * 搜索
+     *
      * @param  array $params
+     *
      * @return \yii\data\ActiveDataProvider
      */
     public function search($params)
@@ -47,7 +52,8 @@ class Menu extends MenuModel
         }]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'pagination' => false
         ]);
 
         $sort = $dataProvider->getSort();
@@ -61,7 +67,7 @@ class Menu extends MenuModel
             'desc' => ['parent.order' => SORT_DESC, 't.order' => SORT_DESC],
             'label' => 'order',
         ];
-        $sort->defaultOrder = ['menuParent.name' => SORT_ASC];
+        $sort->defaultOrder = ['order' => SORT_ASC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

@@ -29,7 +29,11 @@
 		    use yii\bootstrap\Nay;
 		    use yiiplus\desktop\components\MenuHelper; 
 		    $callback = function($menu){ 
-		        $data = json_decode($menu['data'], true); 
+		        $data = [];
+		        if ($menu['icon'] !== '') {
+		        	$icons = explode('-', $menu['icon']);
+		        	$data['icon'] = isset($icons[1]) ? $icons[1] : '';
+		        }
 		        $items = $menu['children']; 
 		        $return = [ 
 		            'label' => $menu['name'], 

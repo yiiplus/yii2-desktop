@@ -11,12 +11,13 @@
  * @link      http://www.yiiplus.com
  */
 
-namespace yiiplus\desktop;
+namespace yiiplus\desktop\widgets\iconpicker;
+
 
 use yii\web\AssetBundle;
 
 /**
- * 样式文件引入
+ * 小图标样式文件路径
  *
  * PHP version 7
  *
@@ -26,40 +27,41 @@ use yii\web\AssetBundle;
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
-class DesktopAsset extends AssetBundle
+class IconPickerAsset extends AssetBundle
 {
     /**
      * 样式文件路径
      *
      * @var string
      */
-    public $sourcePath = '@yiiplus/desktop/assets';
+    public $sourcePath = '@yiiplus/desktop/widgets/iconpicker/static';
 
     /**
-     * css文件
+     * css 文件
      *
-     * @var string
+     * @var array
      */
-    public $css = [
-        'desktop.css',
-        'jquery-ui.css',
+    public $css=[
+        'css/bootstrap-iconpicker.min.css'
     ];
-    
+
     /**
-     * js文件
+     * js 文件
      *
-     * @var string
+     * @var array
      */
-    public $js = [
-        'jquery-ui.js',
+    public $js= [
+        'js/iconset/iconset-fontawesome-4.2.0.min.js',
+        'js/bootstrap-iconpicker.min.js',
     ];
-    
+
     /**
-     * 引入yii2默认jquery
+     * 集成 yii2->jquery
      *
-     * @var string
+     * @var array
      */
     public $depends = [
-        'yii\web\JqueryAsset'
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

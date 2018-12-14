@@ -1,12 +1,34 @@
 <?php
+/**
+ * yiiplus\desktop
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models;
 
 use Yii;
-use yiiplus\desktop\components\Configs;
 use yii\db\Query;
 
+use yiiplus\desktop\components\Configs;
+use yiiplus\desktop\behaviors\PositionBehavior;
 /**
+ * 菜单model
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ *
  * This is the model class for table "menu".
  *
  * @property integer $id Menu id(autoincrement)
@@ -21,10 +43,15 @@ use yii\db\Query;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    /**
+     * 父类
+     */
     public $parent_name;
 
     /**
-     * @inheritdoc
+     * 表名
+     *
+     * @return string
      */
     public static function tableName()
     {
@@ -32,7 +59,9 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * 获取db
+     *
+     * @return object
      */
     public static function getDb()
     {
@@ -44,7 +73,27 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * behaviors
+     *
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'order',
+                'groupAttributes' => [
+                    'parent' // 菜单父类字段名
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * 规则
+     *
+     * @return array
      */
     public function rules()
     {
@@ -57,6 +106,7 @@ class Menu extends \yii\db\ActiveRecord
             [['parent'], 'filterParent', 'when' => function() {
                 return !$this->isNewRecord;
             }],
+            [['icon'], 'string'],
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),
@@ -84,7 +134,9 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * 别名
+     *
+     * @return array
      */
     public function attributeLabels()
     {
@@ -96,11 +148,13 @@ class Menu extends \yii\db\ActiveRecord
             'route' => Yii::t('yiiplus/desktop', 'Route'),
             'order' => Yii::t('yiiplus/desktop', 'Order'),
             'data' => Yii::t('yiiplus/desktop', 'Data'),
+            'icon' => Yii::t('yiiplus/desktop', 'Icon'),
         ];
     }
 
     /**
-     * Get menu parent
+     * 获取parent
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenuParent()
@@ -109,7 +163,8 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get menu children
+     * 获取子类
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenus()
@@ -119,8 +174,9 @@ class Menu extends \yii\db\ActiveRecord
     private static $_routes;
 
     /**
-     * Get saved routes.
-     * @return array
+     * 获取路由
+     *
+     * @return   array
      */
     public static function getSavedRoutes()
     {
@@ -135,13 +191,40 @@ class Menu extends \yii\db\ActiveRecord
         return self::$_routes;
     }
 
+    /**
+     * getMenuSource
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public static function getMenuSource()
     {
         $tableName = static::tableName();
         return (new \yii\db\Query())
-                ->select(['m.id', 'm.name', 'm.route', 'parent_name' => 'p.name'])
-                ->from(['m' => $tableName])
-                ->leftJoin(['p' => $tableName], '[[m.parent]]=[[p.id]]')
-                ->all(static::getDb());
+            ->select(['m.id', 'm.name', 'm.route', 'parent_name' => 'p.name'])
+            ->from(['m' => $tableName])
+            ->leftJoin(['p' => $tableName], '[[m.parent]]=[[p.id]]')
+            ->all(static::getDb());
+    }
+
+    /**
+     * 获取菜单下拉列表
+     *
+     * @param array   $tree      菜单数组
+     * @param array   &$result   返回数组
+     * @param integer $deep      循环值
+     * @param string  $separator 空格
+     *
+     * @return array
+     */
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '&nbsp;&nbsp;&nbsp;&nbsp;')
+    {
+        $deep++;
+        foreach($tree as $list) {
+            $result[$list['id']] = str_repeat($separator, $deep - 1) . $list['name'];
+            if (isset($list['children'])) {
+                self::getDropDownList($list['children'], $result, $deep);
+            }
+        }
+        return $result;
     }
 }
