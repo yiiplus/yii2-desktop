@@ -32,7 +32,6 @@ class AdminLteAsset extends BaseAdminLteAsset
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
     public $css = [
         'css/AdminLTE.min.css',
-        'bower_components/font-awesome/css/font-awesome.css',
     ];
     public $js = [
         'js/adminlte.min.js'
