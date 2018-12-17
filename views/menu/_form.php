@@ -16,7 +16,7 @@ $this->registerJs($this->render('_script.js'));
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
         
-        <?= $form->field($model, 'parent')->dropDownList($model::getDropDownList(\yiiplus\desktop\common\helpers\Tree::build($model::find()->asArray()->all(), 'id', 'parent', 'children', null)), ['encode' => false, 'prompt' => '请选择']) ?>
+        <?= $form->field($model, 'parent')->dropDownList($model::getDropDownList(\yiiplus\desktop\components\Tree::build($model::find()->asArray()->all(), 'id', 'parent', 'children', null)), ['encode' => false, 'prompt' => '请选择']) ?>
 
         <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
 

@@ -1,5 +1,5 @@
 <?php
-use yii\helpers\Html;
+use yiiplus\desktop\components\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
