@@ -14,7 +14,7 @@
 namespace yiiplus\desktop;
 
 use yii\base\Exception;
-use yii\web\AssetBundle as BaseAdminLteAsset;
+use yii\web\AssetBundle;
 
 /**
  * 树形组件样式路径

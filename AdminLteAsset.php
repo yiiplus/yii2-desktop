@@ -14,7 +14,7 @@
 namespace yiiplus\desktop;
 
 use yii\base\Exception;
-use yii\web\AssetBundle as BaseAdminLteAsset;
+use yii\web\AssetBundle;
 
 /**
  * AdminLte AssetBundle
@@ -27,7 +27,7 @@ use yii\web\AssetBundle as BaseAdminLteAsset;
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
-class AdminLteAsset extends BaseAdminLteAsset
+class AdminLteAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
     public $css = [
