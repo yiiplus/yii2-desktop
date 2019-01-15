@@ -6,6 +6,12 @@
 [![License](https://poser.pugx.org/yiiplus/yii2-desktop/license)](https://packagist.org/packages/yiiplus/yii2-desktop)
 [![Monthly Downloads](https://poser.pugx.org/yiiplus/yii2-desktop/d/monthly)](https://packagist.org/packages/yiiplus/yii2-desktop)
 
+## 特性
+
+- based on [AdminLTE](https://github.com/almasaeed2010/AdminLTE)
+
+- RBAC (Role Base Access Control)
+
 ## 安装
 
 安装此扩展程序的首选方法是通过 [composer](http://getcomposer.org/download/).
