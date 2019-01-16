@@ -7,7 +7,8 @@ if (Yii::$app->controller->action->id === 'login') {
     echo $this->render('main-login', ['content' => $content]);
 } else {
     app\assets\AppAsset::register($this);
-    dmstr\web\AdminLteAsset::register($this);
+    yiiplus\desktop\AdminLteAsset::register($this);
+    yiiplus\desktop\FontAwesomeAsset::register($this);
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>
     <?php $this->beginPage() ?>
@@ -43,6 +44,9 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+    <?php if (isset($this->blocks['js'])): ?>
+        <?= $this->blocks['js'] ?>
+    <?php endif; ?>
     </body>
     </html>
     <?php $this->endPage() ?>

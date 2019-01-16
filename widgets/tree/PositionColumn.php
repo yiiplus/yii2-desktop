@@ -11,7 +11,7 @@
  * @link      http://www.yiiplus.com
  */
 
-namespace yiiplus\desktop\widgets\grid;
+namespace yiiplus\desktop\widgets\tree;
 
 use Yii;
 use yii\base\InvalidConfigException;

@@ -11,7 +11,7 @@
  * @link      http://www.yiiplus.com
  */
 
-namespace yiiplus\desktop\widgets\grid;
+namespace yiiplus\desktop\widgets\tree;
 
 use yii\web\AssetBundle;
 
@@ -32,7 +32,7 @@ class TreeGridAsset extends AssetBundle {
      *
      * @var string
      */
-    public $sourcePath = '@yiiplus/desktop/widgets/grid/assets/tree';
+    public $sourcePath = '@yiiplus/desktop/widgets/tree/assets';
 
     /**
      * js文件路径

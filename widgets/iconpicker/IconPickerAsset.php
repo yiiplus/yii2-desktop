@@ -34,7 +34,7 @@ class IconPickerAsset extends AssetBundle
      *
      * @var string
      */
-    public $sourcePath = '@yiiplus/desktop/widgets/iconpicker/static';
+    public $sourcePath = '@yiiplus/desktop/widgets/iconpicker/assets';
 
     /**
      * css 文件

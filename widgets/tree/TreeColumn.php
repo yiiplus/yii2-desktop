@@ -11,10 +11,10 @@
  * @link      http://www.yiiplus.com
  */
 
-namespace yiiplus\desktop\widgets\grid;
+namespace yiiplus\desktop\widgets\tree;
 
-use Closure;
 use Yii;
+use Closure;
 use yii\base\Model;
 use yii\base\Object;
 use yii\data\ActiveDataProvider;

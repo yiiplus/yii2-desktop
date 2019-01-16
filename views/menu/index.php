@@ -1,16 +1,27 @@
 <?php
-use yii\helpers\Html;
+use yiiplus\desktop\components\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
 
-use yiiplus\desktop\widgets\grid\TreeGrid;
+use yiiplus\desktop\widgets\tree\TreeGrid;
 
 $this->title = Yii::t('yiiplus/desktop', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="box box-primary dataTables_wrapper user-index">
+<div class="box desktop-menu-index">
+
+    <div class="box-header with-border">
+        <div class="pull-left">
+            <div class="btn-group pull-left" style="margin-left: 10px">
+                <a href="create" class="btn btn-sm btn-info" title="新增">
+                    <i class="fa fa-save"></i><span class="hidden-xs">&nbsp;&nbsp;新增</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div class="box-body">
     <?php Pjax::begin(); ?>
         <?= TreeGrid::widget([
@@ -19,9 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'parentColumnName' => 'parent',
             'parentRootValue' => null,
             
-            'pluginOptions' => [ //jquery默认收起
-                'initialState' => 'collapse',
-            ],
+            // 'pluginOptions' => [ // 菜单收起
+            //     'initialState' => 'collapse',
+            // ],
+
             'columns' => [
                 'name',
                 'route',
@@ -33,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw'
                 ],
                 [
-                    'class' => 'yiiplus\desktop\widgets\grid\PositionColumn',
+                    'class' => 'yiiplus\desktop\widgets\tree\PositionColumn',
                     'attribute' => 'order'
                 ],
                 [

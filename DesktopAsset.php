@@ -52,6 +52,7 @@ class DesktopAsset extends AssetBundle
      */
     public $js = [
         'jquery-ui.js',
+        'skin.js',
     ];
     
     /**

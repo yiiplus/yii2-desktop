@@ -82,19 +82,15 @@ class MenuController extends Controller
      *
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new Menu;
-
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->parent_name) {
-                $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
-                $model->parent = $parentModel->id;
-            }
             $model->save();
             Helper::invalidate();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
+            $model->parent = $id ? : null;
             return $this->render('create', ['model' => $model]);
         }
     }
@@ -113,13 +109,9 @@ class MenuController extends Controller
             $model->parent_name = $model->menuParent->name;
         }
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->parent_name) {
-                $parentModel = Menu::find()->where(['name' => $model->parent_name])->select(['id'])->one();
-                $model->parent = $parentModel->id;
-            }
             $model->save();
             Helper::invalidate();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', ['model' => $model]);
         }
