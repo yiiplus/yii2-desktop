@@ -17,6 +17,8 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	$("#form-controls").change(function(){
+		$("#form-search").submit();
+	});
  
 });
