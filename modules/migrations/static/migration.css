@@ -51,3 +51,7 @@
 
         cursor                : pointer;
     }
+
+    label {
+        width :33%;
+    }

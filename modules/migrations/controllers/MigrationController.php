@@ -8,6 +8,7 @@ use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yiiplus\desktop\modules\migrations\models\MigrationUtility;
 use yiiplus\desktop\modules\migrations\models\AppUtility;
+use yiiplus\desktop\modules\migrations\models\Database;
 
 class MigrationController extends Controller
 {
@@ -35,16 +36,23 @@ class MigrationController extends Controller
                 return $this->redirect('/migrations/migration/index');
             }
 
+            if (empty($model->database)) {
+                Yii::$app->getSession()->setFlash('error', '未选择数据库');
+                return $this->redirect('/migrations/migration/index');
+            }
+            //获取数据库连接
+            $connect = MigrationUtility::getConnect($model->database);
+
             if (!empty($model->tableSchemas)) {
                 //获取表结构语句
-                list ($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption);
+                list ($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption, $connect);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
 
             if (!empty($model->tableDatas)) {
                 //获取表数据
-                list ($up, $down) = $this->generalTableDatas($model->tableDatas);
+                list ($up, $down) = $this->generalTableDatas($model->tableDatas, $connect);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
@@ -69,32 +77,42 @@ class MigrationController extends Controller
             return $this->redirect('/migrations/migration/index');
         }
 
+        $database = MigrationUtility::getNowDatabase();
+        if ($model->load(\Yii::$app->getRequest()->get())) {
+            $database = $model->database;
+        }
+
         return $this->render('index', [
-            'model' => $model
+            'model' => $model,
+            'database' => $database
         ]);
     }
 
     /**
      * 去掉表前缀
      *
-     * @param $name
+     * @param string   $name    表名
+     * @param resource $connect 数据库连接句柄
+     *
      * @return mixed
      */
-    public function getTableName($name)
+    public function getTableName($name, $connect)
     {
-        $prefix = \Yii::$app->db->tablePrefix;
+        $prefix = $connect->tablePrefix;
         return str_replace($prefix, '', $name);
     }
 
     /**
      * 获取创建表删除表语句
      *
-     * @param $tables
-     * @param $tableOption
+     * @param array    $tables      迁移表数组
+     * @param string   $tableOption 表属性语句
+     * @param resource $connect     数据库连接句柄
+     *
      * @return array
      * @throws \yii\db\Exception
      */
-    public function generalTableSchemas($tables, $tableOption)
+    public function generalTableSchemas($tables, $tableOption, $connect)
     {
         $initialTabLevel = 2;
         $upStr = new OutputString([
@@ -107,12 +125,12 @@ class MigrationController extends Controller
         foreach ($tables as $table) {
             $upStr->tabLevel = $initialTabLevel;
 
-            $tablePrepared = $this->getTableName($table);
+            $tablePrepared = $this->getTableName($table, $connect);
             $tableNameArr[] = "'" . $tablePrepared . "'";
             // 添加表结构
             $upStr->addStr('$this->createTable(\'{{%' . $tablePrepared . '}}\', [');
             $upStr->tabLevel ++;
-            $tableSchema = \Yii::$app->db->getTableSchema($table);
+            $tableSchema = $connect->getTableSchema($table, $connect);
             
             foreach ($tableSchema->columns as $column) {
                 $appUtility = new AppUtility($column);
@@ -127,7 +145,7 @@ class MigrationController extends Controller
 
 
             // 添加索引
-            $tableIndexes = Yii::$app->db->createCommand('SHOW INDEX FROM `' . $table . '`')->queryAll();
+            $tableIndexes = $connect->createCommand('SHOW INDEX FROM `' . $table . '`')->queryAll();
             $indexs = [];
             foreach ($tableIndexes as $item) {
                 if ($item['Key_name'] == 'PRIMARY') {
@@ -165,7 +183,7 @@ class MigrationController extends Controller
             AND REFERENCED_TABLE_SCHEMA = DATABASE() AND REFERENCED_COLUMN_NAME IS NOT NULL
             AND tb1.TABLE_NAME in $tableNameStr";
 
-        $foreignKeys = Yii::$app->db->createCommand($sql)->queryAll();
+        $foreignKeys = $connect->createCommand($sql)->queryAll();
         foreach ($foreignKeys as $fk) {
             $str = '$this->addForeignKey(';
             $str .= '\'' . $fk['CONSTRAINT_NAME'] . '\', ';
@@ -203,13 +221,14 @@ class MigrationController extends Controller
     /**
      * 生成表数据语句
      *
-     * @param array $tables 表数组
+     * @param array    $tables  表数组
+     * @param resource $connect 数据库连接句柄
      *
      * @return array
      *
      * @throws \yii\db\Exception
      */
-    public function generalTableDatas($tables)
+    public function generalTableDatas($tables, $connect)
     {
         $initialTabLevel = 2;
         $upStr = new OutputString([
@@ -218,11 +237,11 @@ class MigrationController extends Controller
         $upStr->addStr('$this->execute(\'SET foreign_key_checks = 0\');');
         $upStr->addStr(' ');
         foreach ($tables as $table) {
-            $tablePrepared = $this->getTableName($table);
+            $tablePrepared = $this->getTableName($table, $connect);
 
             $upStr->addStr('/* Table ' . $table . ' */');
             $tableSchema = \Yii::$app->db->getTableSchema($table);
-            $data = Yii::$app->db->createCommand('SELECT * FROM `' . $table . '`')->queryAll();
+            $data = $connect->createCommand('SELECT * FROM `' . $table . '`')->queryAll();
             $out = '$this->batchInsert(\'{{%' . $tablePrepared . '}}\',[';
             foreach ($tableSchema->columns as $column) {
                 $out .= "'" . $column->name . "',";
