@@ -20,6 +20,7 @@ return [
     'Data' => '数据',
     'Create' => '新增',
     'Update' => '更新',
+    'Trash'  => '移到废纸篓',
     'Delete' => '删除',
     'View'   => '查看',
     'Status' => '状态',

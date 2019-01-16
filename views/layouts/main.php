@@ -44,6 +44,9 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+    <?php if (isset($this->blocks['js'])): ?>
+        <?= $this->blocks['js'] ?>
+    <?php endif; ?>
     </body>
     </html>
     <?php $this->endPage() ?>

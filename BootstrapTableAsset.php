@@ -40,9 +40,8 @@ class BootstrapTableAsset extends AssetBundle {
         'bootstrap-table-locale-all.min.js',
         'https://unpkg.com/tableexport.jquery.plugin@1.10.1/tableExport.min.js',
         'extensions/export/bootstrap-table-export.min.js',
-        'extensions/toolbar/bootstrap-table-toolbar.min.js',
         'extensions/multiple-sort/bootstrap-table-multiple-sort.js',
-        'extensions/defer-url/bootstrap-table-defer-url.min.js',
+        'extensions/toolbar/bootstrap-table-toolbar.min.js',
     ];
 
     public $depends = [

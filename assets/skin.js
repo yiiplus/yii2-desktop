@@ -173,7 +173,7 @@ $(function () {
             + '</a>')
 
     // Add the tab button to the right sidebar tabs
-    $('[href="#control-sidebar-home-tab"]')
+    $('[href="#control-sidebar-settings-tab"]')
         .parent()
         .before($tabButton)
 
@@ -181,10 +181,7 @@ $(function () {
     var $skinSettings = $('<div />')
 
     // Layout options
-    $skinSettings.append(
-        '<h4 class="control-sidebar-heading">'
-        + 'Layout Options'
-        + '</h4>'
+    $skinSettings.append(''
         // Fixed layout
         + '<div class="form-group">'
         + '<label class="control-sidebar-subheading">'
@@ -234,8 +231,10 @@ $(function () {
         + '<p>Toggle between dark and light skins for the right sidebar</p>'
         + '</div>'
     )
-    var $skinsList = $('<ul />', {'class': 'list-unstyled clearfix'})
+    $tabPane.append($skinSettings)
+    $('#control-sidebar-settings-tab').after($tabPane)
 
+    var $skinsList = $('<ul />', {'class': 'list-unstyled clearfix'})
     // Dark sidebar skins
     var $skinBlue =
         $('<li />', {style: 'float:left; width: 33.33333%; padding: 5px;'})
@@ -335,12 +334,7 @@ $(function () {
                 + '</a>'
                 + '<p class="text-center no-margin" style="font-size: 12px">Yellow Light</p>')
     $skinsList.append($skinYellowLight)
-
-    $skinSettings.append('<h4 class="control-sidebar-heading">Skins</h4>')
-    $skinSettings.append($skinsList)
-
-    $tabPane.append($skinSettings)
-    $('#control-sidebar-home-tab').after($tabPane)
+    $('#control-sidebar-settings-tab').append($skinsList)
 
     setup()
 
