@@ -17,53 +17,51 @@ class LogController extends Controller
             'index' => [
                 'class' => 'yiiplus\desktop\actions\Table',
                 'modelClass' => 'yiiplus\desktop\models\Log',
-                // 'title' => Yii::t('yiiplus/desktop', '日志管理'),
-                // 'sort' => [
-                //     'defaultOrder' => [
-                //         'id' => SORT_DESC
-                //     ]
-                // ],
-                // 'columns' => [
-                //     ['checkbox' => true],
-                //     'id',
-                //     'route',
-                //     [
-                //         'field' => 'user_id',
-                //         'value' => function($row, $pk, $index) {
-                //             static $obj;
-                //             if (is_null($obj[$row['user_id']])) {
-                //                 $obj[$row['user_id']] = \yiiplus\desktop\models\User::findOne($row['user_id'])->username;
-                //             }
-                //             return $obj[$row['user_id']];
-                //         },
-                //         'searchable' => false,
-                //     ],
-                //     [
-                //         'field' => 'ip',
-                //         'value' => function($row, $pk, $index) {
-                //         return long2ip($row['ip']);
-                //         },
-                //         'searchable' => function($value) {
-                //         return ['ip' => ip2long($value)];
-                //         },
-                //         'sortable' => true,
-                //     ],
-                //     'created_at:datetime',
-                //     [
-                //         'field' => '_operate',
-                //         'title' => Yii::t('yiiplus/desktop', '操作'),
-                //         'value' => function($row, $pk, $index) {
-                //             static $column;
-                //             if (is_null($column)) {
-                //                 $column = Yii::createObject([
-                //                     'class' => 'yiiplus\desktop\table\ActionColumn',
-                //                     'template' => '{view}',
-                //                 ]);
-                //             }
-                //             return $column->renderDataCell($row, $pk, $index);
-                //         },
-                //     ],
-                // ],
+                'title' => Yii::t('yiiplus/desktop', '日志管理'),
+                'sort' => [
+                    'defaultOrder' => [
+                        'id' => SORT_DESC
+                    ]
+                ],
+                'columns' => [
+                    ['checkbox' => true],
+                    'id',
+                    'route',
+                    [
+                        'field' => 'user_id',
+                        'value' => function($row, $pk, $index) {
+                            static $obj;
+                            if (is_null($obj[$row['user_id']])) {
+                                $obj[$row['user_id']] = \yiiplus\desktop\models\User::findOne($row['user_id'])->username;
+                            }
+                            return $obj[$row['user_id']];
+                        },
+                    ],
+                    [
+                        'field' => 'ip',
+                        'value' => function($row, $pk, $index) {
+                        return long2ip($row['ip']);
+                        },
+                        'searchable' => function($value) {
+                        return ['ip' => ip2long($value)];
+                        },
+                    ],
+                    'created_at:datetime',
+                    [
+                        'field' => '_operate',
+                        'title' => Yii::t('yiiplus/desktop', '操作'),
+                        'value' => function($row, $pk, $index) {
+                            static $column;
+                            if (is_null($column)) {
+                                $column = Yii::createObject([
+                                    'class' => 'yiiplus\desktop\widgets\table\ActionColumn',
+                                    'template' => '{view}',
+                                ]);
+                            }
+                            return $column->renderDataCell($row, $pk, $index);
+                        },
+                    ],
+                ],
             ],
         ];
     }

@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
 
-use yiiplus\desktop\widgets\grid\TreeGrid;
+use yiiplus\desktop\widgets\tree\TreeGrid;
 
 $this->title = Yii::t('yiiplus/desktop', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw'
                 ],
                 [
-                    'class' => 'yiiplus\desktop\widgets\grid\PositionColumn',
+                    'class' => 'yiiplus\desktop\widgets\tree\PositionColumn',
                     'attribute' => 'order'
                 ],
                 [

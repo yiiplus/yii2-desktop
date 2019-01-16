@@ -10,7 +10,8 @@
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
-namespace yiiplus\desktop\widgets\grid;
+
+namespace yiiplus\desktop\widgets\tree;
 
 use Yii;
 use Closure;

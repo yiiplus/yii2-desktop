@@ -128,7 +128,7 @@ class Table extends \yii\base\Action
                         'value' => function($row, $pk, $index) {
                             static $object;
                             if (is_null($object)) {
-                                $object = Yii::createObject(['class' => 'yiiplus\desktop\table\ActionColumn']);
+                                $object = Yii::createObject(['class' => 'yiiplus\desktop\widgets\table\ActionColumn']);
                             }
                             return $object->renderDataCell($row, $pk, $index);
                         },

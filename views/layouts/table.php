@@ -1,9 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yiiplus\desktop\table\ToolbarView;
+use yiiplus\desktop\widgets\table\ToolbarView;
 
-yiiplus\desktop\BootstrapTableAsset::register($this);
+yiiplus\desktop\widgets\table\BootstrapTableAsset::register($this);
 $this->registerJs("$.extend($.fn.bootstrapTable.defaults.icons, { advancedSearchIcon: 'glyphicon-search'});"); // 高级搜索图标替换
 $this->registerJs("$('#${id}').bootstrapTable(".json_encode($options).");");
 
