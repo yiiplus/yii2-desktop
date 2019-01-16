@@ -6,11 +6,9 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Menus'),
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('yiiplus/desktop', 'Update');
 ?>
-
-<div class="box box-primary menu-update">
-    <div class="box-header with-border"></div>
-	<div class="box-body">
-		<?= $this->render('_form', ['model' => $model]) ?>
-	</div>
-	<div class="box-footer"></div>
+<div class="col-md-12">
+    <div class="box box-info desktop-menu-update">
+        <div class="box-header"> </div>
+        <?= $this->render('_form', ['model' => $model]) ?>
+    </div>
 </div>

@@ -11,7 +11,7 @@
  * @link      http://www.yiiplus.com
  */
 
-namespace yiiplus\desktop\common\helpers;
+namespace yiiplus\desktop\components;
 
 /**
  * 创建树形结构数据
