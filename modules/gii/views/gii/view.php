@@ -1,17 +1,22 @@
 <?php
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    zhouyang <zhouyang@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\gii\components\ActiveField;
 use yii\gii\CodeFile;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\Generator */
-/* @var $id string panel ID */
-/* @var $form yii\widgets\ActiveForm */
-/* @var $results string */
-/* @var $hasError boolean */
-/* @var $files CodeFile[] */
-/* @var $answers array */
 $this->title = $generator->getName();
 $templates = [];
 //获取生成代码model模板

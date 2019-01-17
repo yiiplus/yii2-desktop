@@ -1,13 +1,5 @@
 <?php
-/**
- * 生成指定模型的CRUD搜索类的模板
- */
-
 use yii\helpers\StringHelper;
-
-
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
 
 $modelClass = StringHelper::basename($generator->modelClass);
 $searchModelClass = StringHelper::basename($generator->searchModelClass);
@@ -18,9 +10,21 @@ $rules = $generator->generateSearchRules();
 $labels = $generator->generateSearchLabels();
 $searchAttributes = $generator->getSearchAttributes();
 $searchConditions = $generator->generateSearchConditions();
-
+$username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
 
 namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?>;
 
@@ -31,12 +35,21 @@ use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelA
 
 /**
  * <?= $searchModelClass ?> represents the model behind the search form about `<?= $generator->modelClass ?>`.
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
  */
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 
 {
     /**
-     * @inheritdoc
+     * 规则
      */
     public function rules()
     {
@@ -46,7 +59,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
     }
 
     /**
-     * @inheritdoc
+     * 应用场景
      */
     public function scenarios()
     {
@@ -55,7 +68,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * 搜索查询
      *
      * @param array $params
      *

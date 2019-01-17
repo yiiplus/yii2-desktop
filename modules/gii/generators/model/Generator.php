@@ -1,4 +1,16 @@
 <?php
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    zhouyang <zhouyang@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
 
 namespace yiiplus\desktop\modules\gii\generators\model;
 
@@ -6,14 +18,15 @@ use ReflectionClass;
 use yii\base\NotSupportedException;
 use yii\db\Schema;
 
-
 class Generator extends \yii\gii\generators\model\Generator
 {
     public $skipRuleColumns = ['created_at', 'updated_at'];
 
     /**
-     * Generates validation rules for the specified table.
+     * 生成指定表的验证规则
+     *
      * @param \yii\db\TableSchema $table the table schema
+     *
      * @return array the generated validation rules
      */
     public function generateRules($table)
@@ -37,7 +50,7 @@ class Generator extends \yii\gii\generators\model\Generator
                     $types['boolean'][] = $column->name;
                     break;
                 case Schema::TYPE_FLOAT:
-                case 'double': // Schema::TYPE_DOUBLE, which is available since Yii 2.0.3
+                case 'double':
                 case Schema::TYPE_DECIMAL:
                 case Schema::TYPE_MONEY:
                     $types['number'][] = $column->name;
@@ -48,7 +61,7 @@ class Generator extends \yii\gii\generators\model\Generator
                 case Schema::TYPE_TIMESTAMP:
                     $types['safe'][] = $column->name;
                     break;
-                default: // strings
+                default:
                     if ($column->size > 0) {
                         $lengths[$column->size][] = $column->name;
                     } else {
@@ -66,11 +79,11 @@ class Generator extends \yii\gii\generators\model\Generator
 
         $db = $this->getDbConnection();
 
-        // Unique indexes rules
+        //唯一索引规则
         try {
             $uniqueIndexes = $db->getSchema()->findUniqueIndexes($table);
             foreach ($uniqueIndexes as $uniqueColumns) {
-                // Avoid validating auto incremental columns
+                //避免验证自动增量列
                 if (!$this->isColumnAutoIncremental($table, $uniqueColumns)) {
                     $attributesCount = count($uniqueColumns);
 
@@ -85,15 +98,15 @@ class Generator extends \yii\gii\generators\model\Generator
                 }
             }
         } catch (NotSupportedException $e) {
-            // doesn't support unique indexes information...do nothing
+            //不支持唯一索引信息......什么都不做
         }
 
-        // Exist rules for foreign keys
+        //外键存在规则
         foreach ($table->foreignKeys as $refs) {
             $refTable = $refs[0];
             $refTableSchema = $db->getTableSchema($refTable);
             if ($refTableSchema === null) {
-                // Foreign key could point to non-existing table: https://github.com/yiisoft/yii2-gii/issues/34
+                //外键可能指向不存在的表: https://github.com/yiisoft/yii2-gii/issues/34
                 continue;
             }
             $refClassName = $this->generateClassName($refTable);
