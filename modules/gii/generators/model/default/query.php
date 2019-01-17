@@ -1,33 +1,38 @@
 <?php
-/**
- * This is the template for generating the ActiveQuery class.
- */
-
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\model\Generator */
-/* @var $tableName string full table name */
-/* @var $className string class name */
-/* @var $tableSchema yii\db\TableSchema */
-/* @var $labels string[] list of attribute labels (name => label) */
-/* @var $rules string[] list of validation rules */
-/* @var $relations array list of relations (name => relation declaration) */
-/* @var $className string class name */
-/* @var $modelClassName string related model class name */
-
 $modelFullClassName = $modelClassName;
 if ($generator->ns !== $generator->queryNs) {
     $modelFullClassName = '\\' . $generator->ns . '\\' . $modelFullClassName;
 }
 
+$username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
 
 namespace <?= $generator->queryNs ?>;
 
 /**
  * This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
  *
- * @see <?= $modelFullClassName . "\n" ?>
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
  */
 class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\') . "\n" ?>
 {
@@ -37,7 +42,8 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\
     }*/
 
     /**
-     * @inheritdoc
+     * 查询全部
+     *
      * @return <?= $modelFullClassName ?>[]|array
      */
     public function all($db = null)
@@ -46,7 +52,8 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\
     }
 
     /**
-     * @inheritdoc
+     * 查询单条
+     *
      * @return <?= $modelFullClassName ?>|array|null
      */
     public function one($db = null)

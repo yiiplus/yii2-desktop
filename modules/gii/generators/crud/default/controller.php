@@ -1,14 +1,6 @@
 <?php
-/**
- * 生成CRUD控制器类文件的模板
- */
-
 use yii\db\ActiveRecordInterface;
 use yii\helpers\StringHelper;
-
-
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
 
 $controllerClass = StringHelper::basename($generator->controllerClass);
 $modelClass = StringHelper::basename($generator->modelClass);
@@ -23,9 +15,21 @@ $pks = $class::primaryKey();
 $urlParams = $generator->generateUrlParams();
 $actionParams = $generator->generateActionParams();
 $actionParamComments = $generator->generateActionParamComments();
-
+$username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
 
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
@@ -42,11 +46,20 @@ use yii\filters\VerbFilter;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
  */
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {
     /**
-     * @inheritdoc
+     * 行为列表
      */
     public function behaviors()
     {
@@ -61,7 +74,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Lists all <?= $modelClass ?> models.
+     * 入口
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -86,8 +100,10 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Displays a single <?= $modelClass ?> model.
+     * 视图
+     *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     *
      * @return mixed
      */
     public function actionView(<?= $actionParams ?>)
@@ -98,8 +114,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Creates a new <?= $modelClass ?> model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * 创建
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -116,9 +132,10 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Updates an existing <?= $modelClass ?> model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 修改
+     *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     *
      * @return mixed
      */
     public function actionUpdate(<?= $actionParams ?>)
@@ -135,9 +152,10 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Deletes an existing <?= $modelClass ?> model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * 删除
+     *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     *
      * @return mixed
      */
     public function actionDelete(<?= $actionParams ?>)
@@ -148,24 +166,25 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Finds the <?= $modelClass ?> model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 根据主键查找模型
+     *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
+     *
      * @return <?=                   $modelClass ?> the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel(<?= $actionParams ?>)
     {
 <?php
-if (count($pks) === 1) {
-    $condition = '$id';
-} else {
-    $condition = [];
-    foreach ($pks as $pk) {
-        $condition[] = "'$pk' => \$$pk";
-    }
-    $condition = '[' . implode(', ', $condition) . ']';
-}
+        if (count($pks) === 1) {
+            $condition = '$id';
+        } else {
+            $condition = [];
+            foreach ($pks as $pk) {
+                $condition[] = "'$pk' => \$$pk";
+            }
+            $condition = '[' . implode(', ', $condition) . ']';
+        }
 ?>
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;

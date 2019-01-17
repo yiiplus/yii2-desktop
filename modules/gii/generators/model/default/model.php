@@ -14,7 +14,20 @@
 /* @var $relations array list of relations (name => relation declaration) */
 
 echo "<?php\n";
+$username = Yii::$app->user->identity->username;
 ?>
+/**
+* 慧诊
+*
+* PHP version 7
+*
+* @category  PHP
+* @package   Yii2
+* @author    <?= $username ?> <<?= $username ?>@himoca.com>
+* @copyright 2017-2019 北京慧诊科技有限公司
+* @license   https://www.huizhen.com/licence.txt Licence
+* @link      http://www.huizhen.com
+*/
 
 namespace <?= $generator->ns ?>;
 
@@ -23,8 +36,19 @@ use Yii;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ *
 <?php foreach ($tableSchema->columns as $column): ?>
- * @property <?= "{$column->phpType} \${$column->name}\n" ?>
+ * @property <?= "{$column->phpType} \${$column->name} $column->comment\n" ?>
 <?php endforeach; ?>
 <?php if (!empty($relations)): ?>
  *
@@ -36,8 +60,10 @@ use Yii;
 class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
 {
     /**
-     * @inheritdoc
-     */
+    * 表名
+    *
+    * @return string the table name
+    */
     public static function tableName()
     {
         return '<?= $generator->generateTableName($tableName) ?>';
@@ -54,16 +80,20 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
 <?php endif; ?>
 
     /**
-     * @inheritdoc
-     */
+    * 字段限制
+    *
+    * @return array validation rules
+    */
     public function rules()
     {
         return [<?= "\n            " . implode(",\n            ", $rules) . ",\n        " ?>];
     }
 
     /**
-     * @inheritdoc
-     */
+    * 属性标签
+    *
+    * @return array list of attribute names.
+    */
     public function attributeLabels()
     {
         return [
@@ -88,7 +118,8 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     echo "\n";
 ?>
     /**
-     * @inheritdoc
+     * 查找
+     *
      * @return <?= $queryClassFullName ?> the active query used by this AR class.
      */
     public static function find()

@@ -1,20 +1,25 @@
 <?php
-
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
-
+$username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
+/**
+ * 慧诊
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    <?= $username ?> <<?= $username ?>@himoca.com>
+ * @copyright 2017-2019 北京慧诊科技有限公司
+ * @license   https://www.huizhen.com/licence.txt Licence
+ * @link      http://www.huizhen.com
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="box box-primary">
     <div class="box-header">
