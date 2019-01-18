@@ -17,7 +17,7 @@
                 'class' => 'path\to\OtherController', // add another controller
             ],
         ],
-	],
+    ],
 ],
 
 ```

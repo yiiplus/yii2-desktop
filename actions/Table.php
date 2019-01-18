@@ -144,17 +144,6 @@ class Table extends \yii\base\Action
     }
 
     /**
-     * 模型懒加载
-     */
-    protected function getModel()
-    {
-        if ($this->_model === null) {
-            $this->_model = new $this->modelClass();
-        }
-        return $this->_model;
-    }
-
-    /**
      * BootstrapTable 封装入口
      */
     public function run()
@@ -162,6 +151,10 @@ class Table extends \yii\base\Action
         if (Yii::$app->request->isAjax) {
            return $this->query(); 
         }
+
+        \Yii::$app->session->setFlash('success', '查询成功');
+        \Yii::$app->session->setFlash('error', 'test');
+        \Yii::$app->session->setFlash('info', '成功');
         return $this->view();
     }
 
@@ -420,5 +413,16 @@ class Table extends \yii\base\Action
             unset($params['order']);
             Yii::$app->getRequest()->setQueryParams($params);
         }
+    }
+
+    /**
+     * 模型懒加载
+     */
+    protected function getModel()
+    {
+        if ($this->_model === null) {
+            $this->_model = new $this->modelClass();
+        }
+        return $this->_model;
     }
 }

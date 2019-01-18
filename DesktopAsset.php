@@ -41,8 +41,8 @@ class DesktopAsset extends AssetBundle
      * @var string
      */
     public $css = [
-        'desktop.css',
         'jquery-ui.css',
+        'desktop.css',
     ];
     
     /**
@@ -52,7 +52,7 @@ class DesktopAsset extends AssetBundle
      */
     public $js = [
         'jquery-ui.js',
-        'skin.js',
+        'desktop.js',
     ];
     
     /**
@@ -61,6 +61,10 @@ class DesktopAsset extends AssetBundle
      * @var string
      */
     public $depends = [
-        'yii\web\JqueryAsset'
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'yiiplus\desktop\AdminLteAsset',
+        'yiiplus\desktop\FontAwesomeAsset',
     ];
 }

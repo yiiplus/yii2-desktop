@@ -10,8 +10,8 @@ $this->params['breadcrumbs'][] = Yii::t('yiiplus/desktop', 'Update');
 
 <div class="box box-primary rule-update">
     <div class="box-header"></div>
-	<div class="box-body">
-		<?= $this->render('_form', ['model' => $model]) ?>
-	</div>
-	<div class="box-footer"></div>
+    <div class="box-body">
+        <?= $this->render('_form', ['model' => $model]) ?>
+    </div>
+    <div class="box-footer"></div>
 </div>

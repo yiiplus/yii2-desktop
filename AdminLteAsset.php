@@ -40,6 +40,7 @@ class AdminLteAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'yiiplus\desktop\FontAwesomeAsset',
     ];
 
     /**

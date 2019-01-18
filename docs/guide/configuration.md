@@ -5,38 +5,38 @@
 
 ```php
 return [
-	'layout' => '@yiiplus/desktop/views/layouts/main.php',
+    'layout' => '@yiiplus/desktop/views/layouts/main.php',
 
-	...
+    ...
 
-	'modules' => [
-		...
-	    'admin' => [
-	        'class' => 'yiiplus\desktop\Module',
-	    ],
-	    ...
-	],
+    'modules' => [
+        ...
+        'admin' => [
+            'class' => 'yiiplus\desktop\Module',
+        ],
+        ...
+    ],
 
-	...
+    ...
 
-	'components' => [
-		...
-		'authManager' => [
+    'components' => [
+        ...
+        'authManager' => [
             'class' => 'yii\rbac\DbManager',
             'defaultRoles' => ['guest'],
         ],
         ...
-	],
+    ],
 
-	...
+    ...
 
-	'as access' => [
-	    'class' => 'yiiplus\desktop\components\AccessControl',
-	    'allowActions' => [
-	        'site/*',
+    'as access' => [
+        'class' => 'yiiplus\desktop\components\AccessControl',
+        'allowActions' => [
+            'site/*',
             'admin/*',
-	    ]
-	],
+        ]
+    ],
 ];
 ```
 

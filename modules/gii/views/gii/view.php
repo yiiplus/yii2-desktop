@@ -25,14 +25,14 @@ foreach ($generator->templates as $name => $path) {
 }
 ?>
 <div class="box box-primary">
-	<div class="box-header with-border">
-		<h3 class="box-title">
-			<?= Html::encode($this->title) ?>
-		</h3>
-	</div>
-	<div class="box-body default-view">
-		<p><?= $generator->getDescription() ?></p>
-		<?php
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <?= Html::encode($this->title) ?>
+        </h3>
+    </div>
+    <div class="box-body default-view">
+        <p><?= $generator->getDescription() ?></p>
+        <?php
             $form = ActiveForm::begin([
                     'id' => "$id-generator",
                     'successCssClass' => '',
@@ -40,21 +40,21 @@ foreach ($generator->templates as $name => $path) {
                         'class' => ActiveField::className()
                     ]
             ]);
-		?>
-		<?= $this->renderFile($generator->formView(), ['generator' => $generator,'form' => $form])?>
-		<?= $form->field($generator, 'template')->sticky()->label('Code Template')->dropDownList($templates)->hint('
+        ?>
+        <?= $this->renderFile($generator->formView(), ['generator' => $generator,'form' => $form])?>
+        <?= $form->field($generator, 'template')->sticky()->label('Code Template')->dropDownList($templates)->hint('
             Please select which set of the templates should be used to generated the code.
         ')?>
-		<div class="form-group">
-			<?= Html::submitButton('Preview', ['name' => 'preview', 'class' => 'btn btn-primary'])?>
+        <div class="form-group">
+            <?= Html::submitButton('Preview', ['name' => 'preview', 'class' => 'btn btn-primary'])?>
 
-			<?php if (isset($files)): ?>
-			<?= Html::submitButton('Generate', ['name' => 'generate', 'class' => 'btn btn-success'])?>
-			<?php endif; ?>
-		</div>
+            <?php if (isset($files)): ?>
+            <?= Html::submitButton('Generate', ['name' => 'generate', 'class' => 'btn btn-success'])?>
+            <?php endif; ?>
+        </div>
 
 
-		<?php
+        <?php
         if (isset($results)) {
             echo $this->render('view/results', [
                 'generator' => $generator,
@@ -70,6 +70,6 @@ foreach ($generator->templates as $name => $path) {
             ]);
         }
         ?>
-		<?php ActiveForm::end(); ?>
-	</div>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>

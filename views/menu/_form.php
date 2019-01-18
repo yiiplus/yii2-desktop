@@ -2,13 +2,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Json;
-
 use yiiplus\desktop\models\Menu;
-use yiiplus\desktop\DesktopAsset;
 
 $opts = Json::htmlEncode(['menus' => Menu::getMenuSource(), 'routes' => Menu::getSavedRoutes()]);
 $this->registerJs("var _opts = $opts;");
 $this->registerJs($this->render('_script.js'));
+$options = Json::htmlEncode(['source' => Menu::getSavedRoutes()]);
+$this->registerJs("$('#route').autocomplete($options);");
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -37,12 +37,3 @@ $this->registerJs($this->render('_script.js'));
     </div>
 </div>
 <?php ActiveForm::end(); ?>
-
-
-<?php
-DesktopAsset::register($this);
-
-$options = Json::htmlEncode([
-    'source' => Menu::getSavedRoutes(),
-]);
-$this->registerJs("$('#route').autocomplete($options);");

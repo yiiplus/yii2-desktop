@@ -1,8 +1,6 @@
 <?php
-use yii\helpers\Html;
-
-/* @var $this \yii\web\View */
-/* @var $content string */
+    use yii\helpers\Html;
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 ?>
 
 <header class="main-header">

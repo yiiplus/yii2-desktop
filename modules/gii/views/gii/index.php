@@ -24,19 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <div class="default-index">
-	<div class="row">
+    <div class="row">
         <?php foreach ($generators as $id => $generator):?>
         <div class="col-md-4">
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title"><?= Html::encode($generator->getName()) ?></h3>
-				</div>
-				<div class="box-body">
-					<p><?= $generator->getDescription() ?></p>
-					<p><?= Html::a('Start »', ['gii/view', 'id' => $id], ['class' => 'btn btn-default']) ?></p>
-				</div>
-			</div>
-		</div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= Html::encode($generator->getName()) ?></h3>
+                </div>
+                <div class="box-body">
+                    <p><?= $generator->getDescription() ?></p>
+                    <p><?= Html::a('Start »', ['gii/view', 'id' => $id], ['class' => 'btn btn-default']) ?></p>
+                </div>
+            </div>
+        </div>
         <?php endforeach;?>
     </div>
 </div>
