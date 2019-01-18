@@ -29,3 +29,15 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 ```
 
 入门使用，请参阅 [文档中心](docs/guide/)。
+
+## 文档中心
+
+### 基础入门
+
+- [基础配置](configuration.md)
+- [基础使用](basic-usage.md)
+- [用户管理](user-management.md)
+
+### 其他特性
+
+- [设置 AdminLTE 皮肤](adminlte-skin.md)
