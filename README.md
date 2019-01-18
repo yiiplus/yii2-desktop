@@ -28,26 +28,14 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 "yiiplus/yii2-desktop": "^1.0.0"
 ```
 
-## 基础配置
+## 文档中心
 
-```php
-'layout' => '@yiiplus/desktop/views/layouts/main.php',
+### 基础入门
 
-...
+- [基础配置](docs/guide/configuration.md)
+- [基础使用](docs/guide/basic-usage.md)
+- [用户管理](docs/guide/user-management.md)
 
-'modules' => [
-    'admin' => [
-        'class' => 'yiiplus\desktop\Module',
-    ],
-],
+### 其他特性
 
-...
-
-'as access' => [
-    'class' => 'yiiplus\desktop\components\AccessControl',
-    'allowActions' => [
-        'admin/user/login',
-        'admin/user/logout',
-    ]
-],
-```
+- [设置 AdminLTE 皮肤](docs/guide/adminlte-skin.md)
