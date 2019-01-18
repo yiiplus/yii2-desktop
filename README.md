@@ -27,3 +27,5 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 ```
 "yiiplus/yii2-desktop": "^1.0.0"
 ```
+
+入门使用，请参阅 [文档](docs/guide/)。
