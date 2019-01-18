@@ -32,10 +32,10 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 
 ### 基础入门
 
-- [基础配置](configuration.md)
-- [基础使用](basic-usage.md)
-- [用户管理](user-management.md)
+- [基础配置](docs/guide/configuration.md)
+- [基础使用](docs/guide/basic-usage.md)
+- [用户管理](docs/guide/user-management.md)
 
 ### 其他特性
 
-- [设置 AdminLTE 皮肤](adminlte-skin.md)
+- [设置 AdminLTE 皮肤](docs/guide/adminlte-skin.md)
