@@ -27,27 +27,3 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 ```
 "yiiplus/yii2-desktop": "^1.0.0"
 ```
-
-## 基础配置
-
-```php
-'layout' => '@yiiplus/desktop/views/layouts/main.php',
-
-...
-
-'modules' => [
-    'admin' => [
-        'class' => 'yiiplus\desktop\Module',
-    ],
-],
-
-...
-
-'as access' => [
-    'class' => 'yiiplus\desktop\components\AccessControl',
-    'allowActions' => [
-        'admin/user/login',
-        'admin/user/logout',
-    ]
-],
-```
