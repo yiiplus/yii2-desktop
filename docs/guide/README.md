@@ -1,4 +1,4 @@
-# YII2-DESKTOP 文档中心
+# 文档中心
 
 ## 基础入门
 
@@ -7,3 +7,5 @@
 - [用户管理](user-management.md)
 
 ## 其他特性
+
+- [设置 AdminLTE 皮肤](adminlte-skin.md)
