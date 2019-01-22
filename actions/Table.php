@@ -149,12 +149,8 @@ class Table extends \yii\base\Action
     public function run()
     {
         if (Yii::$app->request->isAjax) {
-           return $this->query(); 
+            return $this->query(); 
         }
-
-        \Yii::$app->session->setFlash('success', '查询成功');
-        \Yii::$app->session->setFlash('error', 'test');
-        \Yii::$app->session->setFlash('info', '成功');
         return $this->view();
     }
 
