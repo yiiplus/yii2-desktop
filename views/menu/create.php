@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = Yii::t('yiiplus/desktop', 'Create Menu');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Menus'), 'url' => ['index']];
+$this->title = Yii::t('yiiplus/desktop', '新增菜单');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '菜单列表'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

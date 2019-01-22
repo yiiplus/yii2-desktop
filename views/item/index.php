@@ -49,16 +49,16 @@ unset($rules[RouteRule::RULE_NAME]);
             ],
             [
                 'attribute' => 'name',
-                'label' => Yii::t('yiiplus/desktop', 'Name'),
+                'label' => Yii::t('yiiplus/desktop', '名称'),
             ],
             [
                 'attribute' => 'ruleName',
-                'label' => Yii::t('yiiplus/desktop', 'Rule Name'),
+                'label' => Yii::t('yiiplus/desktop', '规则名称'),
                 'filter' => $rules
             ],
             [
                 'attribute' => 'description',
-                'label' => Yii::t('yiiplus/desktop', 'Description'),
+                'label' => Yii::t('yiiplus/desktop', '描述'),
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

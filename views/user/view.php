@@ -4,7 +4,7 @@ use yii\widgets\DetailView;
 use yiiplus\desktop\components\Helper;
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '用户管理'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $controllerId = $this->context->uniqueId . '/';

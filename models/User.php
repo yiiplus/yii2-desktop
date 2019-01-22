@@ -72,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        throw new NotSupportedException(Yii::t('yiiplus/desktop', '"findIdentityByAccessToken"方法未实现'));
     }
 
     /**
@@ -99,8 +99,8 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return static::findOne([
-                'password_reset_token' => $token,
-                'status' => self::STATUS_ACTIVE,
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
         ]);
     }
 
@@ -117,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 

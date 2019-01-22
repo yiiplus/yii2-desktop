@@ -32,7 +32,7 @@ class BizRule extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('yiiplus/desktop', 'Name'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
         ];
     }
 

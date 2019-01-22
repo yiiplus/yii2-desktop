@@ -84,4 +84,15 @@ return [
     'LogRoute' => '路由',
     'LogUid' => '操作人',
     'LogIp' => '操作人ip',
+    'Search for available' => '按要求查找',
+    'Assign' => '分配',
+    'Remove' => '移除',
+    'Search for assigned' => '查找已分配',
+    'Are you sure you want to activate this user' => '确实要激活此用户吗？',
+    'Are you sure you want to inactive this user?' => '确实要将此用户禁用',
+    'You are not allowed to perform this action.' => '您不允许执行此操作！',
+    '"findIdentityByAccessToken" is not implemented.' => '"findIdentityByAccessToken"方法未实现.',
+    'The requested page does not exist.' => '请求的页面不存在',
+    'does not support labels' => '不支持该标签',
 ];
+

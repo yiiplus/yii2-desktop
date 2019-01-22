@@ -7,7 +7,7 @@ use yiiplus\desktop\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title = Yii::t('yiiplus/desktop', 'Log');
+$this->title = Yii::t('yiiplus/desktop', '操作日志');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box box-primary dataTables_wrapper desktop-log-index">

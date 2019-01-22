@@ -86,8 +86,8 @@ class BizRule extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name'      => Yii::t('yiiplus/desktop', 'Name'),
-            'className' => Yii::t('yiiplus/desktop', 'Class Name'),
+            'name'      => Yii::t('yiiplus/desktop', '名称'),
+            'className' => Yii::t('yiiplus/desktop', '类名'),
         ];
     }
 

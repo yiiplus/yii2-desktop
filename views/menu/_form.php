@@ -23,7 +23,7 @@ $this->registerJs($this->render('_script.js'));
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('yiiplus/desktop', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
+        <?= Html::submitButton(Yii::t('yiiplus/desktop', '提交'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
     </div>
 <?php ActiveForm::end(); ?>
 </div>

@@ -4,15 +4,15 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('yiiplus/desktop', 'Menus');
+$this->title = Yii::t('yiiplus/desktop', '菜单列表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary dataTables_wrapper user-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '新增'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '删除'), ['delete'], ['class' => 'btn btn-danger']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'menuParent.name',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', ['class' => 'form-control', 'id' => null]),
-                'label' => Yii::t('yiiplus/desktop', 'Parent'),
+                'label' => Yii::t('yiiplus/desktop', '父级'),
             ],
             'route',
             ['attribute'=>'order','headerOptions' => ['width' => '100']],
