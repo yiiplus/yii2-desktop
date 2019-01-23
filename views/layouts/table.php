@@ -4,8 +4,11 @@ use yii\helpers\Html;
 use yiiplus\desktop\widgets\table\ToolbarView;
 
 yiiplus\desktop\widgets\table\BootstrapTableAsset::register($this);
+
 $this->registerJs("$.extend($.fn.bootstrapTable.defaults.icons, { advancedSearchIcon: 'glyphicon-search'});"); // 高级搜索图标替换
 $this->registerJs("$('#${id}').bootstrapTable(".json_encode($options).");");
+$this->registerJs("$('#${id}').on('load-success.bs.table', function (data) { toastr.success('加载成功') });");
+$this->registerJs("$('#${id}').on('load-error.bs.table', function (status, jqXHR) { toastr.error('加载失败') });");
 
 $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,5 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?php $this->beginBlock('js'); ?>
 <script type="text/javascript">
+
 </script>
 <?php $this->endBlock('js'); ?>

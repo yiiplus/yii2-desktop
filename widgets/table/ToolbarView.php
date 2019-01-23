@@ -12,7 +12,10 @@ use yii\helpers\Url;
  */
 class ToolbarView extends Widget
 {
-    public $tableId;
+    /**
+     * @var string call a bootstrap table with id table via JavaScript.
+     */
+    public $id = 'table';
 
     /**
      * @var array html options to be applied to the toolbar.
@@ -56,7 +59,7 @@ class ToolbarView extends Widget
      * The callbacks must use the following signature:
      *
      * ```php
-     * function () {
+     * function() {
      *     // return boolean value
      * }
      * ```
@@ -112,76 +115,82 @@ class ToolbarView extends Widget
         // 移到废纸篓
         if (!isset($this->buttons['trash']) && strpos($this->template, '{trash}') !== false) {
             $this->buttons['trash'] = function ($url) {
-                $buttonId = 'trash';
+                $buttonName = 'trash';
+
                 // 删除 JavaScript 处理
                 $view = $this->getView();
-                $view->registerJs("
-                    $('#".$this->tableId."').on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function () {
-                        $('#".$buttonId."').prop('disabled', !$('#".$this->tableId."').bootstrapTable('getSelections').length)
-                    })
-
-                    $('#".$buttonId."').click(function () {
-                        var ids = $.map($('#".$this->tableId."').bootstrapTable('getSelections'), function (row) {
-                            return row.id
-                        })
-
-                        $.ajax({
-                            type: 'POST',
-                            url: '${url}',
-                            data: {
-                                ids : ids
-                            },
-                            dataType: 'JSON',
-                            complete: function () {
-                                $('#".$buttonId."').prop('disabled', true)
-                                $('#".$this->tableId."').bootstrapTable('refresh')
-                            }
-                        });
-                    })
-                ");
+                $view->registerJs($this->_deleteJs($buttonName, $url));
                 
                 // 生成按钮
                 $title  = Yii::t('yiiplus/desktop', '移到废纸篓');
-                return "<button id='".$buttonId."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-trash'></i> ${title}</button>";
+                return "<button id='".$buttonName."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-trash'></i> ${title}</button>";
             };
         }
 
         // 批量删除
         if (!isset($this->buttons['delete']) && strpos($this->template, '{delete}') !== false) {
             $this->buttons['delete'] = function ($url) {
-                $buttonId = 'remove';
+                $buttonName = 'remove';
+                
                 // 删除 JavaScript 处理
                 $view = $this->getView();
-                $view->registerJs("
-                    $('#".$this->tableId."').on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function () {
-                        $('#".$buttonId."').prop('disabled', !$('#".$this->tableId."').bootstrapTable('getSelections').length)
-                    })
-
-                    $('#".$buttonId."').click(function () {
-                        var ids = $.map($('#".$this->tableId."').bootstrapTable('getSelections'), function (row) {
-                            return row.id
-                        })
-
-                        $.ajax({
-                            type: 'POST',
-                            url: '${url}',
-                            data: {
-                                ids : ids
-                            },
-                            dataType: 'JSON',
-                            complete: function () {
-                                $('#".$buttonId."').prop('disabled', true)
-                                $('#".$this->tableId."').bootstrapTable('refresh')
-                            }
-                        });
-                    })
-                ");
+                $view->registerJs($this->_deleteJs($buttonName, $url));
                 
                 // 生成按钮
                 $title  = Yii::t('yiiplus/desktop', '批量删除');
-                return "<button id='".$buttonId."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-remove'></i> ${title}</button>";
+                return "<button id='".$buttonName."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-remove'></i> ${title}</button>";
             };
         }
+    }
+
+    /**
+     * 批量删除操作 JS 脚本
+     *
+     * @param  String $buttonName 按钮名
+     * @param  String $url        请求地址
+     *
+     * @return String             操作脚本
+     */
+    private function _deleteJs($buttonName, $url)
+    {
+        return "
+            $('#".$this->id."').on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function() {
+                $('#".$buttonName."').prop('disabled', !$('#".$this->id."').bootstrapTable('getSelections').length)
+            })
+
+            $('#".$buttonName."').click(function() {
+                var ids = $.map($('#".$this->id."').bootstrapTable('getSelections'), function (row) {
+                    return row.id
+                })
+
+                if(ids.length === 0) {
+                    toastr.warning('" . Yii::t('yiiplus/desktop', '请选择要删除的记录') . "')
+                    return
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '${url}',
+                    data: {
+                        ids : ids
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
+                        if(data.success) {
+                            toastr.success('" . Yii::t('yiiplus/desktop', '删除成功') . "')
+                        } else {
+                            toastr.error(data.data.message)
+                        }
+
+                        $('#".$buttonName."').prop('disabled', true)
+                        $('#".$this->id."').bootstrapTable('refresh', {silent:true})
+                    },
+                    error: function() {
+                        toastr.error('" . Yii::t('yiiplus/desktop', '删除失败') . "')
+                    }
+                });
+            })
+        ";
     }
  
      /**

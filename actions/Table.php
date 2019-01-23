@@ -20,7 +20,6 @@ class Table extends \yii\base\Action
     private $_sort;
     private $_pagination;
     private $_options = [
-        'id' => 'table',
         'data-toolbar' => '#toolbar',
         'data-locale' => 'zh-CN',
         'data-height' => '527', // 736
@@ -39,6 +38,11 @@ class Table extends \yii\base\Action
         'data-id-table' => 'advancedTable',
     ];
     
+    /**
+     * @var string call a bootstrap table with id table via JavaScript.
+     */
+    public $id = 'table';
+
     /**
      * 模型名称
      */
@@ -165,12 +169,13 @@ class Table extends \yii\base\Action
         }
 
         // 默认选项
-        $this->toolbar['tableId'] = $this->_options['id'];
+        $this->toolbar['id'] = $this->id;
+        $this->_options['id'] = $this->id;
         $this->_options['data-url'] = Yii::$app->request->getUrl();
         $this->_options['data-method'] = 'get';
         $this->_options['data-columns'] = $this->columns;
         return $this->controller->render($this->viewName, [
-            'id' => $this->_options['id'],
+            'id' => $this->id,
             'title'   => $this->title,
             'options' => $this->options,
             'columns' => $this->columns,

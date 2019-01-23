@@ -66,5 +66,6 @@ class DesktopAsset extends AssetBundle
         'yii\bootstrap\BootstrapPluginAsset',
         'yiiplus\desktop\AdminLteAsset',
         'yiiplus\desktop\FontAwesomeAsset',
+        'yiiplus\desktop\ToastrAsset',
     ];
 }
