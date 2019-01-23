@@ -15,7 +15,7 @@ class ToolbarView extends Widget
     /**
      * @var string call a bootstrap table with id table via JavaScript.
      */
-    public $id = 'table';
+    public $tableId;
 
     /**
      * @var array html options to be applied to the toolbar.
@@ -115,30 +115,30 @@ class ToolbarView extends Widget
         // 移到废纸篓
         if (!isset($this->buttons['trash']) && strpos($this->template, '{trash}') !== false) {
             $this->buttons['trash'] = function ($url) {
-                $buttonName = 'trash';
+                $name = 'trash';
 
                 // 删除 JavaScript 处理
                 $view = $this->getView();
-                $view->registerJs($this->_deleteJs($buttonName, $url));
+                $view->registerJs($this->_deleteJs($name, $url));
                 
                 // 生成按钮
                 $title  = Yii::t('yiiplus/desktop', '移到废纸篓');
-                return "<button id='".$buttonName."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-trash'></i> ${title}</button>";
+                return "<button id='".$name."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-trash'></i> ${title}</button>";
             };
         }
 
         // 批量删除
         if (!isset($this->buttons['delete']) && strpos($this->template, '{delete}') !== false) {
             $this->buttons['delete'] = function ($url) {
-                $buttonName = 'remove';
+                $name = 'remove';
                 
                 // 删除 JavaScript 处理
                 $view = $this->getView();
-                $view->registerJs($this->_deleteJs($buttonName, $url));
+                $view->registerJs($this->_deleteJs($name, $url));
                 
                 // 生成按钮
                 $title  = Yii::t('yiiplus/desktop', '批量删除');
-                return "<button id='".$buttonName."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-remove'></i> ${title}</button>";
+                return "<button id='".$name."' type='button' class='btn btn-danger' disabled><i class='glyphicon glyphicon-remove'></i> ${title}</button>";
             };
         }
     }
@@ -146,20 +146,20 @@ class ToolbarView extends Widget
     /**
      * 批量删除操作 JS 脚本
      *
-     * @param  String $buttonName 按钮名
-     * @param  String $url        请求地址
+     * @param  String $button 按钮名
+     * @param  String $url    请求地址
      *
-     * @return String             操作脚本
+     * @return String         操作脚本
      */
-    private function _deleteJs($buttonName, $url)
+    private function _deleteJs($button, $url)
     {
         return "
-            $('#".$this->id."').on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function() {
-                $('#".$buttonName."').prop('disabled', !$('#".$this->id."').bootstrapTable('getSelections').length)
+            $('#".$this->tableId."').on('check.bs.table uncheck.bs.table ' + 'check-all.bs.table uncheck-all.bs.table', function() {
+                $('#".$button."').prop('disabled', !$('#".$this->tableId."').bootstrapTable('getSelections').length)
             })
 
-            $('#".$buttonName."').click(function() {
-                var ids = $.map($('#".$this->id."').bootstrapTable('getSelections'), function (row) {
+            $('#".$button."').click(function() {
+                var ids = $.map($('#".$this->tableId."').bootstrapTable('getSelections'), function (row) {
                     return row.id
                 })
 
@@ -182,8 +182,8 @@ class ToolbarView extends Widget
                             toastr.error(data.data.message)
                         }
 
-                        $('#".$buttonName."').prop('disabled', true)
-                        $('#".$this->id."').bootstrapTable('refresh', {silent:true})
+                        $('#".$button."').prop('disabled', true)
+                        $('#".$this->tableId."').bootstrapTable('refresh', {silent:true})
                     },
                     error: function() {
                         toastr.error('" . Yii::t('yiiplus/desktop', '删除失败') . "')

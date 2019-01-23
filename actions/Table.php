@@ -169,11 +169,12 @@ class Table extends \yii\base\Action
         }
 
         // 默认选项
-        $this->toolbar['id'] = $this->id;
+        $this->toolbar['tableId'] = $this->id;
         $this->_options['id'] = $this->id;
         $this->_options['data-url'] = Yii::$app->request->getUrl();
         $this->_options['data-method'] = 'get';
         $this->_options['data-columns'] = $this->columns;
+
         return $this->controller->render($this->viewName, [
             'id' => $this->id,
             'title'   => $this->title,
