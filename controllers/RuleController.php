@@ -122,7 +122,7 @@ class RuleController extends Controller
         if ($item) {
             return new BizRule($item);
         } else {
-            throw new NotFoundHttpException(Yii::t('yiiplus/desktop','请求的页面不存在'));
+            throw new NotFoundHttpException(Yii::t('yiiplus/desktop', '请求的页面不存在'));
         }
     }
 }

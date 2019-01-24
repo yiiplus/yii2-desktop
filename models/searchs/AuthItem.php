@@ -39,7 +39,7 @@ class AuthItem extends Model
     {
         return [
             'name' => Yii::t('yiiplus/desktop', '名称'),
-            'item_name' => Yii::t('yiiplus/desktop', '名称'),
+            'item_name' => Yii::t('yiiplus/desktop', '项目名称'),
             'type' => Yii::t('yiiplus/desktop', '类型'),
             'description' => Yii::t('yiiplus/desktop', '描述'),
             'ruleName' => Yii::t('yiiplus/desktop', '规则名称'),

@@ -75,7 +75,7 @@ class AuthItem extends Model
         $authManager = Configs::authManager();
         $value = $this->name;
         if ($authManager->getRole($value) !== null || $authManager->getPermission($value) !== null) {
-            $message = Yii::t('yii', Yii::t('yiiplus/desktop', '{attribute} "{value}" 已经被占用'));
+            $message = Yii::t('yiiplus/desktop', '{attribute} "{value}" 已经被占用');
             $params = [
                 'attribute' => $this->getAttributeLabel('name'),
                 'value' => $value,

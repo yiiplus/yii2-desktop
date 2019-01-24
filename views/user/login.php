@@ -38,7 +38,7 @@ $fieldOptions2 = [
 
         <div class="row">
             <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->label(Yii::t('yiiplus/desktop', '记住我'))->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->label(Yii::t('yiiplus/desktop', '记住密码'))->checkbox() ?>
             </div>
             <div class="col-xs-4">
                 <?= Html::submitButton(Yii::t('yiiplus/desktop', '登陆'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>

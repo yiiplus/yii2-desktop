@@ -90,7 +90,7 @@ class MenuController extends Controller
         if (($model = Menu::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('yiiplus/desktop','请求的页面不存在'));
+            throw new NotFoundHttpException(Yii::t('yiiplus/desktop', '请求的页面不存在'));
         }
     }
 }

@@ -117,7 +117,7 @@ class AssignmentController extends Controller
         if (($user = $class::findIdentity($id)) !== null) {
             return new Assignment($id, $user);
         } else {
-            throw new NotFoundHttpException(Yii::t('yiiplus/desktop','请求的页面不存在'));
+            throw new NotFoundHttpException(Yii::t('yiiplus/desktop', '请求的页面不存在'));
         }
     }
 }
