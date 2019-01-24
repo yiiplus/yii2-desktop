@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
@@ -22,39 +23,39 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="box-body">
-    <?php Pjax::begin(); ?>
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'tableOptions' => ['class' => 'table table-bordered table-hover'],
-        'layout' => '{items}<div class="dataTables_info pull-left">{summary}</div><div class="dataTables_paginate pull-right">{pager}</div>',
-        'columns' => [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'headerOptions' => ['width' => '10'],
+        <?php Pjax::begin(); ?>
+        <?=
+        GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'tableOptions' => ['class' => 'table table-bordered table-hover'],
+            'layout' => '{items}<div class="dataTables_info pull-left">{summary}</div><div class="dataTables_paginate pull-right">{pager}</div>',
+            'columns' => [
+                [
+                    'class' => 'yii\grid\CheckboxColumn',
+                    'headerOptions' => ['width' => '10'],
+                ],
+                [
+                    'attribute' => 'id',
+                    'label' => Yii::t('yiiplus/desktop', 'ID'),
+                    'headerOptions' => ['width' => '100'],
+                ],
+                'name',
+                [
+                    'attribute' => 'menuParent.name',
+                    'filter' => Html::activeTextInput($searchModel, 'parent_name', ['class' => 'form-control', 'id' => null]),
+                    'label' => Yii::t('yiiplus/desktop', '父级'),
+                ],
+                'route',
+                ['attribute' => 'order', 'headerOptions' => ['width' => '100']],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    "header" => Yii::t('yiiplus/desktop', "操作"),
+                    'headerOptions' => ['width' => '10'],
+                ],
             ],
-            [
-                'attribute' => 'id',
-                'label' => Yii::t('yiiplus/desktop', 'ID'),
-                'headerOptions' => ['width' => '100'],
-            ],
-            'name',
-            [
-                'attribute' => 'menuParent.name',
-                'filter' => Html::activeTextInput($searchModel, 'parent_name', ['class' => 'form-control', 'id' => null]),
-                'label' => Yii::t('yiiplus/desktop', '父级'),
-            ],
-            'route',
-            ['attribute'=>'order','headerOptions' => ['width' => '100']],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                "header" => "操作",
-                'headerOptions' => ['width' => '10'],
-            ],
-        ],  
-    ]);
-    ?>
-    <?php Pjax::end(); ?>
+        ]);
+        ?>
+        <?php Pjax::end(); ?>
     </div>
 </div>

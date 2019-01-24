@@ -69,13 +69,13 @@ class BizRule extends \yii\base\Model
     public function classExists()
     {
         if (!class_exists($this->className)) {
-            $message = Yii::t('yiiplus/desktop', "Unknown class '{class}'", ['class' => $this->className]);
+            $message = Yii::t('yiiplus/desktop', "未知的类型 '{class}'", ['class' => $this->className]);
             $this->addError('className', $message);
             return;
         }
         if (!is_subclass_of($this->className, Rule::className())) {
-            $message = Yii::t('yiiplus/desktop', "'{class}' must extend from 'yii\rbac\Rule' or its child class", [
-                    'class' => $this->className]);
+            $message = Yii::t('yiiplus/desktop', "'{class}' 必须继承 'yii\rbac\Rule' 或者是它的子类", [
+                'class' => $this->className]);
             $this->addError('className', $message);
         }
     }
@@ -86,7 +86,7 @@ class BizRule extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name'      => Yii::t('yiiplus/desktop', '名称'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
             'className' => Yii::t('yiiplus/desktop', '类名'),
         ];
     }

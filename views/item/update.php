@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $context = $this->context;
 $labels = $context->labels();
-$this->title = Yii::t('yiiplus/desktop', 'Update ' . $labels['Item']) . ': ' . $model->name;
+$this->title = Yii::t('yiiplus/desktop', '更新' . $labels['Item']) . ': ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', $labels['Items']), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
 $this->params['breadcrumbs'][] = Yii::t('yiiplus/desktop', '更新');

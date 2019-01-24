@@ -38,26 +38,26 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
         <div class="row">
             <div class="col-sm-5">
                 <input class="form-control search" data-target="available"
-                       placeholder="<?=Yii::t('yiiplus/desktop', '按要求查找');?>">
+                       placeholder="<?= Yii::t('yiiplus/desktop', '按要求查找'); ?>">
                 <select multiple size="20" class="form-control list" data-target="available"></select>
             </div>
             <div class="col-sm-2" align="center">
                 <br><br><br><br>
-                <?=Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => $model->name], [
+                <?= Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => $model->name], [
                     'class' => 'btn btn-success btn-assign',
                     'data-target' => 'available',
                     'title' => Yii::t('yiiplus/desktop', '分配'),
-                ]);?>
+                ]); ?>
                 <br><br>
-                <?=Html::a('&lt;&lt;' . $animateIcon, ['remove', 'id' => $model->name], [
+                <?= Html::a('&lt;&lt;' . $animateIcon, ['remove', 'id' => $model->name], [
                     'class' => 'btn btn-danger btn-assign',
                     'data-target' => 'assigned',
                     'title' => Yii::t('yiiplus/desktop', '移除'),
-                ]);?>
+                ]); ?>
             </div>
             <div class="col-sm-5">
                 <input class="form-control search" data-target="assigned"
-                       placeholder="<?=Yii::t('yiiplus/desktop', '查找已分配');?>">
+                       placeholder="<?= Yii::t('yiiplus/desktop', '查找已分配'); ?>">
                 <select multiple size="20" class="form-control list" data-target="assigned"></select>
             </div>
         </div>

@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = Yii::t('yiiplus/desktop', 'Create');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Users'), 'url' => ['index']];
+$this->title = Yii::t('yiiplus/desktop', '新建');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '用户列表'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box box-primary user-create">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        </div>
 		    </div>
 		    <div class="form-group">
-	    		<?= Html::submitButton(Yii::t('yiiplus/desktop', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
+	    		<?= Html::submitButton(Yii::t('yiiplus/desktop', '提交'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
 	    	</div>
 		</div>
 	    <?php ActiveForm::end(); ?>

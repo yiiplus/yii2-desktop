@@ -12,9 +12,9 @@ $controllerId = $this->context->uniqueId . '/';
 
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#base" data-toggle="tab" aria-expanded="true">基本</a></li>
-      <li class=""><a href="#assignment" data-toggle="tab" aria-expanded="false">分配</a></li>
-      <li class=""><a href="#logs" data-toggle="tab" aria-expanded="false">日志</a></li>
+      <li class="active"><a href="#base" data-toggle="tab" aria-expanded="true"><?= Yii::t('yiiplus/desktop', '基本'); ?></a></li>
+      <li class=""><a href="#assignment" data-toggle="tab" aria-expanded="false"><?= Yii::t('yiiplus/desktop', '分配'); ?></a></li>
+      <li class=""><a href="#logs" data-toggle="tab" aria-expanded="false"><?= Yii::t('yiiplus/desktop', '日志'); ?></a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="base">

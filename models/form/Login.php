@@ -14,7 +14,7 @@ class Login extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-    
+
     private $_user = false;
 
     /**
@@ -44,7 +44,7 @@ class Login extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, Yii::t('yiiplus/desktop', '用户名或密码不正确'));
             }
         }
     }

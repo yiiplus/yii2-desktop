@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\YiiAsset;
 
-$this->title = Yii::t('yiiplus/desktop', 'Routes');
+$this->title = Yii::t('yiiplus/desktop', '路由列表');
 $this->params['breadcrumbs'][] = $this->title;
 
 $opts = Json::htmlEncode([
@@ -22,12 +22,12 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
             <div class="col-sm-12">
                 <div class="input-group">
                     <input id="inp-route" type="text" class="form-control"
-                           placeholder="<?=Yii::t('yiiplus/desktop', 'New route(s)');?>">
+                           placeholder="<?= Yii::t('yiiplus/desktop', '新建路由'); ?>">
                     <span class="input-group-btn">
-                        <?=Html::a(Yii::t('yiiplus/desktop', 'Add') . $animateIcon, ['create'], [
-            'class' => 'btn btn-success',
-            'id' => 'btn-new',
-        ]);?>
+                        <?= Html::a(Yii::t('yiiplus/desktop', '添加') . $animateIcon, ['create'], [
+                            'class' => 'btn btn-success',
+                            'id' => 'btn-new',
+                        ]); ?>
                     </span>
                 </div>
             </div>
@@ -37,33 +37,33 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
             <div class="col-sm-5">
                 <div class="input-group">
                     <input class="form-control search" data-target="available"
-                           placeholder="<?=Yii::t('yiiplus/desktop', 'Search for available');?>">
+                           placeholder="<?= Yii::t('yiiplus/desktop', '按要求查找'); ?>">
                     <span class="input-group-btn">
-                        <?=Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
+                        <?= Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
                             'class' => 'btn btn-default',
                             'id' => 'btn-refresh',
-                        ]);?>
+                        ]); ?>
                     </span>
                 </div>
                 <select multiple size="20" class="form-control list" data-target="available"></select>
             </div>
             <div class="col-sm-2" align="center">
                 <br><br><br><br>
-                <?=Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
+                <?= Html::a('&gt;&gt;' . $animateIcon, ['assign'], [
                     'class' => 'btn btn-success btn-assign',
                     'data-target' => 'available',
-                    'title' => Yii::t('yiiplus/desktop', 'Assign'),
-                ]);?>
+                    'title' => Yii::t('yiiplus/desktop', '分配'),
+                ]); ?>
                 <br><br>
-                <?=Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
+                <?= Html::a('&lt;&lt;' . $animateIcon, ['remove'], [
                     'class' => 'btn btn-danger btn-assign',
                     'data-target' => 'assigned',
-                    'title' => Yii::t('yiiplus/desktop', 'Remove'),
-                ]);?>
+                    'title' => Yii::t('yiiplus/desktop', '移除'),
+                ]); ?>
             </div>
             <div class="col-sm-5">
                 <input class="form-control search" data-target="assigned"
-                       placeholder="<?=Yii::t('yiiplus/desktop', 'Search for assigned');?>">
+                       placeholder="<?= Yii::t('yiiplus/desktop', '查找已分配'); ?>">
                 <select multiple size="20" class="form-control list" data-target="assigned"></select>
             </div>
         </div>

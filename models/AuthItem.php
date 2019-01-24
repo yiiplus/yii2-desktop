@@ -34,7 +34,7 @@ class AuthItem extends Model
 
     /**
      * Initialize object
-     * @param Item  $item
+     * @param Item $item
      * @param array $config
      */
     public function __construct($item = null, $config = [])
@@ -75,7 +75,7 @@ class AuthItem extends Model
         $authManager = Configs::authManager();
         $value = $this->name;
         if ($authManager->getRole($value) !== null || $authManager->getPermission($value) !== null) {
-            $message = Yii::t('yii', '{attribute} "{value}" has already been taken.');
+            $message = Yii::t('yii', Yii::t('yiiplus/desktop', '{attribute} "{value}" 已经被占用'));
             $params = [
                 'attribute' => $this->getAttributeLabel('name'),
                 'value' => $value,
@@ -97,10 +97,10 @@ class AuthItem extends Model
                     $rule->name = $name;
                     Configs::authManager()->add($rule);
                 } else {
-                    $this->addError('ruleName', Yii::t('yiiplus/desktop', 'Invalid rule "{value}"', ['value' => $name]));
+                    $this->addError('ruleName', Yii::t('yiiplus/desktop', '无效的规则 "{value}"', ['value' => $name]));
                 }
             } catch (\Exception $exc) {
-                $this->addError('ruleName', Yii::t('yiiplus/desktop', 'Rule "{value}" does not exists', ['value' => $name]));
+                $this->addError('ruleName', Yii::t('yiiplus/desktop', '"{value}" 规则不存在', ['value' => $name]));
             }
         }
     }
@@ -111,11 +111,11 @@ class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name'          => Yii::t('yiiplus/desktop', 'Name'),
-            'type'          => Yii::t('yiiplus/desktop', 'Type'),
-            'description'   => Yii::t('yiiplus/desktop', 'Description'),
-            'ruleName'      => Yii::t('yiiplus/desktop', 'Rule Name'),
-            'data'          => Yii::t('yiiplus/desktop', 'Data'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'type' => Yii::t('yiiplus/desktop', '类型'),
+            'description' => Yii::t('yiiplus/desktop', '描述'),
+            'ruleName' => Yii::t('yiiplus/desktop', '规则名称'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
         ];
     }
 
