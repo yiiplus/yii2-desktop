@@ -7,7 +7,7 @@ class Delete extends Action
     public function run($id)
     {
         $this->findModel($id)->delete();
-        \Yii::$app->session->setFlash('success', '操作成功');
+        \Yii::$app->session->setFlash('success', Yii::t('yiiplus/desktop', '操作成功'));
         return \Yii::$app->controller->redirect(\Yii::$app->request->getReferrer());
     }
 }

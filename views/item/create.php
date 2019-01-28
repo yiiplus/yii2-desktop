@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 $context = $this->context;
 $labels = $context->labels();
-$this->title = Yii::t('yiiplus/desktop', 'Create ' . $labels['Item']);
+$this->title = Yii::t('yiiplus/desktop', '创建 ' . $labels['Item']);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', $labels['Items']), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -35,11 +35,11 @@ class Log extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('yiiplus/desktop', 'ID'),
-            'route' => Yii::t('yiiplus/desktop', 'LogRoute'),
-            'description' => Yii::t('yiiplus/desktop', 'Description'),
-            'created_at' => Yii::t('yiiplus/desktop', 'CreatedAt'),
-            'user_id' => Yii::t('yiiplus/desktop', 'LogUid'),
-            'ip' => Yii::t('yiiplus/desktop', 'LogIp'),
+            'route' => Yii::t('yiiplus/desktop', '路由'),
+            'description' => Yii::t('yiiplus/desktop', '描述'),
+            'created_at' => Yii::t('yiiplus/desktop', '创建时间'),
+            'user_id' => Yii::t('yiiplus/desktop', '日志用户ID'),
+            'ip' => Yii::t('yiiplus/desktop', '操作人ip'),
         ];
     }
 

@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 use yiiplus\desktop\widgets\tree\TreeGrid;
 
-$this->title = Yii::t('yiiplus/desktop', 'Menus');
+$this->title = Yii::t('yiiplus/desktop', '菜单列表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

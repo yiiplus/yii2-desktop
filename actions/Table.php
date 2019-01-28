@@ -111,7 +111,7 @@ class Table extends \yii\base\Action
         foreach ($this->columns as $i => $column) {
             if (is_string($column)) {
                 if (!preg_match('/^([^:]+)(:(\w*))?(:(.*))?$/', $column, $matches)) {
-                    throw new InvalidConfigException('The column must be specified in the format of "attribute", "attribute:format" or "attribute:format:label"');
+                    throw new InvalidConfigException(Yii::t('yiiplus/desktop', '该列的格式必须是 "attribute", "attribute:format", "attribute:format:label"三种中的一种'));
                 }
                 $column = [
                     'field'  => $matches[1],
@@ -196,7 +196,7 @@ class Table extends \yii\base\Action
             $this->formatter = Yii::createObject($this->formatter);
         }
         if (!$this->formatter instanceof Formatter) {
-            throw new InvalidConfigException('The "formatter" property must be either a Format object or a configuration array.');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', '"formatter" 属性必须是一个对象或者是一个配置数组'));
         }
 
         // 数据处理
@@ -342,7 +342,7 @@ class Table extends \yii\base\Action
         } elseif ($value instanceof Pagination || $value === false) {
             $this->_pagination = $value;
         } else {
-            throw new InvalidArgumentException('Only Pagination instance, configuration array or false is allowed.');
+            throw new InvalidArgumentException(Yii::t('yiiplus/desktop', '仅分页实例、配置数组、false是被允许的'));
         }
     }
 
@@ -379,7 +379,7 @@ class Table extends \yii\base\Action
         } elseif ($value instanceof Sort || $value === false) {
             $this->_sort = $value;
         } else {
-            throw new InvalidArgumentException('Only Sort instance, configuration array or false is allowed.');
+            throw new InvalidArgumentException(Yii::t('yiiplus/desktop', '仅排序实例、配置数组、false是被允许的');
         }
 
         if (($sort = $this->getSort()) !== false) {

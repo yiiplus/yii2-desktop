@@ -64,13 +64,13 @@ class Module extends \yii\base\Module
      * @see [[menus]]
      */
     private $_coreItems = [
-        'user' => 'Users',
-        'assignment' => 'Assignments',
-        'role' => 'Roles',
-        'permission' => 'Permissions',
-        'route' => 'Routes',
-        'rule' => 'Rules',
-        'menu' => 'Menus',
+        'user' => '用户管理',
+        'assignment' => '分配列表',
+        'role' => '角色列表',
+        'permission' => '权限列表',
+        'route' => '路由列表',
+        'rule' => '规则列表',
+        'menu' => '菜单列表',
     ];
     /**
      * @var array
@@ -99,8 +99,8 @@ class Module extends \yii\base\Module
         //user did not define the Navbar?
         if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
             $this->navbar = [
-                ['label' => Yii::t('yiiplus/desktop', 'Help'), 'url' => ['default/index']],
-                ['label' => Yii::t('yiiplus/desktop', 'Application'), 'url' => Yii::$app->homeUrl],
+                ['label' => Yii::t('yiiplus/desktop', '帮助'), 'url' => ['default/index']],
+                ['label' => Yii::t('yiiplus/desktop', '应用'), 'url' => Yii::$app->homeUrl],
             ];
         }
         if (class_exists('yii\jui\JuiAsset')) {
@@ -202,7 +202,7 @@ class Module extends \yii\base\Module
         if (parent::beforeAction($action)) {
             $view = $action->controller->getView();
             $view->params['breadcrumbs'][] = [
-                'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', 'Admin')),
+                'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', '系统设置')),
                 'url' => ['/' . ($this->defaultUrl ?: $this->uniqueId)],
             ];
             return true;
