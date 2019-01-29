@@ -41,57 +41,28 @@ class Module extends \yii\base\Module
     // 源语言
     public $sourceLanguage = 'en';
 
-    /**
-     * @inheritdoc
-     */
+    // 默认路由
     public $defaultRoute = 'assignment';
-    /**
-     * @var string Main layout using for module. Default to layout of parent module.
-     * Its used when `layout` set to 'left-menu', 'right-menu' or 'top-menu'.
-     */
-    public $mainLayout = '@yiiplus/desktop/views/layouts/main.php';
-    /**
-     * @var array
-     * @see [[menus]]
-     */
-    private $_menus = [];
-    /**
-     * @var array
-     * @see [[menus]]
-     */
-    private $_coreItems = [
-        'user' => '用户管理',
-        'assignment' => '分配列表',
-        'role' => '角色列表',
-        'permission' => '权限列表',
-        'route' => '路由列表',
-        'rule' => '规则列表',
-        'menu' => '菜单列表',
-    ];
-    /**
-     * @var array
-     * @see [[items]]
-     */
-    private $_normalizeMenus;
 
-    /**
-     * @var string Default url for breadcrumb
-     */
+    // 默认面包屑地址
     public $defaultUrl;
 
-    /**
-     * @var string Default url label for breadcrumb
-     */
+    // 默认面包屑标题
     public $defaultUrlLabel;
 
     /**
-     * @inheritdoc
+     * 初始化
+     *
+     * @return void
      */
     public function init()
     {
         parent::init();
+
+        // i18n
         $this->registerTranslations();
 
+        // 模块嵌套
         $this->modules = [
             'gii' => [
                 'class' => 'yiiplus\desktop\modules\gii\Module',
@@ -132,64 +103,13 @@ class Module extends \yii\base\Module
     {
         return Yii::t('yiiplus/desktop', $message, $params, $language);
     }
-
+    
     /**
-     * Get available menu.
-     * @return array
-     */
-    public function getMenus()
-    {
-        if ($this->_normalizeMenus === null) {
-            $mid = '/' . $this->getUniqueId() . '/';
-            // resolve core menus
-            $this->_normalizeMenus = [];
-
-            $config = components\Configs::instance();
-            $conditions = [
-                'user' => $config->db && $config->db->schema->getTableSchema($config->userTable),
-                'assignment' => ($userClass = Yii::$app->getUser()->identityClass) && is_subclass_of($userClass, 'yii\db\BaseActiveRecord'),
-                'menu' => $config->db && $config->db->schema->getTableSchema($config->menuTable),
-            ];
-            foreach ($this->_coreItems as $id => $lable) {
-                if (!isset($conditions[$id]) || $conditions[$id]) {
-                    $this->_normalizeMenus[$id] = ['label' => Yii::t('yiiplus/desktop', $lable), 'url' => [$mid . $id]];
-                }
-            }
-            foreach (array_keys($this->controllerMap) as $id) {
-                $this->_normalizeMenus[$id] = ['label' => Yii::t('yiiplus/desktop', Inflector::humanize($id)), 'url' => [$mid . $id]];
-            }
-
-            // user configure menus
-            foreach ($this->_menus as $id => $value) {
-                if (empty($value)) {
-                    unset($this->_normalizeMenus[$id]);
-                    continue;
-                }
-                if (is_string($value)) {
-                    $value = ['label' => $value];
-                }
-                $this->_normalizeMenus[$id] = isset($this->_normalizeMenus[$id]) ? array_merge($this->_normalizeMenus[$id], $value)
-                : $value;
-                if (!isset($this->_normalizeMenus[$id]['url'])) {
-                    $this->_normalizeMenus[$id]['url'] = [$mid . $id];
-                }
-            }
-        }
-        return $this->_normalizeMenus;
-    }
-
-    /**
-     * Set or add available menu.
-     * @param array $menus
-     */
-    public function setMenus($menus)
-    {
-        $this->_menus = array_merge($this->_menus, $menus);
-        $this->_normalizeMenus = null;
-    }
-
-    /**
-     * @inheritdoc
+     * 前置动作
+     *
+     * @param  object $action 动作对象
+     *
+     * @return boolean 状态
      */
     public function beforeAction($action)
     {
