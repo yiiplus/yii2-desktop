@@ -104,8 +104,8 @@ class PositionColumn extends DataColumn
                 'first' => [
                     'icon' => 'triangle-top',
                     'options' => [
-                        'title' => 'Move top',
-                        'aria-label' => 'Move top',
+                        'title' => Yii::t('yiiplus/desktop','置顶'),
+                        'aria-label' => Yii::t('yiiplus/desktop','置顶'),
                         'data-method' => 'post'
                     ],
                 ],
@@ -113,8 +113,8 @@ class PositionColumn extends DataColumn
                 'last' => [
                     'icon' => 'triangle-bottom',
                     'options' => [
-                        'title' => 'Move bottom',
-                        'aria-label' => 'Move bottom',
+                        'title' => Yii::t('yiiplus/desktop','置底'),
+                        'aria-label' => Yii::t('yiiplus/desktop','置底'),
                         'data-method' => 'post'
                     ],
                 ],
@@ -122,8 +122,8 @@ class PositionColumn extends DataColumn
                 'prev' => [
                     'icon' => 'arrow-up',
                     'options' => [
-                        'title' => 'Move up',
-                        'aria-label' => 'Move up',
+                        'title' => Yii::t('yiiplus/desktop','上移'),
+                        'aria-label' => Yii::t('yiiplus/desktop','上移'),
                         'data-method' => 'post'
                     ],
                 ],
@@ -131,8 +131,8 @@ class PositionColumn extends DataColumn
                 'next' => [
                     'icon' => 'arrow-down',
                     'options' => [
-                        'title' => 'Move down',
-                        'aria-label' => 'Move down',
+                        'title' => Yii::t('yiiplus/desktop','下移'),
+                        'aria-label' => Yii::t('yiiplus/desktop','下移'),
                         'data-method' => 'post'
                     ],
                 ],
@@ -188,7 +188,7 @@ class PositionColumn extends DataColumn
             return call_user_func($button, $url, $model, $key);
         }
         if (!is_array($button)) {
-            throw new InvalidConfigException("Button should be either a Closure or array configuration.");
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', "Button必须是一个闭包或者数组配置"));
         }
 
         // 路由 :

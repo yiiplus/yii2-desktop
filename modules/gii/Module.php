@@ -62,13 +62,13 @@ class Module extends \yii\gii\Module
      * @see [[menus]]
      */
     private $_coreItems = [
-        'user' => '用户管理',
-        'assignment' => '分配列表',
-        'role' => '角色列表',
-        'permission' => '权限列表',
-        'route' => '路由列表',
-        'rule' => '规则列表',
-        'menu' => '菜单列表',
+        'user' => 'Users',
+        'assignment' => 'Assignments',
+        'role' => 'Roles',
+        'permission' => 'Permissions',
+        'route' => 'Routes',
+        'rule' => 'Rules',
+        'menu' => 'Menus',
     ];
     
     /**

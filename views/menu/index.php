@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'order'
                 ],
                 [
-                    'header' => '操作',
+                    'header' => Yii::t('yiiplus/desktop','操作'),
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{create} {view} {update} {delete}',
                     'buttons' => [

@@ -157,12 +157,12 @@ class TreeGrid extends Widget
     {
         // DB 数据源
         if ($this->dataProvider === null) {
-            throw new InvalidConfigException('The "dataProvider" property must be set.');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', '必须设置"dataProvider"属性'));
         }
 
         // 数据不存在使用 yii2 语言包
         if ($this->emptyText === null) {
-            $this->emptyText = Yii::t('yii', 'No results found.');
+            $this->emptyText = Yii::t('yiiplus/desktop', '数据不存在');
         }
 
         // 获取默认表格 id
@@ -179,13 +179,13 @@ class TreeGrid extends Widget
 
         // 参数检测
         if (!$this->formatter instanceof Formatter) {
-            throw new InvalidConfigException('The "formatter" property must be either a Format object or a configuration array.');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', '"formatter"属性必须是一个格式化对象或者一个配置数组'));
         }
         if (!$this->keyColumnName) {
-            throw new InvalidConfigException('The "keyColumnName" property must be specified"');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', '必须定义"keyColumnName"属性'));
         }
         if (!$this->parentColumnName) {
-            throw new InvalidConfigException('The "parentColumnName" property must be specified"');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop','必须定义"parentColumnName"属性'));
         }
 
         // 初始化
@@ -230,7 +230,7 @@ class TreeGrid extends Widget
     {
         $options = $this->emptyTextOptions;
         $tag = ArrayHelper::remove($options, 'tag', 'div');
-        return Html::tag($tag, ($this->emptyText === null ? Yii::t('yii', 'No results found.') : $this->emptyText), $options);
+        return Html::tag($tag, ($this->emptyText === null ? Yii::t('yiiplus/desktop', '数据不存在') : $this->emptyText), $options);
     }
 
     /**
@@ -364,7 +364,7 @@ class TreeGrid extends Widget
     protected function createDataColumn($text)
     {
         if (!preg_match('/^([^:]+)(:(\w*))?(:(.*))?$/', $text, $matches)) {
-            throw new InvalidConfigException('The column must be specified in the format of "attribute", "attribute:format" or "attribute:format:label"');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop','必须以“attribute”，“attribute：format”或“attribute：format：label”的格式指定列'));
         }
 
         return Yii::createObject([

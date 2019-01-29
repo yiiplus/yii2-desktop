@@ -38,7 +38,7 @@ class Log extends \yii\db\ActiveRecord
             'route' => Yii::t('yiiplus/desktop', '路由'),
             'description' => Yii::t('yiiplus/desktop', '描述'),
             'created_at' => Yii::t('yiiplus/desktop', '创建时间'),
-            'user_id' => Yii::t('yiiplus/desktop', '日志用户ID'),
+            'user_id' => Yii::t('yiiplus/desktop', '用户ID'),
             'ip' => Yii::t('yiiplus/desktop', '操作人ip'),
         ];
     }

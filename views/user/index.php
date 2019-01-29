@@ -10,10 +10,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="box box-primary dataTables_wrapper user-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Activate'), ['activate'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Inactive'), ['inactive'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '创建'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '启用'), ['activate'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '禁用'), ['inactive'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '删除'), ['delete'], ['class' => 'btn btn-danger']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>

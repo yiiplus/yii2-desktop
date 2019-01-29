@@ -379,7 +379,7 @@ class Table extends \yii\base\Action
         } elseif ($value instanceof Sort || $value === false) {
             $this->_sort = $value;
         } else {
-            throw new InvalidArgumentException(Yii::t('yiiplus/desktop', '仅排序实例、配置数组、false是被允许的');
+            throw new InvalidArgumentException(Yii::t('yiiplus/desktop', '仅排序实例、配置数组、false是被允许的'));
         }
 
         if (($sort = $this->getSort()) !== false) {
@@ -394,7 +394,7 @@ class Table extends \yii\base\Action
             } else {
                 foreach ($sort->attributes as $attribute => $config) {
                     if (!isset($config['label'])) {
-                        $sort->attributes[$attribute]['label'] = $model->getAttributeLabel($attribute);
+                        $sort->attributes[$attribute]['label'] = $this->model->getAttributeLabel($attribute);
                     }
                 }
             }
