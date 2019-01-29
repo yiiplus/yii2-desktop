@@ -46,10 +46,6 @@ class Module extends \yii\base\Module
      */
     public $defaultRoute = 'assignment';
     /**
-     * @var array Nav bar items.
-     */
-    public $navbar;
-    /**
      * @var string Main layout using for module. Default to layout of parent module.
      * Its used when `layout` set to 'left-menu', 'right-menu' or 'top-menu'.
      */
@@ -96,16 +92,14 @@ class Module extends \yii\base\Module
         parent::init();
         $this->registerTranslations();
 
-        //user did not define the Navbar?
-        if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
-            $this->navbar = [
-                ['label' => Yii::t('yiiplus/desktop', '帮助'), 'url' => ['default/index']],
-                ['label' => Yii::t('yiiplus/desktop', '应用'), 'url' => Yii::$app->homeUrl],
-            ];
-        }
-        if (class_exists('yii\jui\JuiAsset')) {
-            Yii::$container->set('yiiplus\desktop\AutocompleteAsset', 'yii\jui\JuiAsset');
-        }
+        $this->modules = [
+            'gii' => [
+                'class' => 'yiiplus\desktop\modules\gii\Module',
+            ],
+            'migrations' => [
+                'class' => 'yiiplus\desktop\modules\migrations\Module',
+            ],
+        ];
     }
 
     /**
