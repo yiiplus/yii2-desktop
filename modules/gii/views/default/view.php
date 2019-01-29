@@ -53,7 +53,6 @@ foreach ($generator->templates as $name => $path) {
             <?php endif; ?>
         </div>
 
-
         <?php
         if (isset($results)) {
             echo $this->render('view/results', [

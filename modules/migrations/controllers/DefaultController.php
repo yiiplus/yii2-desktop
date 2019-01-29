@@ -10,7 +10,7 @@ use yiiplus\desktop\modules\migrations\models\MigrationUtility;
 use yiiplus\desktop\modules\migrations\models\AppUtility;
 use yiiplus\desktop\modules\migrations\models\Database;
 
-class MigrationController extends Controller
+class DefaultController extends Controller
 {
     /**
      * 数据迁移
@@ -27,17 +27,17 @@ class MigrationController extends Controller
 
         if ($model->load(\Yii::$app->getRequest()->post())) {
             if (empty($model->tableSchemas) && empty($model->tableDatas)) {
-                Yii::$app->getSession()->setFlash('error', Yii::t('yiiplus/desktop', '请选择迁移表结构或数据'));
+                Yii::$app->getSession()->setFlash('error', '请选择迁移表结构或数据');
                 return $this->redirect('/migrations/migration/index');
             }
 
             if (empty($model->migrationPath) || empty($model->migrationName)) {
-                Yii::$app->getSession()->setFlash('error', Yii::t('yiiplus/desktop', '迁移名称或路径为空'));
+                Yii::$app->getSession()->setFlash('error', '迁移名称或路径为空');
                 return $this->redirect('/migrations/migration/index');
             }
 
             if (empty($model->database)) {
-                Yii::$app->getSession()->setFlash('error', Yii::t('yiiplus/desktop', '未选择数据库'));
+                Yii::$app->getSession()->setFlash('error', '未选择数据库');
                 return $this->redirect('/migrations/migration/index');
             }
             //获取数据库连接
@@ -73,7 +73,7 @@ class MigrationController extends Controller
                 'down' => $downStr->output()
             ]);
             file_put_contents($file, $content);
-            Yii::$app->session->setFlash("success", Yii::t('yiiplus/desktop', "迁移成功，保存在") . $file);
+            Yii::$app->session->setFlash("success", "迁移成功，保存在" . $file);
             return $this->redirect('/migrations/migration/index');
         }
 

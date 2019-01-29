@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="box-body">
                     <p><?= $generator->getDescription() ?></p>
-                    <p><?= Html::a('Start »', ['gii/view', 'id' => $id], ['class' => 'btn btn-default']) ?></p>
+                    <p><?= Html::a('Start »', ['view', 'id' => $id], ['class' => 'btn btn-default']) ?></p>
                 </div>
             </div>
         </div>
