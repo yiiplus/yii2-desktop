@@ -41,7 +41,6 @@ class DesktopAsset extends AssetBundle
      * @var string
      */
     public $css = [
-        'jquery-ui.css',
         'desktop.css',
     ];
     
@@ -51,7 +50,6 @@ class DesktopAsset extends AssetBundle
      * @var string
      */
     public $js = [
-        'jquery-ui.js',
         'desktop.js',
     ];
     
@@ -62,6 +60,7 @@ class DesktopAsset extends AssetBundle
      */
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'yiiplus\desktop\AdminLteAsset',
