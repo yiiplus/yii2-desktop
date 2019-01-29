@@ -15,7 +15,7 @@ class Module extends \yii\gii\Module
     public $controllerNamespace = 'yiiplus\desktop\modules\gii\controllers';
 
     /**
-     * gii生成配置
+     * gii 生成配置
      */
     public $generators = [
         'crud' => [
@@ -37,11 +37,15 @@ class Module extends \yii\gii\Module
     public $sourceLanguage = 'en';
 
     /**
-     * @inheritdoc
+     * 初始化
+     *
+     * @return void
      */
     public function init()
     {
         parent::init();
+        
+        // i18n
         $this->registerTranslations();
     }
 

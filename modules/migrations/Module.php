@@ -17,11 +17,15 @@ class Module extends \yii\base\Module
     public $sourceLanguage = 'en';
 
     /**
-     * @inheritdoc
+     * 初始化
+     *
+     * @return void
      */
     public function init()
     {
         parent::init();
+        
+        // i18n
         $this->registerTranslations();
     }
 
