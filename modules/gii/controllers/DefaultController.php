@@ -20,18 +20,16 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yiiplus\desktop\components\Helper;
 
-class GiiController extends \yii\gii\controllers\DefaultController
+class DefaultController extends \yii\gii\controllers\DefaultController
 {
 
     /**
      * 首页
-     * 
+     *
      * @return string
      */
     public function actionIndex()
     {
-        //引入布局配置文件
-        $this->layout = '@base/vendor/yiiplus/yii2-desktop/views/layouts/main.php';
         return $this->render('index');
     }
 }
