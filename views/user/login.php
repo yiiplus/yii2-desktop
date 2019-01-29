@@ -24,24 +24,24 @@ $fieldOptions2 = [
         <a href="javascript:void(0)"><b>YiiPlus</b> Desktop</a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg"><?= Yii::t('yiiplus/desktop', 'loginBoxMsg') ?></p>
+        <p class="login-box-msg"><?= Yii::t('yiiplus/desktop', '基于Yii2、RABC开发的通用后台管理系统') ?></p>
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
         <?= $form
             ->field($model, 'username', $fieldOptions1)
             ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+            ->textInput(['placeholder' => $model->getAttributeLabel('用户名')]) ?>
 
         <?= $form
             ->field($model, 'password', $fieldOptions2)
             ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('密码')]) ?>
 
         <div class="row">
             <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->label(Yii::t('yiiplus/desktop', 'rememberMe'))->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->label(Yii::t('yiiplus/desktop', '记住我'))->checkbox() ?>
             </div>
             <div class="col-xs-4">
-                <?= Html::submitButton(Yii::t('yiiplus/desktop', 'Sign In'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(Yii::t('yiiplus/desktop', '登陆'), ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

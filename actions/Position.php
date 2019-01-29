@@ -51,12 +51,12 @@ class Position extends Action
     public function run($id)
     {
         if (!Yii::$app->request->isPost) {
-            throw new MethodNotAllowedHttpException('Method Not Allowed. This url can only handle post');
+            throw new MethodNotAllowedHttpException(Yii::t('yiiplus/desktop', '该方法只接受post传参'));
         }
         // 获取菜单移动方向
         $position = Yii::$app->request->getQueryParam($this->positionParam, null);
         if (empty($position)) {
-            throw new BadRequestHttpException(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->positionParam]));
+            throw new BadRequestHttpException(Yii::t('yiiplus/desktop', '{attribute}不能为空', ['attribute' => $this->positionParam]));
         }
 
         $model = $this->findModel($id);
@@ -97,7 +97,7 @@ class Position extends Action
                 if (is_numeric($position)) {
                     $model->moveToPosition($position);
                 } else {
-                    throw new BadRequestHttpException(Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->positionParam]));
+                    throw new BadRequestHttpException(Yii::t('yiiplus/desktop', '{attribute}无效.', ['attribute' => $this->positionParam]));
                 }
         }
     }

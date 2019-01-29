@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('yiiplus/desktop', 'Rules');
+$this->title = Yii::t('yiiplus/desktop', '规则列表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary dataTables_wrapper role-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create Rule'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '创建规则'), ['create'], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
                 [
                     'attribute' => 'name',
-                    'label' => Yii::t('yiiplus/desktop', 'Name'),
+                    'label' => Yii::t('yiiplus/desktop', '名称'),
                 ],
                 ['class' => 'yii\grid\ActionColumn',],
             ],

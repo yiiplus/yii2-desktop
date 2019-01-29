@@ -4,7 +4,7 @@ use yii\widgets\DetailView;
 use yiiplus\desktop\components\Helper;
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '用户列表'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $controllerId = $this->context->uniqueId . '/';
@@ -12,9 +12,9 @@ $controllerId = $this->context->uniqueId . '/';
 
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#base" data-toggle="tab" aria-expanded="true">基本</a></li>
-      <li class=""><a href="#assignment" data-toggle="tab" aria-expanded="false">分配</a></li>
-      <li class=""><a href="#logs" data-toggle="tab" aria-expanded="false">日志</a></li>
+      <li class="active"><a href="#base" data-toggle="tab" aria-expanded="true"><?= Yii::t('yiiplus/desktop', '基本'); ?></a></li>
+      <li class=""><a href="#assignment" data-toggle="tab" aria-expanded="false"><?= Yii::t('yiiplus/desktop', '分配'); ?></a></li>
+      <li class=""><a href="#logs" data-toggle="tab" aria-expanded="false"><?= Yii::t('yiiplus/desktop', '日志'); ?></a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="base">

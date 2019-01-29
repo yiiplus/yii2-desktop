@@ -13,7 +13,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
             </div>
             <div class="pull-left info">
                 <p><?= Yii::$app->user->identity->username ?></p>
-                <a href="#"><i class="fa fa-circle text-info"></i> 超级管理员</a>
+                <a href="#"><i class="fa fa-circle text-info"></i> <?= Yii::t('yiiplus/desktop', '超级管理员'); ?></a>
             </div>
         </div>
 

@@ -79,7 +79,7 @@ class Action extends \yii\base\Action
         } elseif ($this->controller->hasMethod('findModel')) {
             return call_user_func([$this->controller, 'findModel'], $id, $this);
         } else {
-            throw new InvalidConfigException('Either "' . get_class($this) . '::findModel" must be set or controller must declare method "findModel()".');
+            throw new InvalidConfigException(Yii::t('yiiplus/desktop', '"' . get_class($this) . '::findModel" 静态方法必须设置或者控制器中必须定义"findModel()"方法'));
         }
     }
 

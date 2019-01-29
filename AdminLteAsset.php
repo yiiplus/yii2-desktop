@@ -57,7 +57,7 @@ class AdminLteAsset extends AssetBundle
         // Append skin color file if specified
         if ($this->skin) {
             if (('_all-skins' !== $this->skin) && (strpos($this->skin, 'skin-') !== 0)) {
-                throw new Exception('Invalid skin specified');
+                throw new Exception(Yii::t('yiiplus/desktop','指定的皮肤无效'));
             }
 
             $this->css[] = sprintf('css/skins/%s.min.css', $this->skin);

@@ -98,8 +98,8 @@ class Module extends \yii\gii\Module
         //user did not define the Navbar?
         if ($this->navbar === null && Yii::$app instanceof \yii\web\Application) {
             $this->navbar = [
-                ['label' => Yii::t('yiiplus/desktop', 'Help'), 'url' => ['default/index']],
-                ['label' => Yii::t('yiiplus/desktop', 'Application'), 'url' => Yii::$app->homeUrl],
+                ['label' => Yii::t('yiiplus/desktop', '帮助'), 'url' => ['default/index']],
+                ['label' => Yii::t('yiiplus/desktop', '应用'), 'url' => Yii::$app->homeUrl],
             ];
         }
         if (class_exists('yii\jui\JuiAsset')) {
@@ -203,7 +203,7 @@ class Module extends \yii\gii\Module
         if (parent::beforeAction($action)) {
             $view = $action->controller->getView();
             $view->params['breadcrumbs'][] = [
-                'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', 'Admin')),
+                'label' => ($this->defaultUrlLabel ?: Yii::t('yiiplus/desktop', '系统设置')),
                 'url' => ['/' . ($this->defaultUrl ?: $this->uniqueId)],
             ];
             return true;

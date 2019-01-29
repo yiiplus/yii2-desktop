@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-$this->title = Yii::t('yiiplus/desktop', 'Log');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', 'Log'), 'url' => ['index']];
+$this->title = Yii::t('yiiplus/desktop', '日志管理');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '日志管理'), 'url' => ['index']];
 ?>
 
 <div class="box box-primary desktop-log-view">

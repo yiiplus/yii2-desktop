@@ -107,7 +107,7 @@ class Menu extends \yii\db\ActiveRecord
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),
-                'message' => 'Route "{value}" not found.']
+                'message' => Yii::t('yiiplus/desktop', '路由 "{value}" 没有找到')]
         ];
     }
 
@@ -123,7 +123,7 @@ class Menu extends \yii\db\ActiveRecord
             ->where('[[id]]=:id');
         while ($parent) {
             if ($this->id == $parent) {
-                $this->addError('parent_name', 'Loop detected.');
+                $this->addError('parent_name', Yii::t('yiiplus/desktop', '检测到循环'));
                 return;
             }
             $parent = $query->params([':id' => $parent])->scalar($db);
@@ -139,13 +139,13 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('yiiplus/desktop', 'ID'),
-            'name' => Yii::t('yiiplus/desktop', 'Name'),
-            'parent' => Yii::t('yiiplus/desktop', 'Parent'),
-            'parent_name' => Yii::t('yiiplus/desktop', 'Parent Name'),
-            'route' => Yii::t('yiiplus/desktop', 'Route'),
-            'order' => Yii::t('yiiplus/desktop', 'Order'),
-            'data' => Yii::t('yiiplus/desktop', 'Data'),
-            'icon' => Yii::t('yiiplus/desktop', 'Icon'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'parent' => Yii::t('yiiplus/desktop', '父级'),
+            'parent_name' => Yii::t('yiiplus/desktop', '父级名称'),
+            'route' => Yii::t('yiiplus/desktop', '路由'),
+            'order' => Yii::t('yiiplus/desktop', '排序'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
+            'icon' => Yii::t('yiiplus/desktop', '图标'),
         ];
     }
 

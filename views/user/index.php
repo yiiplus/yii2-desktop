@@ -4,16 +4,16 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yiiplus\desktop\components\Helper;
 
-$this->title = Yii::t('yiiplus/desktop', 'Users');
+$this->title = Yii::t('yiiplus/desktop', '用户列表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box box-primary dataTables_wrapper user-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Activate'), ['activate'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Inactive'), ['inactive'], ['class' => 'btn btn-primary']) ?> 
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '创建'), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '启用'), ['activate'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '禁用'), ['inactive'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '删除'), ['delete'], ['class' => 'btn btn-danger']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -41,36 +41,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '100'],
             ],
             [
-                'label' => Yii::t('yiiplus/desktop', 'Username'),
+                'label' => Yii::t('yiiplus/desktop', '用户名'),
                 'attribute' => 'username',
             ],
             'email:email',
             [
-                'label' => Yii::t('yiiplus/desktop', 'CreatedAt'),
+                'label' => Yii::t('yiiplus/desktop', '创建时间'),
                 'attribute' => 'created_at',
                 'format' => ['date', 'php:Y-m-d H:i:s'],
             ],
             [
                 'attribute' => 'status',
-                'label' => Yii::t('yiiplus/desktop', 'Status'),
+                'label' => Yii::t('yiiplus/desktop', '状态'),
                 'value' => function($model) {
-                    return $model->status == 0 ? Yii::t('yiiplus/desktop', 'Inactive') : Yii::t('yiiplus/desktop', 'Activate');
+                    return $model->status == 0 ? Yii::t('yiiplus/desktop', '禁用') : Yii::t('yiiplus/desktop', '启用');
                 },
                 'filter' => [
-                    0 => Yii::t('yiiplus/desktop', 'Inactive'),
-                    10 => Yii::t('yiiplus/desktop', 'Activate'),
+                    0 => Yii::t('yiiplus/desktop', '禁用'),
+                    10 => Yii::t('yiiplus/desktop', '启用'),
                 ]
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                "header" => "操作",
+                "header" => Yii::t('yiiplus/desktop', "操作"),
                 'headerOptions' => ['width' => '10'],
                 'template'=>'{view} {update} {assignment} {activate} {inactive} {delete}',
                 'buttons' => [
                     'assignment' => function($url, $model) {
                         $options = [
-                            'title' => Yii::t('yiiplus/desktop', 'Assignment'),
-                            'aria-label' => Yii::t('yiiplus/desktop', 'Assignment'),
+                            'title' => Yii::t('yiiplus/desktop', '分配管理'),
+                            'aria-label' => Yii::t('yiiplus/desktop', '分配管理'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -82,9 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '';
                         }
                         $options = [
-                            'title' => Yii::t('yiiplus/desktop', 'Activate'),
-                            'aria-label' => Yii::t('yiiplus/desktop', 'Activate'),
-                            'data-confirm' => Yii::t('yiiplus/desktop', 'Are you sure you want to activate this user?'),
+                            'title' => Yii::t('yiiplus/desktop', '启用'),
+                            'aria-label' => Yii::t('yiiplus/desktop', '禁用'),
+                            'data-confirm' => Yii::t('yiiplus/desktop', '确认要激活该用户?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -95,9 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '';
                         }
                         $options = [
-                            'title' => Yii::t('yiiplus/desktop', 'Inactive'),
-                            'aria-label' => Yii::t('yiiplus/desktop', 'Inactive'),
-                            'data-confirm' => Yii::t('yiiplus/desktop', 'Are you sure you want to inactive this user?'),
+                            'title' => Yii::t('yiiplus/desktop', '禁用'),
+                            'aria-label' => Yii::t('yiiplus/desktop', '禁用'),
+                            'data-confirm' => Yii::t('yiiplus/desktop', '确认要禁用该用户?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -107,8 +107,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         // 超级管理员无法删除
                         if ($model->id != 1 && Yii::$app->getUser()->id != $model->id) {
                             $options = [
-                                'title' => Yii::t('yiiplus/desktop', 'Delete'),
-                                'aria-label' => Yii::t('yiiplus/desktop', 'Delete'),
+                                'title' => Yii::t('yiiplus/desktop', '删除'),
+                                'aria-label' => Yii::t('yiiplus/desktop', '删除'),
                                 'data-method' => 'post',
                                 'data-pjax' => '0',
                             ];
