@@ -1,4 +1,15 @@
 <?php
+/**
+ * yiiplus\desktop
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    zhouyang@mocaapp.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\modules\gii;
 
