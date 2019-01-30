@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yidashi
- * Date: 16/7/15
- * Time: 下午11:00
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 namespace yiiplus\desktop\modules\migrations\models;
@@ -12,11 +15,31 @@ use yii\helpers\ArrayHelper;
 use yii\base\Model;
 use yii\helpers\Url;
 
+/**
+ * 动态表单
+ *
+ * @author zhangxu <zhangxu@mocaapp.com>
+ * @since 2.0.0
+ */
 class ActiveForm extends \yii\widgets\ActiveForm
 {
+    /**
+     * 动态域
+     *
+     * @var string
+     */
     public $fieldClass = 'yiiplus\desktop\modules\migrations\models\ActiveField';
+
+    /**
+     * 多选框
+     *
+     * @var string
+     */
     public $boxFieldClass = 'yiiplus\desktop\modules\migrations\models\BoxField';
 
+    /**
+     * 初始化
+     */
     public function init()
     {
         parent::init();
@@ -53,16 +76,12 @@ class ActiveForm extends \yii\widgets\ActiveForm
     }
 
     /**
-     * Generates a form field.
-     * A form field is associated with a model and an attribute. It contains a label, an input and an error message
-     * and use them to interact with end users to collect their inputs for the attribute.
-     * @param Model $model the data model.
-     * @param string $attribute the attribute name or expression. See [[Html::getAttributeName()]] for the format
-     * about attribute expression.
-     * @param array $options the additional configurations for the field object. These are properties of [[ActiveField]]
-     * or a subclass, depending on the value of [[fieldClass]].
-     * @return ActiveField the created ActiveField object.
-     * @see fieldConfig
+     * 格式化输出
+     *
+     * @param $model
+     * @param $attribute
+     * @param array $options
+     * @return mixed
      */
     public function field($model, $attribute, $options = [])
     {
