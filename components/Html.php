@@ -1,13 +1,11 @@
 <?php
 /**
- * yiiplus\desktop
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
  */
 
@@ -16,6 +14,12 @@ namespace yiiplus\desktop\components;
 use yii\helpers\BaseHtml;
 use yii\helpers\StringHelper;
 
+/**
+ * Html Class
+ *
+ * @author gengxiankun <gengxiankun@126.com>
+ * @since 2.0.0
+ */
 class Html extends BaseHtml
 {
     public static function icon($name)
