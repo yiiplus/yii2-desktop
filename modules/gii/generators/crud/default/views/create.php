@@ -1,4 +1,14 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
@@ -6,16 +16,16 @@ $username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
 /**
- * 慧诊
+ * yiiplus/yii2-desktop
  *
  * PHP version 7
  *
  * @category  PHP
  * @package   Yii2
- * @author    <?= $username ?> <<?= $username ?>@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
+ * @author    <?= $username ?>
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 use yii\helpers\Html;

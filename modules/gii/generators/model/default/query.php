@@ -1,4 +1,14 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
 $modelFullClassName = $modelClassName;
 if ($generator->ns !== $generator->queryNs) {
     $modelFullClassName = '\\' . $generator->ns . '\\' . $modelFullClassName;
@@ -8,31 +18,19 @@ $username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
 /**
- * 慧诊
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    <?= $username ?> <<?= $username ?>@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 namespace <?= $generator->queryNs ?>;
 
 /**
  * This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    <?= $username ?> <<?= $username ?>@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
  */
 class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\') . "\n" ?>
 {

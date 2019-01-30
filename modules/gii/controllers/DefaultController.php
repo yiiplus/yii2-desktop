@@ -1,15 +1,12 @@
 <?php
 /**
- * 慧诊
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    zhouyang <zhouyang@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 namespace yiiplus\desktop\modules\gii\controllers;
@@ -20,6 +17,17 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yiiplus\desktop\components\Helper;
 
+/**
+ * gii
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    zhouyang
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 class DefaultController extends \yii\gii\controllers\DefaultController
 {
 
