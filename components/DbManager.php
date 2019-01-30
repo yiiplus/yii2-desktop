@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\components;
 
@@ -15,6 +24,9 @@ namespace yiiplus\desktop\components;
  *
  * You may change the names of the three tables used to store the authorization data by setting [[\yii\rbac\DbManager::$itemTable]],
  * [[\yii\rbac\DbManager::$itemChildTable]] and [[\yii\rbac\DbManager::$assignmentTable]].
+ *
+ * @author gengxiankun <gengxiankun@126.com>
+ * @since 2.0.0
  */
 class DbManager extends \yii\rbac\DbManager
 {
