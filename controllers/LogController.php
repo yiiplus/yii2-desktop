@@ -20,6 +20,9 @@ use yiiplus\desktop\models\Log as DesktopLog;
 
 /**
  * LogController implements the CRUD actions for Log model.
+ *
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
+ * @since 2.0.0
  */
 class LogController extends Controller
 {

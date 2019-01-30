@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
 /**
  * AdminLte AssetBundle
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class AdminLteAsset extends AssetBundle
