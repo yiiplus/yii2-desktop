@@ -89,7 +89,6 @@ class Table extends \yii\base\Action
      */
     public $formatter;
 
-
     /**
      * 动作初始化
      */
