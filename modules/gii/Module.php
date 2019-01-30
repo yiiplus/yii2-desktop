@@ -1,13 +1,11 @@
 <?php
 /**
- * yiiplus\desktop
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    zhouyang
- * @copyright 2006-2018 YiiPlus Ltd
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
  */
 
@@ -16,17 +14,29 @@ namespace yiiplus\desktop\modules\gii;
 use Yii;
 use yii\helpers\Inflector;
 
+/**
+ * Module 模块
+ */
 class Module extends \yii\gii\Module
 {
+    /**
+     * ip白名单
+     *
+     * @var array
+     */
     public $allowedIPs = ['*'];
 
-    /*
+    /**
      * 控制器名称空间
+     *
+     * @var string
      */
     public $controllerNamespace = 'yiiplus\desktop\modules\gii\controllers';
 
     /**
      * gii 生成配置
+     *
+     * @var array
      */
     public $generators = [
         'crud' => [
@@ -42,8 +52,10 @@ class Module extends \yii\gii\Module
         ]
     ];
 
-    /*
+    /**
      * 源语言
+     *
+     * @var string
      */
     public $sourceLanguage = 'en';
 

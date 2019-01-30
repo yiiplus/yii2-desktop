@@ -1,4 +1,14 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
 use yii\helpers\StringHelper;
 
 $modelClass = StringHelper::basename($generator->modelClass);
@@ -14,16 +24,13 @@ $username = Yii::$app->user->identity->username;
 echo "<?php\n";
 ?>
 /**
- * 慧诊
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    <?= $username ?> <<?= $username ?>@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?>;
@@ -35,15 +42,6 @@ use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelA
 
 /**
  * <?= $searchModelClass ?> represents the model behind the search form about `<?= $generator->modelClass ?>`.
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    <?= $username ?> <<?= $username ?>@himoca.com>
- * @copyright 2017-2019 北京慧诊科技有限公司
- * @license   https://www.huizhen.com/licence.txt Licence
- * @link      http://www.huizhen.com
  */
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 

@@ -1,13 +1,11 @@
 <?php
 /**
- * yiiplus\desktop
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
  */
 
@@ -20,26 +18,6 @@ use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\behaviors\PositionBehavior;
 /**
  * 菜单model
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
- *
- * This is the model class for table "menu".
- *
- * @property integer $id Menu id(autoincrement)
- * @property string $name Menu name
- * @property integer $parent Menu parent
- * @property string $route Route for this menu
- * @property integer $order Menu order
- * @property string $data Extra information for this menu
- *
- * @property Menu $menuParent Menu parent
- * @property Menu[] $menus Menu children
  */
 class Menu extends \yii\db\ActiveRecord
 {
