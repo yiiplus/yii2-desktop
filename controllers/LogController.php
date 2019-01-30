@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\controllers;
 
@@ -9,6 +18,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yiiplus\desktop\models\Log as DesktopLog;
 
+/**
+ * LogController implements the CRUD actions for Log model.
+ */
 class LogController extends Controller
 {
     public function actions()
