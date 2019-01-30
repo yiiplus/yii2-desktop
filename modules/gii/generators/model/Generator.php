@@ -15,6 +15,9 @@ use ReflectionClass;
 use yii\base\NotSupportedException;
 use yii\db\Schema;
 
+/**
+ * Generator model
+ */
 class Generator extends \yii\gii\generators\model\Generator
 {
     public $skipRuleColumns = ['created_at', 'updated_at'];

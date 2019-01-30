@@ -16,14 +16,6 @@ use yii\helpers\Inflector;
 
 /**
  * Module 模块
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    zhouyang
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
  */
 class Module extends \yii\gii\Module
 {

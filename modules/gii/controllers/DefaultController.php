@@ -19,14 +19,6 @@ use yiiplus\desktop\components\Helper;
 
 /**
  * gii
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    zhouyang
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
  */
 class DefaultController extends \yii\gii\controllers\DefaultController
 {

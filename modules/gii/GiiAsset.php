@@ -15,14 +15,6 @@ use yii\web\AssetBundle;
 
 /**
  * 引入样式文件
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    zhouyang
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
  */
 class GiiAsset extends AssetBundle
 {
