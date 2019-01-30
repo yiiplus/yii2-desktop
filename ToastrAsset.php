@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 /**
  * 样式文件引入
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class ToastrAsset extends AssetBundle

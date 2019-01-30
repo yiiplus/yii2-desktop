@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
 /**
  * 树形组件样式路径
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class BootstrapTableAsset extends AssetBundle {

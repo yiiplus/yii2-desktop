@@ -22,6 +22,9 @@ use yii\base\InvalidArgumentException;
 
 /**
  * BootstrapTable 控制器动作封装
+ *
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
+ * @since 2.0.0
  */
 class Table extends \yii\base\Action
 {

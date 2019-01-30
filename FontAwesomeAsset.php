@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 /**
  * FontAwesome AssetBundle
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class FontAwesomeAsset extends AssetBundle

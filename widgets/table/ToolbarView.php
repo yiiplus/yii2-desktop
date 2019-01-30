@@ -19,7 +19,7 @@ use yii\helpers\Url;
 /**
  * ToolbarView
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class ToolbarView extends Widget

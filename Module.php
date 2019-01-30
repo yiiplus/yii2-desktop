@@ -17,7 +17,7 @@ use yii\helpers\Inflector;
 /**
  * GUI manager for RBAC.
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class Module extends \yii\base\Module

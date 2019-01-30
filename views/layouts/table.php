@@ -7,6 +7,8 @@
  * @copyright 2018-2019 YiiPlus Ltd
  * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
+ * @author    Hongbin Chen <hongbin.chen@aliyun.com>
+ * @since     2.0.0
  */
 
 use yii\helpers\Html;

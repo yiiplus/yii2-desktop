@@ -17,7 +17,7 @@ use \yii\grid\ActionColumn as YiiActionColumn;
 /**
  * 操作栏
  *
- * @author liguangquan <liguangquan@163.com>
+ * @author Hongbin Chen <hongbin.chen@aliyun.com>
  * @since 2.0.0
  */
 class ActionColumn extends YiiActionColumn
