@@ -16,13 +16,8 @@ namespace yiiplus\desktop\components;
 /**
  * 创建树形结构数据
  *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
+ * @author gengxiankun <gengxiankun@126.com>
+ * @since 2.0.0     http://www.yiiplus.com
  */
 class Tree
 {
