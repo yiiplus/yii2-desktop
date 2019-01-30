@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\controllers;
 
@@ -16,8 +25,8 @@ class RoleController extends ItemController
     public function labels()
     {
         return[
-            'Item' => 'Role',
-            'Items' => 'Roles',
+            'Item' => '角色',
+            'Items' => '角色列表',
         ];
     }
 

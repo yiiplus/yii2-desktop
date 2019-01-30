@@ -1,3 +1,17 @@
+<?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
+$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -25,36 +39,40 @@
         </form>
         <!-- /.search form -->
 
-		 <?php 
-		    use yii\bootstrap\Nay;
-		    use yiiplus\desktop\components\MenuHelper; 
-		    $callback = function($menu){ 
-		        $data = json_decode($menu['data'], true); 
-		        $items = $menu['children']; 
-		        $return = [ 
-		            'label' => $menu['name'], 
-		            'url' => [$menu['route']], 
-		        ]; 
-		        //处理我们的配置 
-		        if ($data) { 
-		            //visible 
-		            isset($data['visible']) && $return['visible'] = $data['visible']; 
-		            //icon 
-		            isset($data['icon']) && $data['icon'] && $return['icon'] = $data['icon']; 
-		            //other attribute e.g. class... 
-		            $return['options'] = $data; 
-		        } 
-		        //没配置图标的显示默认图标 
-		        (!isset($return['icon']) || !$return['icon']) && $return['icon'] = 'circle'; 
-		        $items && $return['items'] = $items; 
-		        return $return; 
-		    }; 
-		    //这里我们对一开始写的菜单menu进行了优化
-		    echo dmstr\widgets\Menu::widget( [ 
-		        'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-		        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback), 
-		    ] ); 
-		?>
+         <?php 
+            use yii\bootstrap\Nay;
+            use yiiplus\desktop\components\MenuHelper; 
+            $callback = function($menu){ 
+                $data = [];
+                if ($menu['icon'] !== '') {
+                    $icons = explode('-', $menu['icon']);
+                    $data['icon'] = isset($icons[1]) ? $icons[1] : '';
+                }
+                $items = $menu['children']; 
+                $return = [ 
+                    'label' => $menu['name'], 
+                    'url' => [$menu['route']], 
+                ]; 
+                //处理我们的配置 
+                if ($data) { 
+                    //visible 
+                    isset($data['visible']) && $return['visible'] = $data['visible']; 
+                    //icon 
+                    isset($data['icon']) && $data['icon'] && $return['icon'] = $data['icon']; 
+                    //other attribute e.g. class... 
+                    $return['options'] = $data; 
+                } 
+                //没配置图标的显示默认图标 
+                (!isset($return['icon']) || !$return['icon']) && $return['icon'] = 'circle'; 
+                $items && $return['items'] = $items; 
+                return $return; 
+            }; 
+            //这里我们对一开始写的菜单menu进行了优化
+            echo yiiplus\desktop\widgets\Menu::widget( [ 
+                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback), 
+            ] ); 
+        ?>
 
     </section>
 

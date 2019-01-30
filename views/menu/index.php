@@ -1,60 +1,85 @@
 <?php
-use yii\helpers\Html;
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
+use yiiplus\desktop\components\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('yiiplus/desktop', 'Menus');
+use yiiplus\desktop\widgets\tree\TreeGrid;
+
+$this->title = Yii::t('yiiplus/desktop', '菜单列表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="box box-primary dataTables_wrapper user-index">
-    <div class="box-header">
-        <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create'), ['create'], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Delete'), ['delete'], ['class' => 'btn btn-danger']) ?>
-        </div>
-        <div class="no-margin pull-right">
-            <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
-            <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
-            <button type="button" class="btn btn-default"><i class="fa fa-save"></i></button>
-            <button type="button" class="btn btn-default"><i class="fa fa-arrows-alt"></i></button>
+<div class="box desktop-menu-index">
+
+    <div class="box-header with-border">
+        <div class="pull-left">
+            <div class="btn-group pull-left" style="margin-left: 10px">
+                <a href="create" class="btn btn-sm btn-info" title="新增">
+                    <i class="fa fa-save"></i><span class="hidden-xs">&nbsp;&nbsp;新增</span>
+                </a>
+            </div>
         </div>
     </div>
+
     <div class="box-body">
     <?php Pjax::begin(); ?>
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'tableOptions' => ['class' => 'table table-bordered table-hover'],
-        'layout' => '{items}<div class="dataTables_info pull-left">{summary}</div><div class="dataTables_paginate pull-right">{pager}</div>',
-        'columns' => [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'headerOptions' => ['width' => '10'],
+        <?= TreeGrid::widget([
+            'dataProvider' => $dataProvider,
+            'keyColumnName' => 'id',
+            'parentColumnName' => 'parent',
+            'parentRootValue' => null,
+            
+            // 'pluginOptions' => [ // 菜单收起
+            //     'initialState' => 'collapse',
+            // ],
+
+            'columns' => [
+                'name',
+                'route',
+                [
+                    'attribute' => 'icon',
+                    'value' => function($model) {
+                        return Html::icon($model->icon);
+                    },
+                    'format' => 'raw'
+                ],
+                [
+                    'class' => 'yiiplus\desktop\widgets\tree\PositionColumn',
+                    'attribute' => 'order'
+                ],
+                [
+                    'header' => Yii::t('yiiplus/desktop','操作'),
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{create} {view} {update} {delete}',
+                    'buttons' => [
+                        'create' => function($url, $model) {
+                            return Html::a(Html::icon('plus'), ['create', 'id' => $model->id], ['class' => 'btn btn-default btn-xs']);
+                        },
+                        'view' => function($url, $model) {
+                            return Html::a(Html::icon('eye'), ['view', 'id' => $model->id], ['class' => 'btn btn-default btn-xs']);
+                        },
+                        'update' => function($url, $model) {
+                            return Html::a(Html::icon('pencil'), ['update', 'id' => $model->id], ['class' => 'btn btn-default btn-xs']);
+                        },
+                        'delete' => function($url, $model) {
+                            return Html::a(Html::icon('trash'), ['delete', 'id' => $model->id], ['class' => 'btn btn-default btn-xs']);
+                        },
+                    ]
+                ],
             ],
-            [
-                'attribute' => 'id',
-                'label' => Yii::t('yiiplus/desktop', 'ID'),
-                'headerOptions' => ['width' => '100'],
-            ],
-            'name',
-            [
-                'attribute' => 'menuParent.name',
-                'filter' => Html::activeTextInput($searchModel, 'parent_name', ['class' => 'form-control', 'id' => null]),
-                'label' => Yii::t('yiiplus/desktop', 'Parent'),
-            ],
-            'route',
-            ['attribute'=>'order','headerOptions' => ['width' => '100']],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                "header" => "操作",
-                'headerOptions' => ['width' => '10'],
-            ],
-        ],  
-    ]);
-    ?>
+        ]);
+        ?>
     <?php Pjax::end(); ?>
     </div>
 </div>

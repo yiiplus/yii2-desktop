@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\controllers;
 
@@ -12,7 +21,7 @@ use yiiplus\desktop\components\Helper;
 use yiiplus\desktop\components\Configs;
 
 /**
- * Description of RuleController
+ * RuleController implements the CRUD actions for BizRule model.
  */
 class RuleController extends Controller
 {
@@ -122,7 +131,7 @@ class RuleController extends Controller
         if ($item) {
             return new BizRule($item);
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('yiiplus/desktop', '请求的页面不存在'));
         }
     }
 }

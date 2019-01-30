@@ -1,4 +1,14 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
 namespace yiiplus\desktop\models\form;
 
 use Yii;
@@ -22,13 +32,13 @@ class Signup extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => Yii::t('yiiplus/desktop', '此用户名已被使用')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => Yii::t('yiiplus/desktop', '此电子邮件地址已被占用')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],

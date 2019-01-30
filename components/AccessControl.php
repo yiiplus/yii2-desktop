@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\components;
 
@@ -24,6 +33,9 @@ use yii\di\Instance;
  * ```
  *
  * @property User $user
+ *
+ * @author gengxiankun <gengxiankun@126.com>
+ * @since 2.0.0
  */
 class AccessControl extends \yii\base\ActionFilter
 {
@@ -82,7 +94,7 @@ class AccessControl extends \yii\base\ActionFilter
         if ($user->getIsGuest()) {
             $user->loginRequired();
         } else {
-            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+            throw new ForbiddenHttpException(Yii::t('yii', '您没有执行此操作权限'));
         }
     }
 

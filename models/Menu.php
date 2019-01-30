@@ -1,30 +1,35 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models;
 
 use Yii;
-use yiiplus\desktop\components\Configs;
 use yii\db\Query;
 
+use yiiplus\desktop\components\Configs;
+use yiiplus\desktop\behaviors\PositionBehavior;
 /**
- * This is the model class for table "menu".
- *
- * @property integer $id Menu id(autoincrement)
- * @property string $name Menu name
- * @property integer $parent Menu parent
- * @property string $route Route for this menu
- * @property integer $order Menu order
- * @property string $data Extra information for this menu
- *
- * @property Menu $menuParent Menu parent
- * @property Menu[] $menus Menu children
+ * 菜单model
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    /**
+     * 父类
+     */
     public $parent_name;
 
     /**
-     * @inheritdoc
+     * 表名
+     *
+     * @return string
      */
     public static function tableName()
     {
@@ -32,7 +37,9 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * 获取db
+     *
+     * @return object
      */
     public static function getDb()
     {
@@ -44,23 +51,41 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * behaviors
+     *
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'order',
+                'groupAttributes' => [
+                    'parent' // 菜单父类字段名
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * 规则
+     *
+     * @return array
      */
     public function rules()
     {
         return [
             [['name'], 'required'],
-            [['parent_name'], 'in',
-                'range' => static::find()->select(['name'])->column(),
-                'message' => 'Menu "{value}" not found.'],
             [['parent', 'route', 'data', 'order'], 'default'],
             [['parent'], 'filterParent', 'when' => function() {
                 return !$this->isNewRecord;
             }],
+            [['icon'], 'string'],
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),
-                'message' => 'Route "{value}" not found.']
+                'message' => Yii::t('yiiplus/desktop', '路由 "{value}" 没有找到')]
         ];
     }
 
@@ -76,7 +101,7 @@ class Menu extends \yii\db\ActiveRecord
             ->where('[[id]]=:id');
         while ($parent) {
             if ($this->id == $parent) {
-                $this->addError('parent_name', 'Loop detected.');
+                $this->addError('parent_name', Yii::t('yiiplus/desktop', '检测到循环'));
                 return;
             }
             $parent = $query->params([':id' => $parent])->scalar($db);
@@ -84,23 +109,27 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * 别名
+     *
+     * @return array
      */
     public function attributeLabels()
     {
         return [
             'id' => Yii::t('yiiplus/desktop', 'ID'),
-            'name' => Yii::t('yiiplus/desktop', 'Name'),
-            'parent' => Yii::t('yiiplus/desktop', 'Parent'),
-            'parent_name' => Yii::t('yiiplus/desktop', 'Parent Name'),
-            'route' => Yii::t('yiiplus/desktop', 'Route'),
-            'order' => Yii::t('yiiplus/desktop', 'Order'),
-            'data' => Yii::t('yiiplus/desktop', 'Data'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'parent' => Yii::t('yiiplus/desktop', '父级'),
+            'parent_name' => Yii::t('yiiplus/desktop', '父级名称'),
+            'route' => Yii::t('yiiplus/desktop', '路由'),
+            'order' => Yii::t('yiiplus/desktop', '排序'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
+            'icon' => Yii::t('yiiplus/desktop', '图标'),
         ];
     }
 
     /**
-     * Get menu parent
+     * 获取parent
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenuParent()
@@ -109,7 +138,8 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get menu children
+     * 获取子类
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenus()
@@ -119,8 +149,9 @@ class Menu extends \yii\db\ActiveRecord
     private static $_routes;
 
     /**
-     * Get saved routes.
-     * @return array
+     * 获取路由
+     *
+     * @return   array
      */
     public static function getSavedRoutes()
     {
@@ -135,13 +166,40 @@ class Menu extends \yii\db\ActiveRecord
         return self::$_routes;
     }
 
+    /**
+     * getMenuSource
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public static function getMenuSource()
     {
         $tableName = static::tableName();
         return (new \yii\db\Query())
-                ->select(['m.id', 'm.name', 'm.route', 'parent_name' => 'p.name'])
-                ->from(['m' => $tableName])
-                ->leftJoin(['p' => $tableName], '[[m.parent]]=[[p.id]]')
-                ->all(static::getDb());
+            ->select(['m.id', 'm.name', 'm.route', 'parent_name' => 'p.name'])
+            ->from(['m' => $tableName])
+            ->leftJoin(['p' => $tableName], '[[m.parent]]=[[p.id]]')
+            ->all(static::getDb());
+    }
+
+    /**
+     * 获取菜单下拉列表
+     *
+     * @param array   $tree      菜单数组
+     * @param array   &$result   返回数组
+     * @param integer $deep      循环值
+     * @param string  $separator 空格
+     *
+     * @return array
+     */
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '&nbsp;&nbsp;&nbsp;&nbsp;')
+    {
+        $deep++;
+        foreach($tree as $list) {
+            $result[$list['id']] = str_repeat($separator, $deep - 1) . $list['name'];
+            if (isset($list['children'])) {
+                self::getDropDownList($list['children'], $result, $deep);
+            }
+        }
+        return $result;
     }
 }

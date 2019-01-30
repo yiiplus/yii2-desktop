@@ -1,4 +1,15 @@
 <?php
+/**
+ * yiiplus\desktop
+ *
+ * PHP version 7
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @author    liguangquan@163.com
+ * @copyright 2006-2018 YiiPlus Ltd
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\components;
 
@@ -35,6 +46,9 @@ use yiiplus\desktop\models\Menu;
  *
  * $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback);
  * ```
+ *
+ * @author gengxiankun <gengxiankun@126.com>
+ * @since 2.0.0
  */
 class MenuHelper
 {

@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -25,7 +34,7 @@ unset($rules[RouteRule::RULE_NAME]);
 <div class="box box-primary dataTables_wrapper role-index">
     <div class="box-header">
         <div class="no-margin pull-left">
-            <?= Html::a(Yii::t('yiiplus/desktop', 'Create ' . $labels['Item']), ['create'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('yiiplus/desktop', '创建 ' . $labels['Item']), ['create'], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="no-margin pull-right">
             <button type="button" class="btn btn-default"><i class="fa fa-cog"></i></button>
@@ -49,20 +58,20 @@ unset($rules[RouteRule::RULE_NAME]);
             ],
             [
                 'attribute' => 'name',
-                'label' => Yii::t('yiiplus/desktop', 'Name'),
+                'label' => Yii::t('yiiplus/desktop', '名称'),
             ],
             [
                 'attribute' => 'ruleName',
-                'label' => Yii::t('yiiplus/desktop', 'Rule Name'),
+                'label' => Yii::t('yiiplus/desktop', '规则名称'),
                 'filter' => $rules
             ],
             [
                 'attribute' => 'description',
-                'label' => Yii::t('yiiplus/desktop', 'Description'),
+                'label' => Yii::t('yiiplus/desktop', '描述'),
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                "header" => "操作",
+                "header" => Yii::t('yiiplus/desktop', "操作"),
                 'headerOptions' => ['width' => '10'],
             ],
         ],

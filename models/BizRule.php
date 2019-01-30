@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models;
 
@@ -69,12 +78,12 @@ class BizRule extends \yii\base\Model
     public function classExists()
     {
         if (!class_exists($this->className)) {
-            $message = Yii::t('yiiplus/desktop', "Unknown class '{class}'", ['class' => $this->className]);
+            $message = Yii::t('yiiplus/desktop', "未知的类 '{class}'", ['class' => $this->className]);
             $this->addError('className', $message);
             return;
         }
         if (!is_subclass_of($this->className, Rule::className())) {
-            $message = Yii::t('yiiplus/desktop', "'{class}' must extend from 'yii\rbac\Rule' or its child class", [
+            $message = Yii::t('yiiplus/desktop', "'{class}' 必须继承 'yii\rbac\Rule' 或者是它的子类", [
                     'class' => $this->className]);
             $this->addError('className', $message);
         }
@@ -86,8 +95,8 @@ class BizRule extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name'      => Yii::t('yiiplus/desktop', 'Name'),
-            'className' => Yii::t('yiiplus/desktop', 'Class Name'),
+            'name'      => Yii::t('yiiplus/desktop', '名称'),
+            'className' => Yii::t('yiiplus/desktop', '类名'),
         ];
     }
 

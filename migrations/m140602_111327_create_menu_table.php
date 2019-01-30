@@ -1,11 +1,20 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 use yii\db\Migration;
 use yii\db\Schema;
 use yiiplus\desktop\components\Configs;
 
 /**
- * Migration table of table_menu
+ * Migration table of menu_table
  */
 class m140602_111327_create_menu_table extends Migration
 {
@@ -27,6 +36,7 @@ class m140602_111327_create_menu_table extends Migration
             'parent' => $this->integer(),
             'route' => $this->string(),
             'order' => $this->integer(),
+            'icon' => $this->string(20),
             'data' => $this->binary(),
             "FOREIGN KEY ([[parent]]) REFERENCES {$menuTable}([[id]]) ON DELETE SET NULL ON UPDATE CASCADE",
         ], $tableOptions);

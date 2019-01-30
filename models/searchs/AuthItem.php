@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models\searchs;
 
@@ -38,12 +47,12 @@ class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('yiiplus/desktop', 'Name'),
-            'item_name' => Yii::t('yiiplus/desktop', 'Name'),
-            'type' => Yii::t('yiiplus/desktop', 'Type'),
-            'description' => Yii::t('yiiplus/desktop', 'Description'),
-            'ruleName' => Yii::t('yiiplus/desktop', 'Rule Name'),
-            'data' => Yii::t('yiiplus/desktop', 'Data'),
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'item_name' => Yii::t('yiiplus/desktop', '项目名称'),
+            'type' => Yii::t('yiiplus/desktop', '类型'),
+            'description' => Yii::t('yiiplus/desktop', '描述'),
+            'ruleName' => Yii::t('yiiplus/desktop', '规则名称'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
         ];
     }
 

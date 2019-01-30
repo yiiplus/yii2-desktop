@@ -1,15 +1,22 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
+
 use yii\helpers\Html;
 
-/* @var $this \yii\web\View */
-/* @var $content string */
 if (Yii::$app->controller->action->id === 'login') { 
     echo $this->render('main-login', ['content' => $content]);
 } else {
     app\assets\AppAsset::register($this);
-    dmstr\web\AdminLteAsset::register($this);
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
-    ?>
+    yiiplus\desktop\DesktopAsset::register($this);
+?>
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
@@ -21,28 +28,16 @@ if (Yii::$app->controller->action->id === 'login') {
         <?php $this->head() ?>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
-    <?php $this->beginBody() ?>
-    <div class="wrapper">
-
-        <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
-        ) ?>
-
-        <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
-        )
-        ?>
-
-        <?= $this->render(
-            'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
-        ) ?>
-
-    </div>
-
-    <?php $this->endBody() ?>
+        <?php $this->beginBody() ?>
+        <div class="wrapper">
+            <?php echo $this->render('header.php'); ?>
+            <?php echo $this->render('left.php'); ?>
+            <?php echo $this->render('content.php', ['content' => $content]); ?>
+        </div>
+        <?php $this->endBody() ?>
+        <?php if (isset($this->blocks['js'])): ?>
+            <?= $this->blocks['js'] ?>
+        <?php endif; ?>
     </body>
     </html>
     <?php $this->endPage() ?>

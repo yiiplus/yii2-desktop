@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -28,8 +37,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'data') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('yiiplus/desktop', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('yiiplus/desktop', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('yiiplus/desktop', '搜索'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('yiiplus/desktop', '重置'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

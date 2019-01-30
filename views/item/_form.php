@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -35,7 +44,7 @@ $this->registerJs($js);
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('yiiplus/desktop', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
+        <?= Html::submitButton(Yii::t('yiiplus/desktop', '提交'), ['class' => 'btn btn-primary', 'name' => 'submit-button']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

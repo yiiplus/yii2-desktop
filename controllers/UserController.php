@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\controllers;
 
@@ -14,13 +23,10 @@ use yiiplus\desktop\models\form\Login;
 use yiiplus\desktop\models\User;
 use yiiplus\desktop\models\searchs\User as UserSearch;
 use yiiplus\desktop\components\Helper;
-
-
-
 use yiiplus\desktop\models\form\Signup;
 
 /**
- * User controller
+ * UserController implements the CRUD actions for User model.
  */
 class UserController extends Controller
 {
@@ -191,7 +197,7 @@ class UserController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('yiiplus/desktop', '请求的页面不存在'));
         }
     }
 }
