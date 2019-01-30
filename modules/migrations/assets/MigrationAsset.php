@@ -14,7 +14,7 @@ namespace yiiplus\desktop\modules\migrations\assets;
 /**
  * 引入静态文件
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class MigrationAsset extends  \yii\web\AssetBundle

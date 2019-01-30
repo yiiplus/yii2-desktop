@@ -22,7 +22,7 @@ use yiiplus\desktop\modules\migrations\models\Database;
 /**
  * 迁移控制器
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class DefaultController extends Controller
@@ -289,8 +289,8 @@ class DefaultController extends Controller
 /**
  * 输出类
  *
- * Class OutputString
- * @package yiiplus\desktop\modules\migrations\controllers
+ * @author zhangxu <2217418603@qq.com>
+ * @since 2.0.0
  */
 class OutputString extends Object
 {

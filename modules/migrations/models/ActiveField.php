@@ -16,7 +16,7 @@ use yii\helpers\Html;
 /**
  * 动态域
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class ActiveField extends \yii\widgets\ActiveField

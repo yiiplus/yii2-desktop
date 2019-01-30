@@ -17,7 +17,7 @@ use yii\helpers\Inflector;
 /**
  * 迁移Module
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class Module extends \yii\base\Module

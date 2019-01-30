@@ -18,7 +18,7 @@ use yii\helpers\Url;
 /**
  * 动态表单
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class ActiveForm extends \yii\widgets\ActiveForm

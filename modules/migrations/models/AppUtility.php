@@ -16,7 +16,7 @@ use Yii;
 /**
  * 将数据库字段转换为插入语句
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class AppUtility

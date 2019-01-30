@@ -16,7 +16,7 @@ use yii\helpers\Html;
 /**
  * 可折叠多选框
  *
- * @author zhangxu <zhangxu@mocaapp.com>
+ * @author zhangxu <2217418603@qq.com>
  * @since 2.0.0
  */
 class BoxField extends \yii\widgets\ActiveField
