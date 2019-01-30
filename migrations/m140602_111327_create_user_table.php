@@ -1,11 +1,22 @@
 <?php
-
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 use yii\db\Migration;
 use yii\db\Schema;
 use yiiplus\desktop\components\Configs;
 
-class m160312_050000_create_user extends Migration
+/**
+ * Migration table of user_table
+ */
+class m140602_111327_create_user_table extends Migration
 {
 
     public function up()

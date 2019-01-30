@@ -1,13 +1,11 @@
 <?php
 /**
- * yiiplus\desktop
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
  */
 
@@ -17,20 +15,10 @@ use yii\bootstrap\Alert as BootstrapAlert;
 use yii\bootstrap\Widget;
 
 /**
- * Alert widget renders a message from session flash for AdminLTE alerts. All flash messages are displayed
- * in the sequence they were assigned using setFlash. You can set message as following:
+ * Alert
  *
- * ```php
- * \Yii::$app->getSession()->setFlash('error', '<b>Alert!</b> Danger alert preview. This alert is dismissable.');
- * ```
- *
- * Multiple messages could be set as follows:
- *
- * ```php
- * \Yii::$app->getSession()->setFlash('error', ['Error 1', 'Error 2']);
- * ```
- *
- * @author Evgeniy Tkachenko <et.coder@gmail.com>
+ * @author liguangquan <liguangquan@163.com>
+ * @since 2.0.0
  */
 class Alert extends Widget
 {

@@ -1,17 +1,32 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yidashi
- * Date: 2017/2/11
- * Time: 下午9:43
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
 
 namespace yiiplus\desktop\modules\migrations\models;
 
 use yii\helpers\Html;
 
+/**
+ * 动态域
+ *
+ * @author zhangxu <zhangxu@mocaapp.com>
+ * @since 2.0.0
+ */
 class ActiveField extends \yii\widgets\ActiveField
 {
+    /**
+     * 资源控制
+     *
+     * @param array $options
+     * @return $this
+     */
     public function staticControl($options = [])
     {
         $this->adjustLabelFor($options);
@@ -19,6 +34,14 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
+    /**
+     * 后缀
+     *
+     * @param string $suffix
+     * @param string $suffixType
+     * @param int $size
+     * @return $this
+     */
     public function suffix($suffix = '', $suffixType = 'addon', $size = 300)
     {
         $size = !empty($size) ? "input-group-{$size} " : '';
@@ -26,6 +49,14 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
+    /**
+     * 前缀
+     *
+     * @param string $prefix
+     * @param string $prefixType
+     * @param int $size
+     * @return $this
+     */
     public function prefix($prefix = '', $prefixType = 'addon', $size = 300)
     {
         $size = !empty($size) ? "input-group-{$size} " : '';
@@ -33,6 +64,13 @@ class ActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
+    /**
+     * 真假
+     *
+     * @param array $options
+     * @param bool $enclosedByLabel
+     * @return $this
+     */
     public function boolean($options = [], $enclosedByLabel = true)
     {
         if ($enclosedByLabel) {

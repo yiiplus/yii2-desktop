@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\modules\migrations\controllers;
 
@@ -10,6 +19,12 @@ use yiiplus\desktop\modules\migrations\models\MigrationUtility;
 use yiiplus\desktop\modules\migrations\models\AppUtility;
 use yiiplus\desktop\modules\migrations\models\Database;
 
+/**
+ * 迁移控制器
+ *
+ * @author zhangxu <zhangxu@mocaapp.com>
+ * @since 2.0.0
+ */
 class DefaultController extends Controller
 {
     /**

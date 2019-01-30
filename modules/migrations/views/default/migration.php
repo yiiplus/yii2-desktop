@@ -1,9 +1,13 @@
 <?php
 /**
- * This view is used by console/controllers/MigrateController.php
- * The following variables are available in this view:
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
  */
-/* @var $className string the new migration class name */
 
 echo "<?php\n";
 ?>

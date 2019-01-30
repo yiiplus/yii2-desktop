@@ -1,13 +1,11 @@
 <?php
 /**
- * yiiplus\desktop
- *
- * PHP version 7
+ * yiiplus/yii2-desktop
  *
  * @category  PHP
  * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
  * @link      http://www.yiiplus.com
  */
 
@@ -20,14 +18,6 @@ use yii\web\Response;
 
 /**
  * 菜单移动
- *
- * PHP version 7
- *
- * @category  PHP
- * @package   Yii2
- * @author    liguangquan@163.com
- * @copyright 2006-2018 YiiPlus Ltd
- * @link      http://www.yiiplus.com
  */
 class Position extends Action
 {
