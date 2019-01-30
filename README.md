@@ -25,7 +25,7 @@ php composer.phar require --prefer-dist yiiplus/yii2-desktop "^2.0.0"
 或添加配置到项目目录下的`composer.json`文件的 require 部分
 
 ```
-"yiiplus/yii2-desktop": "^1.0.0"
+"yiiplus/yii2-desktop": "^2.0.0"
 ```
 
 ## 文档中心
