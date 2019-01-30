@@ -6,7 +6,7 @@
  *
  * @category  PHP
  * @package   Yii2
- * @author    zhouyang@mocaapp.com
+ * @author    zhouyang
  * @copyright 2006-2018 YiiPlus Ltd
  * @link      http://www.yiiplus.com
  */
