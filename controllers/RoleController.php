@@ -16,8 +16,8 @@ class RoleController extends ItemController
     public function labels()
     {
         return[
-            'Item' => 'Role',
-            'Items' => 'Roles',
+            'Item' => '角色',
+            'Items' => '角色列表',
         ];
     }
 
