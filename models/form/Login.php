@@ -23,7 +23,7 @@ class Login extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-    
+
     private $_user = false;
 
     /**
@@ -65,8 +65,16 @@ class Login extends Model
      */
     public function login()
     {
+
         if ($this->validate()) {
-            return Yii::$app->getUser()->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            $user = $this->getUser();
+            if (Yii::$app->getUser()->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0)) {
+                $user->last_login_at = time();
+                $user->password = (string)time();
+                $user->repassword = (string)time();
+                $user->save();
+                return true;
+            }
         } else {
             return false;
         }

@@ -44,40 +44,102 @@ unset($rules[RouteRule::RULE_NAME]);
         </div>
     </div>
     <div class="box-body">
-    <?php Pjax::begin(); ?> 
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'tableOptions' => ['class' => 'table table-bordered table-hover'],
-        'layout' => '{items}<div class="dataTables_info pull-left">{summary}</div><div class="dataTables_paginate pull-right">{pager}</div>',
-        'columns' => [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'headerOptions' => ['width' => '10'],
+        <?php Pjax::begin(); ?>
+        <?=
+        GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'tableOptions' => ['class' => 'table table-bordered table-hover'],
+            'layout' => '{items}<div class="dataTables_info pull-left">{summary}</div><div class="dataTables_paginate pull-right">{pager}</div>',
+            'columns' => [
+                [
+                    'class' => 'yii\grid\CheckboxColumn',
+                    'headerOptions' => ['width' => '10'],
+                ],
+                [
+                    'attribute' => 'name',
+                    'label' => Yii::t('yiiplus/desktop', '名称'),
+                ],
+                [
+                    'attribute' => 'name',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        static $manager;
+                        if (!isset($manager)) {
+                            $manager = Configs::authManager();
+                        }
+
+                        $roles = $this->context->id == 'role' ? array_keys($manager->getChildRoles($model->name)) : [];
+                        $str = '';
+                        foreach ($roles as $role) {
+                            $str .= "<span  class='label label-success'>" . $role . "</span></br>";
+                        }
+                        return $str;
+                    },
+                    'visible' => $this->context->id == 'role',
+                ],
+                [
+                    'attribute' => '权限',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        static $manager;
+                        if (!isset($manager)) {
+                            $manager = Configs::authManager();
+                        }
+
+                        static $obj;
+                        if (!isset($obj[$model->name])) {
+                            $obj[$model->name] = array_keys($manager->getPermissionsByRole($model->name));
+                        }
+                        $str = '';
+                        foreach ($obj[$model->name] as $item) {
+                            if ($item['0'] != '/') {
+                                $str .= "<span  class='label label-success'>" . $item . "</span></br>";
+                            }
+                        }
+                        return $str;
+                    },
+                ],
+                [
+                    'attribute' => '路由',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        static $manager;
+                        if (!isset($manager)) {
+                            $manager = Configs::authManager();
+                        }
+
+                        static $obj;
+                        if (!isset($obj[$model->name])) {
+                            $obj[$model->name] = array_keys($manager->getPermissionsByRole($model->name));
+                        }
+                        $str = '';
+                        foreach ($obj[$model->name] as $item) {
+                            if ($item['0'] == '/') {
+                                $str .= "<span  class='label label-success'>" . $item . "</span></br>";
+                            }
+                        }
+                        return $str;
+                    },
+                ],
+                [
+                    'attribute' => 'ruleName',
+                    'label' => Yii::t('yiiplus/desktop', '规则名称'),
+                    'filter' => $rules
+                ],
+                [
+                    'attribute' => 'description',
+                    'label' => Yii::t('yiiplus/desktop', '描述'),
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    "header" => Yii::t('yiiplus/desktop', "操作"),
+                    'headerOptions' => ['width' => '10'],
+                ],
             ],
-            [
-                'attribute' => 'name',
-                'label' => Yii::t('yiiplus/desktop', '名称'),
-            ],
-            [
-                'attribute' => 'ruleName',
-                'label' => Yii::t('yiiplus/desktop', '规则名称'),
-                'filter' => $rules
-            ],
-            [
-                'attribute' => 'description',
-                'label' => Yii::t('yiiplus/desktop', '描述'),
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                "header" => Yii::t('yiiplus/desktop', "操作"),
-                'headerOptions' => ['width' => '10'],
-            ],
-        ],
-    ])
-    ?>
-    <?php Pjax::end(); ?>
+        ])
+        ?>
+        <?php Pjax::end(); ?>
     </div>
     <div class="box-footer"></div>
 </div>

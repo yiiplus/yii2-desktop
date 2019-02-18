@@ -11,9 +11,10 @@
 
 namespace yiiplus\desktop\models;
 
+use Yii;
+use yii\debug\panels\EventPanel;
 use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\components\Helper;
-use Yii;
 use yii\base\Model;
 use yii\helpers\Json;
 use yii\rbac\Item;
@@ -28,6 +29,8 @@ class AuthItem extends Model
     public $description;
     public $ruleName;
     public $data;
+    public $availableItem;
+    public $assignedItem;
     /**
      * @var Item
      */
@@ -35,7 +38,7 @@ class AuthItem extends Model
 
     /**
      * Initialize object
-     * @param Item  $item
+     * @param Item $item
      * @param array $config
      */
     public function __construct($item = null, $config = [])
@@ -65,6 +68,8 @@ class AuthItem extends Model
             [['type'], 'integer'],
             [['description', 'data', 'ruleName'], 'default'],
             [['name'], 'string', 'max' => 64],
+
+            [['availableItem', 'assignedItem'], 'safe'],
         ];
     }
 
@@ -104,20 +109,6 @@ class AuthItem extends Model
                 $this->addError('ruleName', Yii::t('yiiplus/desktop', '"{value}" 规则不存在', ['value' => $name]));
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'name'          => Yii::t('yiiplus/desktop', '名称'),
-            'type'          => Yii::t('yiiplus/desktop', '类型'),
-            'description'   => Yii::t('yiiplus/desktop', '描述'),
-            'ruleName'      => Yii::t('yiiplus/desktop', '规则名称'),
-            'data'          => Yii::t('yiiplus/desktop', '数据'),
-        ];
     }
 
     /**
@@ -255,11 +246,14 @@ class AuthItem extends Model
         }
 
         $assigned = [];
-        foreach ($manager->getChildren($this->_item->name) as $item) {
-            $assigned[$item->name] = $item->type == 1 ? 'role' : ($item->name[0] == '/' ? 'route' : 'permission');
-            unset($available[$item->name]);
+        if (isset($this->_item->name)) {
+            foreach ($manager->getChildren($this->_item->name) as $item) {
+                $assigned[$item->name] = $item->type == 1 ? 'role' : ($item->name[0] == '/' ? 'route' : 'permission');
+                unset($available[$item->name]);
+            }
+            unset($available[$this->name]);
         }
-        unset($available[$this->name]);
+
         return [
             'available' => $available,
             'assigned' => $assigned,
@@ -291,5 +285,67 @@ class AuthItem extends Model
         }
 
         return $result[$type];
+    }
+
+    /**
+     * 自己
+     *
+     * @return array
+     */
+    public static function getAllItems()
+    {
+        $manager = Configs::authManager();
+        $roles = [];
+        foreach (array_keys($manager->getRoles()) as $name) {
+            $roles[$name] = $name;
+        }
+
+        $permissions = [];
+        $route = [];
+        foreach (array_keys($manager->getPermissions()) as $name) {
+            if ($name[0] != '/') {
+                $permissions[$name] = $name;
+            } else {
+                $route[$name] = $name;
+            }
+        }
+
+        return [
+            'roles' => $roles,
+            'route' => $route,
+            'permissions' => $permissions,
+        ];
+    }
+
+    /**
+     * 该用户的身份
+     *
+     * @param int $id 用户ID
+     * @return array
+     */
+    public static function getItemByUser($id)
+    {
+        $manager = Configs::authManager();
+        $role = [];
+        $role = array_keys($manager->getRolesByUser($id));
+        $permission = [];
+        $route = [];
+        foreach (array_keys($manager->getPermissionsByUser($id)) as $name) {
+            if ($name[0] != '/') {
+                $permission[] = $name;
+            } else {
+                $route[] = $name;
+            }
+        }
+        return [
+            'role' => $role,
+            'permission' => $permission,
+            'route' => $route,
+        ];
+    }
+
+    public function getRoute()
+    {
+
     }
 }

@@ -25,6 +25,11 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 10;
+    public $password;
+    public $repassword;
+    public $role;
+    public $permission;
+    public $type;
 
     /**
      * @inheritdoc
@@ -52,6 +57,46 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE]],
+
+            ['username', 'required'],
+            ['username', 'filter', 'filter' => 'trim'],
+            ['username', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['nickname', 'required'],
+            ['nickname', 'filter', 'filter' => 'trim'],
+
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This email address has already been taken.'],
+
+            [['password', 'repassword'], 'required'],
+            ['password', 'string', 'min' => 6],
+            ['repassword', 'compare', 'compareAttribute' => 'password', 'message' => '密码不一致'],
+
+            [['role', 'permission', 'type', 'last_login_at'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('yiiplus/desktop', 'ID'),
+            'username' => Yii::t('yiiplus/desktop', '登录名'),
+            'nickname' => Yii::t('yiiplus/desktop', '昵称'),
+            'email' => Yii::t('yiiplus/desktop', '邮箱'),
+            'avatar' => Yii::t('yiiplus/desktop', '头像'),
+            'password' => Yii::t('yiiplus/desktop', '密码'),
+            'repassword' => Yii::t('yiiplus/desktop', '确认密码'),
+            'role' => Yii::t('yiiplus/desktop', '角色'),
+            'permission' => Yii::t('yiiplus/desktop', '权限'),
+            'created_at' => Yii::t('yiiplus/desktop', '创建时间'),
+            'updated_at' => Yii::t('yiiplus/desktop', '更新时间'),
+            'last_login_at' => Yii::t('yiiplus/desktop', '最后登录时间'),
         ];
     }
 
@@ -95,8 +140,8 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return static::findOne([
-                'password_reset_token' => $token,
-                'status' => self::STATUS_ACTIVE,
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
         ]);
     }
 
@@ -113,7 +158,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 

@@ -23,5 +23,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-body">
         <?= $this->render('_form', ['model' => $model]) ?>
     </div>
-    <div class="box-footer"></div>
 </div>
