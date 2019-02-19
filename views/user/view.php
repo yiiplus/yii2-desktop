@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yiiplus\desktop\components\Helper;
 use yiiplus\desktop\components\Configs;
+use yiiplus\desktop\models\User;
 
 $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yiiplus/desktop', '用户列表'), 'url' => ['index']];
@@ -39,9 +40,9 @@ $controllerId = $this->context->uniqueId . '/';
                         'label' => '头像',
                         'value' => function ($model) {
                             return Html::img(
-                                Yii::$app->request->hostInfo . '/' . $model->avatar,
+                                $model->avatar ? Yii::$app->request->hostInfo . '/' . $model->avatar : Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . User::DEFAULT_AVATAR_URL,
                                 [
-                                    'class' => 'img',
+                                    'class' => 'img-circle',
                                     'width' => 120,
                                     'height' => 120,
                                 ]

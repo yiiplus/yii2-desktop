@@ -65,11 +65,30 @@ class AuthItem extends Model
             [['name'], 'checkUnique', 'when' => function () {
                 return $this->isNewRecord || ($this->_item->name != $this->name);
             }],
+            ['name', 'match', 'not' => 'true', 'pattern' => '/^\/.*$/', 'message' => '不以/开头'],
             [['type'], 'integer'],
             [['description', 'data', 'ruleName'], 'default'],
             [['name'], 'string', 'max' => 64],
-
             [['availableItem', 'assignedItem'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'type' => Yii::t('yiiplus/desktop', '类型'),
+            'description' => Yii::t('yiiplus/desktop', '描述'),
+            'ruleName' => Yii::t('yiiplus/desktop', '规则名称'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
+            'created_at' => Yii::t('yiiplus/desktop', '创建时间'),
+            'updated_at' => Yii::t('yiiplus/desktop', '更新时间'),
+            'role' => Yii::t('yiiplus/desktop', '角色'),
+            'route' => Yii::t('yiiplus/desktop', '路由'),
+            'permission' => Yii::t('yiiplus/desktop', '权限'),
         ];
     }
 
@@ -288,7 +307,7 @@ class AuthItem extends Model
     }
 
     /**
-     * 自己
+     * 获取所有的角色权限路由
      *
      * @return array
      */
@@ -318,9 +337,10 @@ class AuthItem extends Model
     }
 
     /**
-     * 该用户的身份
+     * 根据用户查询角色权限
      *
      * @param int $id 用户ID
+     *
      * @return array
      */
     public static function getItemByUser($id)
@@ -342,10 +362,5 @@ class AuthItem extends Model
             'permission' => $permission,
             'route' => $route,
         ];
-    }
-
-    public function getRoute()
-    {
-
     }
 }

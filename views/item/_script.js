@@ -13,7 +13,7 @@ $('.btn-assign').click(function () {
     var type = $this.data('type');
     var items = $('select.list[data-target="' + target + '"]').val();
 
-    if (type == 0 && items && items.length) {
+    if (type == 'show' && items && items.length) {
         $this.children('i.glyphicon-refresh-animate').show();
         $.post($this.attr('href'), {items: items}, function (r) {
             updateItems(r);
@@ -29,12 +29,12 @@ $('.btn-assign').click(function () {
         }
 
         $.each(items, function (index, value) {
-            if (type == 1) {
+            if (type == 'assign') {
                 $("input[name='availableItem[]'][value='" + value + "']").remove();
                 str = "<input type='hidden' name='assignedItem[]' value=" + value + ">";
                 r.assigned[value] = r.available[value];
                 delete r.available[value];
-            } else if (type == 2) {
+            } else if (type == 'remove') {
                 $("input[name='assignedItem[]'][value='" + value + "']").remove();
                 str = "<input type='hidden' name='availableItem[]' value=" + value + ">";
                 r.available[value] = r.assigned[value];

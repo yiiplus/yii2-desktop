@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'labelOptions' => ['class' => 'col-sm-2 control-label'],
             ],
         ]); ?>
-        <?= Html::errorSummary($model) ?>
         <?= $form->field($model, 'username', [
             'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>{input}</div>',
         ])?>

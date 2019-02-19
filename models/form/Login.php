@@ -70,9 +70,7 @@ class Login extends Model
             $user = $this->getUser();
             if (Yii::$app->getUser()->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0)) {
                 $user->last_login_at = time();
-                $user->password = (string)time();
-                $user->repassword = (string)time();
-                $user->save();
+                $user->save(false);
                 return true;
             }
         } else {

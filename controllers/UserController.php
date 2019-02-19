@@ -12,25 +12,26 @@
 namespace yiiplus\desktop\controllers;
 
 use Yii;
+use yii\bootstrap\Button;
+use yii\rbac\Item;
+use yii\helpers\Html;
+use yii\web\Controller;
+use yii\mail\BaseMailer;
+use yii\web\UploadedFile;
+use yii\base\UserException;
+use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\base\InvalidParamException;
-use yii\base\UserException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\mail\BaseMailer;
 use yiiplus\desktop\models\form\Login;
 use yiiplus\desktop\models\User;
-use yiiplus\desktop\models\searchs\User as UserSearch;
 use yiiplus\desktop\components\Helper;
 use yiiplus\desktop\models\form\Signup;
 use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\models\Assignment;
 use yiiplus\desktop\models\AuthItem;
-use yii\web\UploadedFile;
-use yii\rbac\Item;
-use yii\helpers\Html;
+use yiiplus\desktop\models\searchs\User as UserSearch;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -39,6 +40,11 @@ class UserController extends Controller
 {
     private $_oldMailPath;
 
+    /**
+     * Returns a list of behaviors that this component should behave as.
+     *
+     * @return array the behavior configurations.
+     */
     public function behaviors()
     {
         return [
@@ -75,6 +81,11 @@ class UserController extends Controller
         return parent::afterAction($action, $result);
     }
 
+    /**
+     * 用户列表
+     * 
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -96,11 +107,11 @@ class UserController extends Controller
                         'field' => 'avatar',
                         'value' => function ($row, $pk, $index) {
                             return Html::img(
-                                Yii::$app->request->hostInfo . '/' . $row['avatar'],
+                                $row['avatar'] ? Yii::$app->request->hostInfo . '/' . $row['avatar'] : Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist') . User::DEFAULT_AVATAR_URL,
                                 [
-                                    'class' => 'img',
-                                    'width' => 120,
-                                    'height' => 120,
+                                    'class' => 'img-circle',
+                                    'width' => 84,
+                                    'height' => 84,
                                 ]
                             );
                         },
@@ -166,6 +177,11 @@ class UserController extends Controller
         ];
     }
 
+    /**
+     * 登录
+     * 
+     * @return string|\yii\web\Response
+     */
     public function actionLogin()
     {
         if (!Yii::$app->getUser()->isGuest) {
@@ -180,6 +196,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 用户退出
+     * 
+     * @return \yii\web\Response
+     */
     public function actionLogout()
     {
         Yii::$app->getUser()->logout();
@@ -187,6 +208,11 @@ class UserController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * 用户首页
+     * 
+     * @return string
+     */
     public function actionIndex()
     {
         $searchModel = new UserSearch();
@@ -198,16 +224,30 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * 用户详情
+     * 
+     * @param int $id 用户ID
+     * 
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionView($id)
     {
         return $this->render('view', ['model' => $this->findModel($id)]);
     }
 
+    /**
+     * 新增用户
+     * 
+     * @return string|\yii\web\Response
+     * @throws \yii\base\Exception
+     */
     public function actionCreate()
     {
         $model = new User();
         if ($model->load(Yii::$app->getRequest()->post())) {
-            //是否上传图片
+            // 是否上传图片
             $avatar = UploadedFile::getInstance($model, 'avatar');
             if ($avatar) {
                 $folder = date('Ymd') . '/';
@@ -221,7 +261,6 @@ class UserController extends Controller
             }
             $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
             $model->auth_key = Yii::$app->security->generateRandomString();
-            $model->last_login_at = time();
             $ownRole = $model->role ? $model->role : [];
             $ownPermission = $model->permission ? $model->permission : [];
 
@@ -235,19 +274,24 @@ class UserController extends Controller
             }
         }
         $allItems = AuthItem::getAllItems();
-        $ownItem = AuthItem::getItemByUser($model->id);
-        $model->role = $ownItem['role'];
-        $model->permission = $ownItem['permission'];
         return $this->render('create', ['model' => $model, 'roles' => $allItems['roles'], 'permissions' => $allItems['permissions']]);
     }
 
+    /**
+     * 修改用户
+     * 
+     * @param int $id 用户ID
+     * 
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         $model->type = Item::TYPE_ROLE;
         $assignment = new Assignment($model->id);
-        if ($model->load(Yii::$app->request->post())) {
-            //是否上传图片
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // 是否上传图片
             $avatar = UploadedFile::getInstance($model, 'avatar');
             if ($avatar) {
                 $folder = date('Ymd') . '/';
@@ -259,12 +303,12 @@ class UserController extends Controller
                 $avatar->saveAs($path);
                 $model->avatar = $path;
             }
-            //密码和数据库不一致则为修改密码
+            // 密码和数据库不一致则为修改密码
             if ($model->password != $model->password_hash) {
-                $model->password_hash = $model->setPassword($model->password);
+                $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
             }
 
-            //新的角色权限列表
+            // 新的角色权限列表
             $old = array_keys($assignment->getItems()['assigned']);
             if ($old) {
                 $assignment->revoke($old);
@@ -296,6 +340,76 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 修改自己的资料
+     * 
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionProfile()
+    {
+        $model = $this->findModel(Yii::$app->user->identity->id);
+        $model->type = Item::TYPE_ROLE;
+        $assignment = new Assignment($model->id);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // 是否上传图片
+            $avatar = UploadedFile::getInstance($model, 'avatar');
+            if ($avatar) {
+                $folder = date('Ymd') . '/';
+                if (!is_dir($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+                $name = md5($model->nickname) . '.' . $avatar->getExtension();
+                $path = $folder . $name;
+                $avatar->saveAs($path);
+                $model->avatar = $path;
+            }
+            // 密码和数据库不一致则为修改密码
+            if ($model->password != $model->password_hash) {
+                $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+            }
+
+            //新的角色权限列表
+            $old = array_keys($assignment->getItems()['assigned']);
+            if ($old) {
+                $assignment->revoke($old);
+            }
+
+            $ownRole = $model->role ? $model->role : [];
+            $ownPermission = $model->permission ? $model->permission : [];
+            $new = array_merge($ownRole, $ownPermission);
+            if ($new) {
+                $assignment->assign($new);
+            }
+
+            if ($model->save()) {
+                Helper::invalidate();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->password = $model->password_hash;
+            $model->repassword = $model->password_hash;
+            if ($model->avatar) {
+                $model->avatar = Yii::$app->request->hostInfo . '/' . $model->avatar;
+            }
+
+            $allItems = AuthItem::getAllItems();
+            $ownItem = AuthItem::getItemByUser($model->id);
+            $model->role = $ownItem['role'];
+            $model->permission = $ownItem['permission'];
+            return $this->render('profile', ['model' => $model, 'assignment' => $assignment, 'roles' => $allItems['roles'], 'permissions' => $allItems['permissions']]);
+        }
+    }
+
+    /**
+     * 删除用户
+     * 
+     * @param int $id 用户ID
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();

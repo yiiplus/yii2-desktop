@@ -27,7 +27,9 @@ class RuleController extends Controller
 {
 
     /**
-     * @inheritdoc
+     * Returns a list of behaviors that this component should behave as.
+     *
+     * @return array the behavior configurations.
      */
     public function behaviors()
     {

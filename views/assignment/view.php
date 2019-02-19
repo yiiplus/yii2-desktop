@@ -30,7 +30,6 @@ $opts = Json::htmlEncode([
 ]);
 $this->registerJs("var _opts = {$opts};");
 $this->registerJs($this->render('_script.js'));
-$this->registerJsFile("@web/assets/1b5abb4b/jquery-1.js");
 $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>';
 ?>
 

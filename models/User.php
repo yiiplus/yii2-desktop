@@ -25,6 +25,7 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 10;
+    const DEFAULT_AVATAR_URL = '/img/user2-160x160.jpg';
     public $password;
     public $repassword;
     public $role;
@@ -32,7 +33,9 @@ class User extends ActiveRecord implements IdentityInterface
     public $type;
 
     /**
-     * @inheritdoc
+     * Declares the name of the database table associated with this AR class.
+     *
+     * @return string the table name
      */
     public static function tableName()
     {
@@ -50,7 +53,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -60,16 +65,18 @@ class User extends ActiveRecord implements IdentityInterface
 
             ['username', 'required'],
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'unique', 'message' => '登录名已存在'],
+            ['username', 'string', 'min' => 2, 'max' => 10],
 
             ['nickname', 'required'],
             ['nickname', 'filter', 'filter' => 'trim'],
+            ['nickname', 'unique', 'message' => '昵称已存在'],
+            ['nickname', 'string', 'min' => 2, 'max' => 10],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'yiiplus\desktop\models\User', 'message' => '邮箱已存在'],
 
             [['password', 'repassword'], 'required'],
             ['password', 'string', 'min' => 6],
@@ -80,7 +87,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {

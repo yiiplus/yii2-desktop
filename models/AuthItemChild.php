@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models;
 
@@ -6,17 +15,13 @@ use Yii;
 
 /**
  * This is the model class for table "auth_item_child".
- *
- * @property string $parent
- * @property string $child
- *
- * @property AuthItem $parent0
- * @property AuthItem $child0
  */
 class AuthItemChild extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Declares the name of the database table associated with this AR class.
+     *
+     * @return string the table name
      */
     public static function tableName()
     {
@@ -24,7 +29,9 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -38,7 +45,9 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {

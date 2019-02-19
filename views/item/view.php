@@ -55,14 +55,14 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
                 <?=Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => $model->name], [
                     'class' => 'btn btn-success btn-assign',
                     'data-target' => 'available',
-                    'data-type' => $this->context->action->id == 'view' ? 0 : 1,
+                    'data-type' => $this->context->action->id == 'view' ? 'show' : 'assign',
                     'title' => Yii::t('yiiplus/desktop', '分配'),
                 ]);?>
                 <br><br>
                 <?=Html::a('&lt;&lt;' . $animateIcon, ['remove', 'id' => $model->name], [
                     'class' => 'btn btn-danger btn-assign',
                     'data-target' => 'assigned',
-                    'data-type' => $this->context->action->id == 'view' ? 0 : 2,
+                    'data-type' => $this->context->action->id == 'view' ? 'show' : 'remove',
                     'title' => Yii::t('yiiplus/desktop', '移除'),
                 ]);?>
             </div>

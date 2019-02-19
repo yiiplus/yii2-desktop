@@ -31,7 +31,9 @@ class AssignmentController extends Controller
     public $extraColumns = [];
 
     /**
-     * @inheritdoc
+     * Initializes the object.
+     * This method is invoked at the end of the constructor after the object is initialized with the
+     * given configuration.
      */
     public function init()
     {
@@ -43,7 +45,9 @@ class AssignmentController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * Returns a list of behaviors that this component should behave as.
+     *
+     * @return array the behavior configurations.
      */
     public function behaviors()
     {

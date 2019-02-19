@@ -1,4 +1,13 @@
 <?php
+/**
+ * yiiplus/yii2-desktop
+ *
+ * @category  PHP
+ * @package   Yii2
+ * @copyright 2018-2019 YiiPlus Ltd
+ * @license   https://github.com/yiiplus/yii2-desktop/licence.txt Apache 2.0
+ * @link      http://www.yiiplus.com
+ */
 
 namespace yiiplus\desktop\models;
 
@@ -12,21 +21,6 @@ use yii\rbac\Item as It;
 
 /**
  * This is the model class for table "auth_item".
- *
- * @property string $name
- * @property int $type
- * @property string $description
- * @property string $rule_name
- * @property resource $data
- * @property int $created_at
- * @property int $updated_at
- *
- * @property AuthAssignment[] $authAssignments
- * @property AuthRule $ruleName
- * @property AuthItemChild[] $authItemChildren
- * @property AuthItemChild[] $authItemChildren0
- * @property Item[] $children
- * @property Item[] $parents
  */
 class Item extends ActiveRecord
 {
@@ -38,7 +32,9 @@ class Item extends ActiveRecord
     const TYPE_PERMISSION = 'permission';
 
     /**
-     * {@inheritdoc}
+     * Declares the name of the database table associated with this AR class.
+     *
+     * @return string the table name
      */
     public static function tableName()
     {
@@ -46,12 +42,15 @@ class Item extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
         return [
             [['name', 'type'], 'required'],
+            ['name', 'match', 'not' => 'true', 'pattern' => '/^\/.*$/', 'message' => '不以/开头'],
             [['type', 'created_at', 'updated_at'], 'integer'],
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64],
@@ -62,7 +61,9 @@ class Item extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -81,8 +82,10 @@ class Item extends ActiveRecord
     }
 
     /**
-     * 自己
-     *
+     * 获取子类
+     * 
+     * @param int $id item-id
+     * 
      * @return array
      */
     public static function getChild($id)
@@ -110,10 +113,18 @@ class Item extends ActiveRecord
         ];
     }
 
+    /**
+     * 搜索
+     * 
+     * @param array $params 搜索条件
+     * 
+     * @return \yii\db\ActiveQuery
+     */
     public function search($params)
     {
         $query = self::find();
         $query->joinWith('authItemChildren');
+        $query->groupBy('name');
         $attributes = array_keys($this->attributes);
         Yii::$app->controller->id == self::TYPE_ROLE ? $query->where(['type' => It::TYPE_ROLE]) : $query->where(['type' => It::TYPE_PERMISSION]);
         if (Yii::$app->controller->id == 'permission') {
