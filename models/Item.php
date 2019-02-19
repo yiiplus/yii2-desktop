@@ -24,11 +24,29 @@ use yii\rbac\Item as It;
  */
 class Item extends ActiveRecord
 {
+    /**
+     * 角色
+     */
     public $role;
+
+    /**
+     * 路由
+     */
     public $route;
+
+    /**
+     * 权限
+     */
     public $permission;
 
+    /**
+     * 角色类型
+     */
     const TYPE_ROLE = 'role';
+
+    /**
+     * 权限类型
+     */
     const TYPE_PERMISSION = 'permission';
 
     /**
@@ -146,6 +164,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联授权项目
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getAuthAssignments()
@@ -154,6 +174,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联规则
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getRuleName()
@@ -162,6 +184,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联子类项目
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getAuthItemChildren()
@@ -170,6 +194,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联子类项目
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getAuthItemChildren0()
@@ -178,6 +204,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联子类项目
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getChildren()
@@ -186,6 +214,8 @@ class Item extends ActiveRecord
     }
 
     /**
+     * 关联父类项目
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getParents()

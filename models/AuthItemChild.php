@@ -58,6 +58,8 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
+     * 关联父类
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getParent0()
@@ -66,6 +68,8 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
+     * 关联子类
+     * 
      * @return \yii\db\ActiveQuery
      */
     public function getChild0()

@@ -20,14 +20,30 @@ use yiiplus\desktop\models\User;
  */
 class Login extends Model
 {
+    /**
+     * 用户名
+     */
     public $username;
+
+    /**
+     * 密码
+     */
     public $password;
+
+    /**
+     * 状态
+     */
     public $rememberMe = true;
 
+    /**
+     * @var bool 
+     */
     private $_user = false;
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {

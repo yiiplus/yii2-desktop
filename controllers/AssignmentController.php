@@ -23,17 +23,42 @@ use yii\filters\VerbFilter;
  */
 class AssignmentController extends Controller
 {
+    /**
+     * 用户类
+     */
     public $userClassName;
+
+    /**
+     * id
+     */
     public $idField = 'id';
+
+    /**
+     * username
+     */
     public $usernameField = 'username';
+
+    /**
+     * fullnameField 
+     */
     public $fullnameField;
+
+    /**
+     * searchClass 
+     */
     public $searchClass;
+
+    /**
+     * extraColumns
+     */
     public $extraColumns = [];
 
     /**
      * Initializes the object.
      * This method is invoked at the end of the constructor after the object is initialized with the
      * given configuration.
+     * 
+     * @return null
      */
     public function init()
     {
@@ -65,6 +90,7 @@ class AssignmentController extends Controller
 
     /**
      * Lists all Assignment models.
+     * 
      * @return mixed
      */
     public function actionIndex()
@@ -74,7 +100,9 @@ class AssignmentController extends Controller
 
     /**
      * Displays a single Assignment model.
-     * @param  integer $id
+     * 
+     * @param  integer $id ID
+     * 
      * @return mixed
      */
     public function actionView($id)
@@ -91,7 +119,9 @@ class AssignmentController extends Controller
 
     /**
      * Assign items
-     * @param string $id
+     * 
+     * @param string $id ID
+     * 
      * @return array
      */
     public function actionAssign($id)
@@ -105,7 +135,9 @@ class AssignmentController extends Controller
 
     /**
      * Assign items
-     * @param string $id
+     * 
+     * @param string $id ID
+     * 
      * @return array
      */
     public function actionRevoke($id)
@@ -120,7 +152,9 @@ class AssignmentController extends Controller
     /**
      * Finds the Assignment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param  integer $id
+     * 
+     * @param  integer $id ID
+     * 
      * @return Assignment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

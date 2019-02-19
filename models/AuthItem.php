@@ -24,22 +24,53 @@ use yii\rbac\Item;
  */
 class AuthItem extends Model
 {
-    public $name;
-    public $type;
-    public $description;
-    public $ruleName;
-    public $data;
-    public $availableItem;
-    public $assignedItem;
     /**
-     * @var Item
+     * 名称
+     */
+    public $name;
+
+    /**
+     * 类型
+     */
+    public $type;
+
+    /**
+     * 描述
+     */
+    public $description;
+
+    /**
+     * 规则名称
+     */
+    public $ruleName;
+
+    /**
+     * 数据
+     */
+    public $data;
+
+    /**
+     * 可获得的类目
+     */
+    public $availableItem;
+
+    /**
+     * 授权的类目
+     */
+    public $assignedItem;
+    
+    /**
+     * Item
      */
     private $_item;
 
     /**
      * Initialize object
-     * @param Item $item
-     * @param array $config
+     * 
+     * @param Item  $item   项目
+     * @param array $config 配置
+     * 
+     * @return null
      */
     public function __construct($item = null, $config = [])
     {
@@ -55,7 +86,9 @@ class AuthItem extends Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -74,7 +107,9 @@ class AuthItem extends Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -94,6 +129,8 @@ class AuthItem extends Model
 
     /**
      * Check role is unique
+     * 
+     * @return null
      */
     public function checkUnique()
     {
@@ -111,6 +148,8 @@ class AuthItem extends Model
 
     /**
      * Check for rule
+     *
+     * @return null
      */
     public function checkRule()
     {
@@ -132,6 +171,7 @@ class AuthItem extends Model
 
     /**
      * Check if is new record.
+     * 
      * @return boolean
      */
     public function getIsNewRecord()
@@ -141,7 +181,9 @@ class AuthItem extends Model
 
     /**
      * Find role
-     * @param string $id
+     * 
+     * @param string $id ID
+     * 
      * @return null|\self
      */
     public static function find($id)
@@ -156,6 +198,7 @@ class AuthItem extends Model
 
     /**
      * Save role to [[\yii\rbac\authManager]]
+     * 
      * @return boolean
      */
     public function save()
@@ -191,7 +234,9 @@ class AuthItem extends Model
 
     /**
      * Adds an item as a child of another item.
-     * @param array $items
+     * 
+     * @param array $items 类目
+     * 
      * @return int
      */
     public function addChildren($items)
@@ -220,7 +265,9 @@ class AuthItem extends Model
 
     /**
      * Remove an item as a child of another item.
-     * @param array $items
+     * 
+     * @param array $items 类目
+     * 
      * @return int
      */
     public function removeChildren($items)
@@ -249,6 +296,7 @@ class AuthItem extends Model
 
     /**
      * Get items
+     * 
      * @return array
      */
     public function getItems()
@@ -281,6 +329,7 @@ class AuthItem extends Model
 
     /**
      * Get item
+     * 
      * @return Item
      */
     public function getItem()
@@ -290,7 +339,9 @@ class AuthItem extends Model
 
     /**
      * Get type name
-     * @param  mixed $type
+     * 
+     * @param  mixed $type 类型
+     * 
      * @return string|array
      */
     public static function getTypeName($type = null)

@@ -26,6 +26,11 @@ use yiiplus\desktop\models\Log as DesktopLog;
  */
 class LogController extends Controller
 {
+    /**
+     * 首页渲染
+     * 
+     * @return array
+     */
     public function actions()
     {
        return [
@@ -84,7 +89,7 @@ class LogController extends Controller
     /**
      * Displays a single DesktopLog model.
      *
-     * @param integer $id
+     * @param integer $id ID
      *
      * @return mixed
      */
@@ -99,7 +104,7 @@ class LogController extends Controller
      * Finds the DesktopLog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
-     * @param integer $id
+     * @param integer $id ID
      *
      * @return DesktopLog the loaded model
      * @throws NotFoundHttpException if the model cannot be found

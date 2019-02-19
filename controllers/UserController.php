@@ -38,6 +38,9 @@ use yiiplus\desktop\models\searchs\User as UserSearch;
  */
 class UserController extends Controller
 {
+    /**
+     * oldMailPath 
+     */
     private $_oldMailPath;
 
     /**
@@ -60,6 +63,13 @@ class UserController extends Controller
         ];
     }
 
+    /**
+     * This method is invoked right before an action is executed.
+     *
+     * @param Action $action the action to be executed.
+     *
+     * @return bool whether the action should continue to run.
+     */
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
@@ -73,6 +83,14 @@ class UserController extends Controller
         return false;
     }
 
+    /**
+     * This method is invoked right after an action is executed.
+     *
+     * @param Action $action the action just executed.
+     * @param mixed $result the action return result.
+     * 
+     * @return mixed the processed action result.
+     */
     public function afterAction($action, $result)
     {
         if ($this->_oldMailPath !== null) {
@@ -405,6 +423,7 @@ class UserController extends Controller
      * 删除用户
      * 
      * @param int $id 用户ID
+     *
      * @return \yii\web\Response
      * @throws NotFoundHttpException
      * @throws \Throwable
@@ -418,7 +437,9 @@ class UserController extends Controller
 
     /**
      * 重置密码
-     * @param integer $id
+     *
+     * @param integer $id ID
+     *
      * @return type
      * @throws UserException
      * @throws NotFoundHttpException
@@ -430,7 +451,9 @@ class UserController extends Controller
 
     /**
      * 激活用户
-     * @param integer $id
+     *
+     * @param integer $id ID
+     *
      * @return type
      * @throws UserException
      * @throws NotFoundHttpException
@@ -450,7 +473,9 @@ class UserController extends Controller
 
     /**
      * 禁用用户
-     * @param integer $id
+     *
+     * @param integer $id ID
+     *
      * @return type
      * @throws UserException
      * @throws NotFoundHttpException
@@ -471,7 +496,9 @@ class UserController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     *
+     * @param integer $id ID
+     *
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

@@ -47,7 +47,9 @@ class BizRule extends \yii\base\Model
 
     /**
      * Initilaize object
-     * @param \yii\rbac\Rule $item
+     * 
+     * @param \yii\rbac\Rule $item 类目
+     * 
      * @param array $config
      */
     public function __construct($item, $config = [])
@@ -61,7 +63,9 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -74,6 +78,8 @@ class BizRule extends \yii\base\Model
 
     /**
      * Validate class exists
+     * 
+     * @return null
      */
     public function classExists()
     {
@@ -90,7 +96,9 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -102,6 +110,7 @@ class BizRule extends \yii\base\Model
 
     /**
      * Check if new record.
+     * 
      * @return boolean
      */
     public function getIsNewRecord()
@@ -111,7 +120,9 @@ class BizRule extends \yii\base\Model
 
     /**
      * Find model by id
-     * @param type $id
+     * 
+     * @param type $id ID
+     * 
      * @return null|static
      */
     public static function find($id)
@@ -126,6 +137,7 @@ class BizRule extends \yii\base\Model
 
     /**
      * Save model to authManager
+     * 
      * @return boolean
      */
     public function save()
@@ -156,6 +168,7 @@ class BizRule extends \yii\base\Model
 
     /**
      * Get item
+     * 
      * @return Item
      */
     public function getItem()

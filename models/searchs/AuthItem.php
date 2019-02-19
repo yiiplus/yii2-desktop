@@ -22,16 +22,40 @@ use yii\rbac\Item;
  */
 class AuthItem extends Model
 {
+    /**
+     * 路由类型
+     */
     const TYPE_ROUTE = 101;
 
+    /**
+     * 名称
+     */
     public $name;
+
+    /**
+     * 类型
+     */
     public $type;
+
+    /**
+     * 描述
+     */
     public $description;
+
+    /**
+     * 规则名称
+     */
     public $ruleName;
+
+    /**
+     * 数据
+     */
     public $data;
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -42,7 +66,9 @@ class AuthItem extends Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -58,7 +84,9 @@ class AuthItem extends Model
 
     /**
      * Search authitem
-     * @param array $params
+     * 
+     * @param array $params 搜索条件
+     * 
      * @return \yii\data\ActiveDataProvider|\yii\data\ArrayDataProvider
      */
     public function search($params)

@@ -23,13 +23,44 @@ use yiiplus\desktop\components\Configs;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    /**
+     * 激活状态
+     */
     const STATUS_INACTIVE = 0;
+
+    /**
+     * 未激活状态
+     */
     const STATUS_ACTIVE = 10;
+
+    /**
+     * 默认头像
+     */
     const DEFAULT_AVATAR_URL = '/img/user2-160x160.jpg';
+
+    /**
+     * 密码
+     */
     public $password;
+
+    /**
+     * 确认密码
+     */
     public $repassword;
+
+    /**
+     * 角色
+     */
     public $role;
+
+    /**
+     * 权限
+     */
     public $permission;
+
+    /**
+     * 类型
+     */
     public $type;
 
     /**
@@ -43,7 +74,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * Makes sure that the behaviors declared in [[behaviors()]] are attached to this component.
+     * 
+     * @return array
      */
     public function behaviors()
     {
@@ -110,7 +143,11 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * 根据ID获取用户信息
+     * 
+     * @param int|string $id 用户ID
+     * 
+     * @return IdentityInterface|User|null
      */
     public static function findIdentity($id)
     {
@@ -118,7 +155,13 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * 根据用户token获取用户信息
+     * 
+     * @param mixed string $token TOKEN
+     * @param null  int    $type  类型
+     * 
+     * @return void|IdentityInterface
+     * @throws NotSupportedException
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -128,7 +171,8 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Finds user by username
      *
-     * @param string $username
+     * @param string $username 用户名
+     * 
      * @return static|null
      */
     public static function findByUsername($username)
@@ -140,6 +184,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Finds user by password reset token
      *
      * @param string $token password reset token
+     * 
      * @return static|null
      */
     public static function findByPasswordResetToken($token)
@@ -158,6 +203,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Finds out if password reset token is valid
      *
      * @param string $token password reset token
+     * 
      * @return boolean
      */
     public static function isPasswordResetTokenValid($token)
@@ -172,7 +218,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * 获取ID
+     * 
+     * @return int|mixed|string
      */
     public function getId()
     {
@@ -180,7 +228,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * 获取authkey
+     * 
+     * @return mixed|string
      */
     public function getAuthKey()
     {
@@ -188,7 +238,11 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * 验证authkey
+     * 
+     * @param string $authKey authkey
+     * 
+     * @return bool
      */
     public function validateAuthKey($authKey)
     {
@@ -199,6 +253,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Validates password
      *
      * @param string $password password to validate
+     * 
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
@@ -210,6 +265,8 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
+     * 
+     *  @return null
      */
     public function setPassword($password)
     {
@@ -218,6 +275,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates "remember me" authentication key
+     * 
+     *  @return null
      */
     public function generateAuthKey()
     {
@@ -226,6 +285,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates new password reset token
+     * 
+     *  @return null
      */
     public function generatePasswordResetToken()
     {
@@ -234,12 +295,19 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Removes password reset token
+     * 
+     * @return null
      */
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
     }
 
+    /**
+     * Returns the database connection used by this AR class.
+     *
+     * @return null|object|\yii\db\Connection
+     */
     public static function getDb()
     {
         return Configs::userDb();
