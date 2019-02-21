@@ -31,12 +31,12 @@ $('.btn-assign').click(function () {
         $.each(items, function (index, value) {
             if (type == 'assign') {
                 $("input[name='availableItem[]'][value='" + value + "']").remove();
-                str = "<input type='hidden' name='assignedItem[]' value=" + value + ">";
+                str = "<input type='hidden' name='AuthItem[assignedItem][]' value=" + value + ">";
                 r.assigned[value] = r.available[value];
                 delete r.available[value];
             } else if (type == 'remove') {
                 $("input[name='assignedItem[]'][value='" + value + "']").remove();
-                str = "<input type='hidden' name='availableItem[]' value=" + value + ">";
+                str = "<input type='hidden' name='AuthItem[availableItem][]' value=" + value + ">";
                 r.available[value] = r.assigned[value];
                 delete r.assigned[value]
             }
