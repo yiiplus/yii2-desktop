@@ -227,22 +227,6 @@ class UserController extends Controller
     }
 
     /**
-     * 用户首页
-     * 
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
      * 用户详情
      * 
      * @param int $id 用户ID
