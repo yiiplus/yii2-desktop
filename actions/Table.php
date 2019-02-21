@@ -49,7 +49,7 @@ class Table extends \yii\base\Action
         'data-advanced-search' => 'true',
         'data-id-table' => 'advancedTable',
     ];
-    
+
     /**
      * @var string call a bootstrap table with id table via JavaScript.
      */
@@ -125,22 +125,22 @@ class Table extends \yii\base\Action
                     throw new InvalidConfigException(Yii::t('yiiplus/desktop', '该列的格式必须是 "attribute", "attribute:format", "attribute:format:label"三种中的一种'));
                 }
                 $column = [
-                    'field'  => $matches[1],
+                    'field' => $matches[1],
                     'format' => isset($matches[3]) ? $matches[3] : 'text',
-                    'title'  => isset($matches[5]) ? $matches[5] : $this->model->getAttributeLabel($matches[1]),
+                    'title' => isset($matches[5]) ? $matches[5] : $this->model->getAttributeLabel($matches[1]),
                 ];
             }
 
             if (isset($column['field'])) {
                 // 默认标题
-                if(!isset($column['title'])) {
+                if (!isset($column['title'])) {
                     $column['title'] = $this->model->getAttributeLabel($column['field']);
                 }
 
                 // 默认操作
-                if(substr($column['field'], 0, 1) == '_') {
+                if (substr($column['field'], 0, 1) == '_') {
                     $column = array_merge([
-                        'value' => function($row, $pk, $index) {
+                        'value' => function ($row, $pk, $index) {
                             static $object;
                             if (is_null($object)) {
                                 $object = Yii::createObject(['class' => 'yiiplus\desktop\widgets\table\ActionColumn']);
@@ -164,7 +164,7 @@ class Table extends \yii\base\Action
     public function run()
     {
         if (Yii::$app->request->isAjax) {
-            return $this->query(); 
+            return $this->query();
         }
         return $this->view();
     }
@@ -175,7 +175,7 @@ class Table extends \yii\base\Action
     protected function view()
     {
         // 标题
-        if(empty($this->title)) {
+        if (empty($this->title)) {
             $this->title = $this->model->formName();
         }
 
@@ -188,11 +188,11 @@ class Table extends \yii\base\Action
 
         return $this->controller->render($this->viewName, [
             'id' => $this->id,
-            'title'   => $this->title,
+            'title' => $this->title,
             'options' => $this->options,
             'columns' => $this->columns,
             'toolbar' => $this->toolbar,
-            'table'   => Html::tag('table', '', $this->_options),
+            'table' => Html::tag('table', '', $this->_options),
         ]);
     }
 
@@ -230,7 +230,7 @@ class Table extends \yii\base\Action
 
             // 数据格式化
             foreach ($this->columns as $column) {
-                if(empty($column['field'])) {
+                if (empty($column['field'])) {
                     continue;
                 }
 
@@ -242,7 +242,7 @@ class Table extends \yii\base\Action
                         $value = call_user_func($column['value'], $row, $pk, $index);
                     }
                 }
-                if(isset($column['format'])) {
+                if (isset($column['format'])) {
                     $value = $this->formatter->format($value, $column['format']);
                 }
                 $row[$column['field']] = $value;
@@ -254,14 +254,15 @@ class Table extends \yii\base\Action
             }
         }
 
-        return json_encode(['total' => $this->pagination->totalCount, 'rows'  => $rows]);
+        return json_encode(['total' => $this->pagination->totalCount, 'rows' => $rows]);
     }
 
     /**
      * 执行查询并将所有结果作为数组返回
      * @return array 查询结果 如果查询结果为空，则返回空数组。
      */
-    private function _rows() {
+    private function _rows()
+    {
         $rows = [];
         // 数据查询
         if (method_exists($this->model, 'search')) {
@@ -271,7 +272,7 @@ class Table extends \yii\base\Action
             if (Yii::$app->request->get('filter')) { // 高级搜索
                 $filter = json_decode(Yii::$app->request->get('filter'), true);
                 foreach ($this->columns as $column) {
-                    if(empty($column['field']) || !isset($filter[$column['field']])) {
+                    if (empty($column['field']) || !isset($filter[$column['field']])) {
                         continue;
                     }
                     if (!isset($column['searchable']) || $column['searchable'] === true) {
@@ -282,7 +283,7 @@ class Table extends \yii\base\Action
                 }
             } elseif (Yii::$app->request->get('search')) { // 快速搜索
                 foreach ($this->columns as $column) {
-                    if(empty($column['field'])) {
+                    if (empty($column['field'])) {
                         continue;
                     }
                     if (!isset($column['searchable']) || $column['searchable'] === true) {
@@ -295,7 +296,8 @@ class Table extends \yii\base\Action
         }
 
         // 分页
-        if (($pagination = $this->getPagination()) !== false) { 
+        if (($pagination = $this->getPagination()) !== false) {
+            $pagination->pageSizeLimit = [1, Yii::$app->request->get('limit', 10)];
             $pagination->totalCount = $query->count();
             if ($pagination->totalCount === 0) {
                 return $rows;
@@ -304,10 +306,10 @@ class Table extends \yii\base\Action
         }
 
         // 排序
-        if (($sort = $this->getSort()) !== false) { 
+        if (($sort = $this->getSort()) !== false) {
             $query->addOrderBy($sort->getOrders());
         }
-        
+
         $rows = $query->asArray()->all();
         return $rows;
     }
@@ -346,7 +348,7 @@ class Table extends \yii\base\Action
                 'class' => Pagination::className(),
                 'defaultPageSize' => Yii::$app->request->get('limit', 10),
             ];
-            if(Yii::$app->request->get('offset')) {
+            if (Yii::$app->request->get('offset')) {
                 $config['page'] = Yii::$app->request->get('offset') / $config['defaultPageSize'];
             }
             $this->_pagination = Yii::createObject(array_merge($config, $value));
@@ -416,13 +418,13 @@ class Table extends \yii\base\Action
             $sort->enableMultiSort = true;
             $sorts = [];
             foreach ($params['multiSort'] as $v) {
-                $sorts[] = $v['sortOrder'] === 'desc' ? '-'.$v['sortName'] : $v['sortName'];
+                $sorts[] = $v['sortOrder'] === 'desc' ? '-' . $v['sortName'] : $v['sortName'];
             }
             $params[$sort->sortParam] = implode($sort->separator, $sorts);
             unset($params['multiSort']);
             Yii::$app->getRequest()->setQueryParams($params);
         } elseif (isset($params['sort'])) {
-            $params[$sort->sortParam] = $params['order'] === 'desc' ? '-'.$params['sort'] : $params['sort'];
+            $params[$sort->sortParam] = $params['order'] === 'desc' ? '-' . $params['sort'] : $params['sort'];
             unset($params['order']);
             Yii::$app->getRequest()->setQueryParams($params);
         }

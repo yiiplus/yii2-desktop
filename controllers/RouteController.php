@@ -21,6 +21,11 @@ use yii\filters\VerbFilter;
  */
 class RouteController extends Controller
 {
+    /**
+     * Returns a list of behaviors that this component should behave as.
+     *
+     * @return array the behavior configurations.
+     */
     public function behaviors()
     {
         return [
@@ -37,6 +42,7 @@ class RouteController extends Controller
     }
     /**
      * Lists all Route models.
+     * 
      * @return mixed
      */
     public function actionIndex()
@@ -48,6 +54,7 @@ class RouteController extends Controller
     /**
      * Creates a new AuthItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * 
      * @return mixed
      */
     public function actionCreate()
@@ -62,6 +69,7 @@ class RouteController extends Controller
 
     /**
      * Assign routes
+     * 
      * @return array
      */
     public function actionAssign()
@@ -75,6 +83,7 @@ class RouteController extends Controller
 
     /**
      * Remove routes
+     * 
      * @return array
      */
     public function actionRemove()
@@ -88,6 +97,7 @@ class RouteController extends Controller
 
     /**
      * Refresh cache
+     * 
      * @return type
      */
     public function actionRefresh()

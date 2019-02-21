@@ -28,6 +28,11 @@ class BizRule extends Model
      */
     public $name;
 
+    /**
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
+     */
     public function rules()
     {
         return [
@@ -36,7 +41,9 @@ class BizRule extends Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -47,7 +54,9 @@ class BizRule extends Model
 
     /**
      * Search BizRule
-     * @param array $params
+     * 
+     * @param array $params 搜索条件
+     * 
      * @return \yii\data\ActiveDataProvider|\yii\data\ArrayDataProvider
      */
     public function search($params)

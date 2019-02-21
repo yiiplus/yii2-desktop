@@ -24,16 +24,31 @@ use yii\helpers\VarDumper;
  */
 class Route extends \yii\base\Object
 {
+    /**
+     * 标签
+     */
     const CACHE_TAG = 'yiiplus.desktop.route';
 
+    /**
+     * @前缀
+     */
     const PREFIX_ADVANCED = '@';
+
+    /**
+     * /前缀
+     */
     const PREFIX_BASIC = '/';
 
+    /**
+     * route前缀
+     */
     private $_routePrefix;
 
     /**
      * Assign or remove items
-     * @param array $routes
+     * 
+     * @param array $routes 路由名
+     * 
      * @return array
      */
     public function addNew($routes)
@@ -70,7 +85,9 @@ class Route extends \yii\base\Object
 
     /**
      * Assign or remove items
-     * @param array $routes
+     * 
+     * @param array $routes 路由
+     * 
      * @return array
      */
     public function remove($routes)
@@ -89,6 +106,7 @@ class Route extends \yii\base\Object
 
     /**
      * Returns route prefix depending on the configuration.
+     * 
      * @return string Route prefix
      */
     public function getRoutePrefix()
@@ -101,7 +119,9 @@ class Route extends \yii\base\Object
 
     /**
      * Returns the correct permission name depending on the configuration.
-     * @param  string $route Route
+     * 
+     * @param  string $route Route 路由
+     * 
      * @return string        Permission name
      */
     public function getPermissionName($route)
@@ -115,6 +135,7 @@ class Route extends \yii\base\Object
 
     /**
      * Get available and assigned routes
+     * 
      * @return array
      */
     public function getRoutes()
@@ -179,6 +200,7 @@ class Route extends \yii\base\Object
 
     /**
      * Get list of application routes
+     * 
      * @return array
      */
     public function getAppRoutes($module = null)
@@ -205,7 +227,9 @@ class Route extends \yii\base\Object
 
     /**
      * Get route(s) recursive
+     * 
      * @param \yii\base\Module $module
+     * 
      * @param array $result
      */
     protected function getRouteRecursive($module, &$result)
@@ -235,10 +259,12 @@ class Route extends \yii\base\Object
 
     /**
      * Get list controller under module
-     * @param \yii\base\Module $module
-     * @param string $namespace
-     * @param string $prefix
-     * @param mixed $result
+     * 
+     * @param \yii\base\Module $module    module
+     * @param string           $namespace namespace
+     * @param string           $prefix    prefix
+     * @param mixed            $result    result
+     * 
      * @return mixed
      */
     protected function getControllerFiles($module, $namespace, $prefix, &$result)
@@ -274,10 +300,13 @@ class Route extends \yii\base\Object
 
     /**
      * Get list action of controller
-     * @param mixed $type
-     * @param string $id
-     * @param \yii\base\Module $module
-     * @param string $result
+     * 
+     * @param mixed            $type   type
+     * @param string           $id     id
+     * @param \yii\base\Module $module module
+     * @param string           $result result
+     * 
+     * @return null
      */
     protected function getControllerActions($type, $id, $module, &$result)
     {
@@ -297,8 +326,11 @@ class Route extends \yii\base\Object
 
     /**
      * Get route of action
+     * 
      * @param \yii\base\Controller $controller
      * @param array $result all controller action.
+     * 
+     * @return null
      */
     protected function getActionRoutes($controller, &$result)
     {
@@ -326,6 +358,8 @@ class Route extends \yii\base\Object
 
     /**
      * Ivalidate cache
+     * 
+     * @return null
      */
     public static function invalidate()
     {
@@ -336,6 +370,8 @@ class Route extends \yii\base\Object
 
     /**
      * Set default rule of parameterize route.
+     * 
+     * @return null
      */
     protected function setDefaultRule()
     {

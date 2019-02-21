@@ -25,7 +25,11 @@ $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box">
-    <div class="box-header"></div>
+    <div class="box-header">
+        <div id="toolbar">
+            <?= Html::a(Yii::t('yiiplus/desktop', '创建'), ['create'], ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
     <div class="box-body">
         <?php echo ToolbarView::widget($toolbar); ?>
         <?php echo $table; ?>

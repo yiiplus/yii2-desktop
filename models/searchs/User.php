@@ -22,7 +22,9 @@ use yiiplus\desktop\models\User as UserModel;
 class User extends UserModel
 {
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -33,7 +35,9 @@ class User extends UserModel
     }
 
     /**
-     * @inheritdoc
+     * Returns a list of scenarios and the corresponding active attributes.
+     *
+     * @return array a list of scenarios and the corresponding active attributes.
      */
     public function scenarios()
     {
@@ -44,7 +48,7 @@ class User extends UserModel
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param array $params 搜索条件
      *
      * @return ActiveDataProvider
      */

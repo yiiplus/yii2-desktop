@@ -20,14 +20,30 @@ use yiiplus\desktop\models\User;
  */
 class Login extends Model
 {
+    /**
+     * 用户名
+     */
     public $username;
+
+    /**
+     * 密码
+     */
     public $password;
+
+    /**
+     * 状态
+     */
     public $rememberMe = true;
-    
+
+    /**
+     * @var bool 
+     */
     private $_user = false;
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -65,8 +81,14 @@ class Login extends Model
      */
     public function login()
     {
+
         if ($this->validate()) {
-            return Yii::$app->getUser()->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            $user = $this->getUser();
+            if (Yii::$app->getUser()->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0)) {
+                $user->last_login_at = time();
+                $user->save(false);
+                return true;
+            }
         } else {
             return false;
         }

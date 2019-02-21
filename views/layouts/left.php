@@ -19,11 +19,12 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<?= Yii::$app->user->identity->avatar ? Yii::$app->request->hostInfo . '/' . Yii::$app->user->identity->avatar : $directoryAsset . '/img/user2-160x160.jpg' ?>"
+                     class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->username ?></p>
-                <a href="#"><i class="fa fa-circle text-info"></i> 超级管理员</a>
+                <p><?= Yii::$app->user->identity->nickname ? Yii::$app->user->identity->nickname : Yii::$app->user->identity->username ?></p>
+                <a href="#"><i class="fa fa-circle text-info"></i> <?= Yii::$app->user->identity->username ?></a>
             </div>
         </div>
 
@@ -31,7 +32,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
+                <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
@@ -39,39 +40,41 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
         </form>
         <!-- /.search form -->
 
-         <?php 
-            use yii\bootstrap\Nay;
-            use yiiplus\desktop\components\MenuHelper; 
-            $callback = function($menu){ 
-                $data = [];
-                if ($menu['icon'] !== '') {
-                    $icons = explode('-', $menu['icon']);
-                    $data['icon'] = isset($icons[1]) ? $icons[1] : '';
-                }
-                $items = $menu['children']; 
-                $return = [ 
-                    'label' => $menu['name'], 
-                    'url' => [$menu['route']], 
-                ]; 
-                //处理我们的配置 
-                if ($data) { 
-                    //visible 
-                    isset($data['visible']) && $return['visible'] = $data['visible']; 
-                    //icon 
-                    isset($data['icon']) && $data['icon'] && $return['icon'] = $data['icon']; 
-                    //other attribute e.g. class... 
-                    $return['options'] = $data; 
-                } 
-                //没配置图标的显示默认图标 
-                (!isset($return['icon']) || !$return['icon']) && $return['icon'] = 'circle'; 
-                $items && $return['items'] = $items; 
-                return $return; 
-            }; 
-            //这里我们对一开始写的菜单menu进行了优化
-            echo yiiplus\desktop\widgets\Menu::widget( [ 
-                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback), 
-            ] ); 
+        <?php
+
+        use yii\bootstrap\Nay;
+        use yiiplus\desktop\components\MenuHelper;
+
+        $callback = function ($menu) {
+            $data = [];
+            if ($menu['icon'] !== '') {
+                $icons = explode('-', $menu['icon']);
+                $data['icon'] = isset($icons[1]) ? $icons[1] : '';
+            }
+            $items = $menu['children'];
+            $return = [
+                'label' => $menu['name'],
+                'url' => [$menu['route']],
+            ];
+            //处理我们的配置
+            if ($data) {
+                //visible
+                isset($data['visible']) && $return['visible'] = $data['visible'];
+                //icon
+                isset($data['icon']) && $data['icon'] && $return['icon'] = $data['icon'];
+                //other attribute e.g. class...
+                $return['options'] = $data;
+            }
+            //没配置图标的显示默认图标
+            (!isset($return['icon']) || !$return['icon']) && $return['icon'] = 'circle';
+            $items && $return['items'] = $items;
+            return $return;
+        };
+        //这里我们对一开始写的菜单menu进行了优化
+        echo yiiplus\desktop\widgets\Menu::widget([
+            'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
+            'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback),
+        ]);
         ?>
 
     </section>

@@ -31,7 +31,11 @@ class Assignment extends Object
     public $user;
 
     /**
-     * @inheritdoc
+     * Constructor.
+     *
+     * @param array $config name-value pairs that will be used to initialize the object properties
+     * 
+     * @return null
      */
     public function __construct($id, $user = null, $config = array())
     {
@@ -42,7 +46,9 @@ class Assignment extends Object
 
     /**
      * Grands a roles from a user.
-     * @param array $items
+     * 
+     * @param array $items 项目
+     * 
      * @return integer number of successful grand
      */
     public function assign($items)
@@ -65,7 +71,9 @@ class Assignment extends Object
 
     /**
      * Revokes a roles from a user.
-     * @param array $items
+     * 
+     * @param array $items 项目
+     * 
      * @return integer number of successful revoke
      */
     public function revoke($items)
@@ -88,6 +96,7 @@ class Assignment extends Object
 
     /**
      * Get all available and assigned roles/permission
+     * 
      * @return array
      */
     public function getItems()
@@ -117,7 +126,11 @@ class Assignment extends Object
     }
 
     /**
-     * @inheritdoc
+     * 获取名称
+     * 
+     * @param string $name 名称
+     * 
+     * @return mixed
      */
     public function __get($name)
     {

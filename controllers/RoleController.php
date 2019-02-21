@@ -20,7 +20,9 @@ use yii\rbac\Item;
 class RoleController extends ItemController
 {
     /**
-     * @inheritdoc
+     * 标签
+     * 
+     * @return array|void
      */
     public function labels()
     {
@@ -31,7 +33,9 @@ class RoleController extends ItemController
     }
 
     /**
-     * @inheritdoc
+     * 类型
+     * 
+     * @return int
      */
     public function getType()
     {

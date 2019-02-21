@@ -20,12 +20,25 @@ use yii\base\Model;
  */
 class Signup extends Model
 {
+    /**
+     * 用户名
+     */
     public $username;
+
+    /**
+     * 邮箱
+     */
     public $email;
+
+    /**
+     * 密码
+     */
     public $password;
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {

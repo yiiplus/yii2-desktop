@@ -21,7 +21,9 @@ use yiiplus\desktop\components\Configs;
 class Log extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * Declares the name of the database table associated with this AR class.
+     *
+     * @return string the table name
      */
     public static function tableName()
     {
@@ -29,7 +31,9 @@ class Log extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -41,7 +45,9 @@ class Log extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
      */
     public function attributeLabels()
     {
@@ -56,7 +62,9 @@ class Log extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Returns a list of behaviors that this component should behave as.
+     *
+     * @return array the behavior configurations.
      */
     public function behaviors()
     {

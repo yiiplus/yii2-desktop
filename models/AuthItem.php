@@ -11,9 +11,10 @@
 
 namespace yiiplus\desktop\models;
 
+use Yii;
+use yii\debug\panels\EventPanel;
 use yiiplus\desktop\components\Configs;
 use yiiplus\desktop\components\Helper;
-use Yii;
 use yii\base\Model;
 use yii\helpers\Json;
 use yii\rbac\Item;
@@ -23,20 +24,53 @@ use yii\rbac\Item;
  */
 class AuthItem extends Model
 {
-    public $name;
-    public $type;
-    public $description;
-    public $ruleName;
-    public $data;
     /**
-     * @var Item
+     * 名称
+     */
+    public $name;
+
+    /**
+     * 类型
+     */
+    public $type;
+
+    /**
+     * 描述
+     */
+    public $description;
+
+    /**
+     * 规则名称
+     */
+    public $ruleName;
+
+    /**
+     * 数据
+     */
+    public $data;
+
+    /**
+     * 可获得的类目
+     */
+    public $availableItem;
+
+    /**
+     * 授权的类目
+     */
+    public $assignedItem;
+    
+    /**
+     * Item
      */
     private $_item;
 
     /**
      * Initialize object
-     * @param Item  $item
-     * @param array $config
+     * 
+     * @param Item  $item   项目
+     * @param array $config 配置
+     * 
+     * @return null
      */
     public function __construct($item = null, $config = [])
     {
@@ -52,7 +86,9 @@ class AuthItem extends Model
     }
 
     /**
-     * @inheritdoc
+     * Returns the validation rules for attributes.
+     *
+     * @return array validation rules
      */
     public function rules()
     {
@@ -62,14 +98,39 @@ class AuthItem extends Model
             [['name'], 'checkUnique', 'when' => function () {
                 return $this->isNewRecord || ($this->_item->name != $this->name);
             }],
+            ['name', 'match', 'not' => 'true', 'pattern' => '/^\/.*$/', 'message' => '不以/开头'],
             [['type'], 'integer'],
             [['description', 'data', 'ruleName'], 'default'],
             [['name'], 'string', 'max' => 64],
+            [['availableItem', 'assignedItem'], 'safe'],
+        ];
+    }
+
+    /**
+     * Returns the list of all attribute names of the model.
+     *
+     * @return array list of attribute names.
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('yiiplus/desktop', '名称'),
+            'type' => Yii::t('yiiplus/desktop', '类型'),
+            'description' => Yii::t('yiiplus/desktop', '描述'),
+            'ruleName' => Yii::t('yiiplus/desktop', '规则名称'),
+            'data' => Yii::t('yiiplus/desktop', '数据'),
+            'created_at' => Yii::t('yiiplus/desktop', '创建时间'),
+            'updated_at' => Yii::t('yiiplus/desktop', '更新时间'),
+            'role' => Yii::t('yiiplus/desktop', '角色'),
+            'route' => Yii::t('yiiplus/desktop', '路由'),
+            'permission' => Yii::t('yiiplus/desktop', '权限'),
         ];
     }
 
     /**
      * Check role is unique
+     * 
+     * @return null
      */
     public function checkUnique()
     {
@@ -87,6 +148,8 @@ class AuthItem extends Model
 
     /**
      * Check for rule
+     *
+     * @return null
      */
     public function checkRule()
     {
@@ -107,21 +170,8 @@ class AuthItem extends Model
     }
 
     /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'name'          => Yii::t('yiiplus/desktop', '名称'),
-            'type'          => Yii::t('yiiplus/desktop', '类型'),
-            'description'   => Yii::t('yiiplus/desktop', '描述'),
-            'ruleName'      => Yii::t('yiiplus/desktop', '规则名称'),
-            'data'          => Yii::t('yiiplus/desktop', '数据'),
-        ];
-    }
-
-    /**
      * Check if is new record.
+     * 
      * @return boolean
      */
     public function getIsNewRecord()
@@ -131,7 +181,9 @@ class AuthItem extends Model
 
     /**
      * Find role
-     * @param string $id
+     * 
+     * @param string $id ID
+     * 
      * @return null|\self
      */
     public static function find($id)
@@ -146,6 +198,7 @@ class AuthItem extends Model
 
     /**
      * Save role to [[\yii\rbac\authManager]]
+     * 
      * @return boolean
      */
     public function save()
@@ -181,7 +234,9 @@ class AuthItem extends Model
 
     /**
      * Adds an item as a child of another item.
-     * @param array $items
+     * 
+     * @param array $items 类目
+     * 
      * @return int
      */
     public function addChildren($items)
@@ -210,7 +265,9 @@ class AuthItem extends Model
 
     /**
      * Remove an item as a child of another item.
-     * @param array $items
+     * 
+     * @param array $items 类目
+     * 
      * @return int
      */
     public function removeChildren($items)
@@ -239,6 +296,7 @@ class AuthItem extends Model
 
     /**
      * Get items
+     * 
      * @return array
      */
     public function getItems()
@@ -255,11 +313,14 @@ class AuthItem extends Model
         }
 
         $assigned = [];
-        foreach ($manager->getChildren($this->_item->name) as $item) {
-            $assigned[$item->name] = $item->type == 1 ? 'role' : ($item->name[0] == '/' ? 'route' : 'permission');
-            unset($available[$item->name]);
+        if (isset($this->_item->name)) {
+            foreach ($manager->getChildren($this->_item->name) as $item) {
+                $assigned[$item->name] = $item->type == 1 ? 'role' : ($item->name[0] == '/' ? 'route' : 'permission');
+                unset($available[$item->name]);
+            }
+            unset($available[$this->name]);
         }
-        unset($available[$this->name]);
+
         return [
             'available' => $available,
             'assigned' => $assigned,
@@ -268,6 +329,7 @@ class AuthItem extends Model
 
     /**
      * Get item
+     * 
      * @return Item
      */
     public function getItem()
@@ -277,7 +339,9 @@ class AuthItem extends Model
 
     /**
      * Get type name
-     * @param  mixed $type
+     * 
+     * @param  mixed $type 类型
+     * 
      * @return string|array
      */
     public static function getTypeName($type = null)
@@ -291,5 +355,63 @@ class AuthItem extends Model
         }
 
         return $result[$type];
+    }
+
+    /**
+     * 获取所有的角色权限路由
+     *
+     * @return array
+     */
+    public static function getAllItems()
+    {
+        $manager = Configs::authManager();
+        $roles = [];
+        foreach (array_keys($manager->getRoles()) as $name) {
+            $roles[$name] = $name;
+        }
+
+        $permissions = [];
+        $route = [];
+        foreach (array_keys($manager->getPermissions()) as $name) {
+            if ($name[0] != '/') {
+                $permissions[$name] = $name;
+            } else {
+                $route[$name] = $name;
+            }
+        }
+
+        return [
+            'roles' => $roles,
+            'route' => $route,
+            'permissions' => $permissions,
+        ];
+    }
+
+    /**
+     * 根据用户查询角色权限
+     *
+     * @param int $id 用户ID
+     *
+     * @return array
+     */
+    public static function getItemByUser($id)
+    {
+        $manager = Configs::authManager();
+        $role = [];
+        $role = array_keys($manager->getRolesByUser($id));
+        $permission = [];
+        $route = [];
+        foreach (array_keys($manager->getPermissionsByUser($id)) as $name) {
+            if ($name[0] != '/') {
+                $permission[] = $name;
+            } else {
+                $route[] = $name;
+            }
+        }
+        return [
+            'role' => $role,
+            'permission' => $permission,
+            'route' => $route,
+        ];
     }
 }
