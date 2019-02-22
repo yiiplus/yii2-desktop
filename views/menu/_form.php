@@ -16,7 +16,6 @@ use yiiplus\desktop\models\Menu;
 
 $opts = Json::htmlEncode(['menus' => Menu::getMenuSource(), 'routes' => Menu::getSavedRoutes()]);
 $this->registerJs("var _opts = $opts;");
-$this->registerJs($this->render('_script.js'));
 $options = Json::htmlEncode(['source' => Menu::getSavedRoutes()]);
 $this->registerJs("$('#route').autocomplete($options);");
 ?>
