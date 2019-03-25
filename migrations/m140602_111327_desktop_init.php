@@ -57,8 +57,6 @@ class m140602_111327_desktop_init extends Migration
             "FOREIGN KEY ([[parent]]) REFERENCES {$menuTable}([[id]]) ON DELETE SET NULL ON UPDATE CASCADE",
         ], $tableOptions);
 
-        $this->addColumn($menuTable, 'icon', $this->string(32)->notNUll()->comment('图标'));
-
         $userTable = Configs::instance()->userTable;
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
