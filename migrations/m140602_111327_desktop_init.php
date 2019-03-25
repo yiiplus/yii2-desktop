@@ -57,13 +57,13 @@ class m140602_111327_desktop_init extends Migration
             "FOREIGN KEY ([[parent]]) REFERENCES {$menuTable}([[id]]) ON DELETE SET NULL ON UPDATE CASCADE",
         ], $tableOptions);
 
+        $this->addColumn($menuTable, 'icon', $this->string(32)->notNUll()->comment('图标'));
+
         $userTable = Configs::instance()->userTable;
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
-
-        $this->addColumn('admin_menu', 'icon', $this->string(32)->notNUll()->comment('图标'));
 
         // create user table
         $this->createTable($userTable, [
