@@ -91,16 +91,16 @@ class m140602_111327_desktop_init extends Migration
         $this->batchInsert('{{%yp_desktop_menu}}', 
             ['id', 'name', 'parent', 'route', 'icon', 'order', 'data'],
             [
-                [1, '仪表盘', null, '/', 'dashboard', 1, ''],
-                [2, '系统设置', null, null, 'cog', 2, ''],
-                [3, '菜单列表', 2, '/admin/menu/index', 'list', 3, ''],
-                [4, '操作日志', 2, '/admin/log/index', 'file', 5, ''],
-                [5, '用户管理', 2, '/admin/user/index', 'user', 2, ''],
-                [6, '角色列表', 2, '/admin/role/index', 'users', 4, ''],
-                [7, '访问控制', 2, null, 'laptop', 1, ''],
-                [8, '路由列表', 7, '/admin/route/index', 'circle-o', 3, ''],
-                [9, '规则列表', 7, '/admin/rule/index', 'circle-o', 4, ''],
-                [10, '权限列表', 7, '/admin/permission/index', 'circle-o', 1, ''],
+                [1, '仪表盘', null, '/', 'fa-dashboard', 1, ''],
+                [2, '系统设置', null, null, 'fa-cog', 2, ''],
+                [3, '菜单列表', 2, '/admin/menu/index', 'fa-list', 3, ''],
+                [4, '操作日志', 2, '/admin/log/index', 'fa-file', 5, ''],
+                [5, '用户管理', 2, '/admin/user/index', 'fa-user', 2, ''],
+                [6, '角色列表', 2, '/admin/role/index', 'fa-users', 4, ''],
+                [7, '访问控制', 2, null, 'fa-laptop', 1, ''],
+                [8, '路由列表', 7, '/admin/route/index', 'fa-circle-o', 3, ''],
+                [9, '规则列表', 7, '/admin/rule/index', 'fa-circle-o', 4, ''],
+                [10, '权限列表', 7, '/admin/permission/index', 'fa-circle-o', 1, ''],
             ]
         );
 
@@ -108,9 +108,9 @@ class m140602_111327_desktop_init extends Migration
             $this->batchInsert('{{%yp_desktop_menu}}', 
                 ['name', 'parent', 'route', 'icon', 'order', 'data'],
                 [
-                    ['GII', null, '/admin/gii/default/index', 'circle-o', 3, ''],
-                    ['迁移', null, '/admin/migrations/default/index', 'circle-o', 4, ''],
-                    ['调试', null, '/debug/default/index', 'circle-o', 5, ''],
+                    ['GII', null, '/admin/gii/default/index', 'fa-google', 3, ''],
+                    ['迁移', null, '/admin/migrations/default/index', 'fa-truck', 4, ''],
+                    ['调试', null, '/debug/default/index', 'fa-bug', 5, ''],
                 ]
             );
         }
