@@ -43,17 +43,17 @@ class DefaultController extends Controller
         if ($model->load(\Yii::$app->getRequest()->post())) {
             if (empty($model->tableSchemas) && empty($model->tableDatas)) {
                 Yii::$app->getSession()->setFlash('error', '请选择迁移表结构或数据');
-                return $this->redirect('/migrations/migration/index');
+                return $this->redirect('/migrations');
             }
 
             if (empty($model->migrationPath) || empty($model->migrationName)) {
                 Yii::$app->getSession()->setFlash('error', '迁移名称或路径为空');
-                return $this->redirect('/migrations/migration/index');
+                return $this->redirect('/migrations');
             }
 
             if (empty($model->database)) {
                 Yii::$app->getSession()->setFlash('error', '未选择数据库');
-                return $this->redirect('/migrations/migration/index');
+                return $this->redirect('/migrations');
             }
             //获取数据库连接
             $connect = MigrationUtility::getConnect($model->database);
@@ -82,14 +82,14 @@ class DefaultController extends Controller
             $name = 'm' . gmdate('ymd_His') . '_' . $model->migrationName;
             $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
 
-            $content = $this->renderFile(dirname(__DIR__) . '/views/migration/migration.php', [
+            $content = $this->renderFile(dirname(__DIR__) . '/views/default/migration.php', [
                 'className' => $name,
                 'up' => $upStr->output(),
                 'down' => $downStr->output()
             ]);
             file_put_contents($file, $content);
             Yii::$app->session->setFlash("success", "迁移成功，保存在" . $file);
-            return $this->redirect('/migrations/migration/index');
+            return $this->redirect('/migrations');
         }
 
         $database = MigrationUtility::getNowDatabase();
@@ -202,9 +202,9 @@ class DefaultController extends Controller
         foreach ($foreignKeys as $fk) {
             $str = '$this->addForeignKey(';
             $str .= '\'' . $fk['CONSTRAINT_NAME'] . '\', ';
-            $str .= '\'{{%' . $this->getTableName($fk['TABLE_NAME']) . '}}\', ';
+            $str .= '\'{{%' . $this->getTableName($fk['TABLE_NAME'], $connect) . '}}\', ';
             $str .= '\'' . $fk['COLUMN_NAME'] . '\', ';
-            $str .= '\'{{%' . $this->getTableName($fk['REFERENCED_TABLE_NAME'])  . '}}\', ';
+            $str .= '\'{{%' . $this->getTableName($fk['REFERENCED_TABLE_NAME'], $connect)  . '}}\', ';
             $str .= '\'' . $fk['REFERENCED_COLUMN_NAME'] . '\', ';
             $str .= '\'' . $fk['DELETE_RULE'] . '\', ';
             $str .= '\'' . $fk['UPDATE_RULE'] . '\' ';

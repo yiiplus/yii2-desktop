@@ -57,7 +57,7 @@ class MigrationUtility extends Model
     /*
      * 表属性选项
      */
-    public $tableOption = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+    public $tableOption = 'ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT=\'\'';
 
     /**
      * @return array
@@ -65,6 +65,14 @@ class MigrationUtility extends Model
     function rules()
     {
         return [
+            [[
+                'migrationName',
+                'migrationPath',
+                'tableSchemas',
+                'tableDatas',
+                'tableOption',
+                'database'
+            ], 'required'],
             [[
                 'migrationName',
                 'migrationPath',

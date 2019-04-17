@@ -42,7 +42,7 @@ class Module extends \yii\gii\Module
         'crud' => [
             'class' => 'yii\gii\generators\crud\Generator',
             'templates' => [
-                'default' => 'vendor/yiiplus/yii2-desktop/modules/gii/generators/crud/default'
+                'default' => '@vendor/yiiplus/yii2-desktop/modules/gii/generators/crud/default'
             ]
         ],
         'model' => [

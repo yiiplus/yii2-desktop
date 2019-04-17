@@ -13,9 +13,23 @@ use yii\helpers\Html;
 use yiiplus\desktop\modules\migrations\assets\MigrationAsset;
 use yiiplus\desktop\modules\migrations\models\MigrationUtility;
 use yiiplus\desktop\modules\migrations\models\ActiveForm;
+use yii\bootstrap\Alert;
 
 MigrationAsset::register($this);
 $this->title = '迁移';
+?>
+<?php
+if (!empty(Yii::$app->session->getFlash('success'))) {
+    echo Alert::widget([
+        'options' => ['class' => 'alert-info'],
+        'body' => Yii::$app->session->getFlash('success'),
+    ]);
+} elseif (!empty(Yii::$app->session->getFlash('error'))) {
+    echo Alert::widget([
+        'options' => ['class' => 'alert-info'],
+        'body' => Yii::$app->session->getFlash('error'),
+    ]);
+}
 ?>
 <div class="box box-primary">
     <div class="box-body">
