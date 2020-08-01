@@ -76,12 +76,18 @@ class MenuHelper
     public static function getAssignedMenu($userId, $root = null, $callback = null, $refresh = false)
     {
         $config = Configs::instance();
-
-        /* @var $manager \yii\rbac\BaseManager */
         $manager = Configs::authManager();
+        // search menu
+        $search = Yii::$app->request->get('q', null);
+        $cache = $key = null;
+        if (empty($search)) {
+            $key = [__METHOD__, $userId, $manager->defaultRoles];
+            $cache = $config->cache;
+        } else {
+            $refresh = true;
+        }
+        /* @var $manager \yii\rbac\BaseManager */
         $menus = Menu::find()->asArray()->indexBy('id')->all();
-        $key = [__METHOD__, $userId, $manager->defaultRoles];
-        $cache = $config->cache;
 
         if ($refresh || $cache === null || ($assigned = $cache->get($key)) === false) {
             $routes = $filter1 = $filter2 = [];
@@ -125,6 +131,22 @@ class MenuHelper
             }
             if (count($filter1)) {
                 $query->where('route like :filter');
+                // Initial search
+                if (preg_match("/^[a-z]+$/i", $search)) {
+                    $names = Menu::find()
+                        ->select(['name', 'id'])
+                        ->indexBy('id')
+                        ->column();
+                    $menuIds = [];
+                    foreach ($names as $id => $name) {
+                        if (Utf8ToPy::isSubsequence(Utf8ToPy::encode($name), $search)) {
+                            array_push($menuIds, $id);
+                        }
+                    }
+                    $query->andFilterWhere(['id' => $menuIds]);
+                } else {
+                    $query->andFilterWhere(['like', 'name', $search]);
+                }
                 foreach ($filter1 as $filter) {
                     $assigned = array_merge($assigned, $query->params([':filter' => $filter])->column());
                 }
