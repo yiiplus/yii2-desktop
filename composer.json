@@ -1,7 +1,13 @@
 {
     "name": "yiiplus/yii2-desktop",
     "description": "RBAC Auth manager for Yii2",
-    "keywords": ["yii", "admin" ,"desktop", "auth", "rbac"],
+    "keywords": [
+        "yii",
+        "admin",
+        "desktop",
+        "auth",
+        "rbac"
+    ],
     "homepage": "https://github.com/yiiplus/",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
@@ -41,10 +47,14 @@
             "yiiplus\\desktop\\": ""
         }
     },
-    "repositories": {
-        "packagist": {
+    "repositories": [
+        {
             "type": "composer",
-            "url": "http://packagist.yiiplus.com"
+            "url": "https://mirrors.aliyun.com/composer/"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
-    }
+    ]
 }
